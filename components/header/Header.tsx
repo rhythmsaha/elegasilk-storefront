@@ -17,7 +17,7 @@ const Header: React.FC<Props> = () => {
     };
 
     return (
-        <header className="shadow-2xl relative">
+        <header className="shadow-2xl relative z-10">
             <div className="max-w-screen-2xl mx-auto w-11/12 flex justify-between items-center h-20 ">
                 <Link href="/" className="cursor-pointer">
                     <Image src="/logo_black.svg" alt="Logo" width={250} height={46} className="w-20 lg:w-24" />
