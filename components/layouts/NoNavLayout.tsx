@@ -1,17 +1,17 @@
 import React from "react";
-import { Header } from "../header";
+import { BrandHeader } from "../header";
 
 interface Props {
     children: React.ReactNode;
 }
 
-const MainLayout: React.FC<Props> = ({ children }) => {
+const NoNavLayout = ({ children }: Props) => {
     return (
         <>
-            <Header />
+            <BrandHeader />
             {children}
         </>
     );
 };
 
-export default MainLayout;
+export default NoNavLayout;

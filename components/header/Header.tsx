@@ -29,6 +29,7 @@ const Header: React.FC<Props> = () => {
                     <button className="text-2xl" onClick={showSearchBar}>
                         <AiOutlineSearch />
                     </button>
+
                     <UserMenu />
 
                     <button className="text-2xl">
