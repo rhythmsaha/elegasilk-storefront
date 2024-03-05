@@ -2,11 +2,16 @@ import BrandLogo from "@/components/authentication/BrandLogo";
 import SubmitButton from "@/components/authentication/SubmitButton";
 import AuthFormInput from "@/components/authentication/inputs/AuthFormInput";
 import AuthPasswordInput from "@/components/authentication/inputs/AuthPasswordInput";
+import API_URLs from "@/lib/API_URLs";
+import axios from "@/utils/axios";
 import Link from "next/link";
-import React from "react";
+import React, { FC, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
-interface Props {}
+interface Props {
+    onComplete: () => void;
+}
 
 interface IFormInput {
     firstName: string;
@@ -17,7 +22,9 @@ interface IFormInput {
     confirmPassword: string;
 }
 
-const RegisterSection = (props: Props) => {
+const RegisterSection: FC<Props> = ({ onComplete }) => {
+    const [isLoading, setIsLoading] = useState(false);
+
     const {
         register,
         handleSubmit,
@@ -25,9 +32,24 @@ const RegisterSection = (props: Props) => {
         formState: { errors, isSubmitting },
     } = useForm<IFormInput>({});
 
-    const onSubmit: SubmitHandler<IFormInput> = (data) => {
-        console.log(data);
+    const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+        if (isLoading) return;
+        if (isSubmitting) return;
+        toast.dismiss();
+        setIsLoading(true);
+
+        try {
+            const reposne = await axios.post(API_URLs.register, data);
+            if (reposne.status !== 201) throw new Error("Failed to Create Account");
+            window.sessionStorage.setItem("resend_Token", JSON.stringify(data));
+            onComplete();
+        } catch (error: any) {
+            toast.error(error.message || "Something Went Wrong! Please try again later.");
+        } finally {
+            setIsLoading(false);
+        }
     };
+
     return (
         <div className="bg-white p-6 mt-6 rounded-lg shadow-lg border border-gray-100">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -61,9 +83,9 @@ const RegisterSection = (props: Props) => {
                         label="Email Address"
                         type="email"
                         id="reg_email"
-                        value="rs.2001.saha@gmail.com"
                         isError={!!errors.email}
                         errorMessage={errors.email?.message}
+                        autoComplete="email webauthn"
                         placeholder="E.g. address@example.com"
                         {...register("email", {
                             required: "Email is required",
@@ -73,6 +95,7 @@ const RegisterSection = (props: Props) => {
                     <AuthFormInput
                         label="Phone Number"
                         placeholder="E.g. 9876543210"
+                        autoComplete="tel"
                         type="number"
                         isError={!!errors.phone}
                         errorMessage={errors.phone?.message}
@@ -92,8 +115,8 @@ const RegisterSection = (props: Props) => {
                     <AuthPasswordInput
                         label="Password"
                         id="reg_password"
-                        defaultValue={"0123456789"}
                         placeholder="************"
+                        autoComplete="new-password webauthn"
                         isError={!!errors.password}
                         errorMessage={errors.password?.message}
                         {...register("password", {
@@ -107,8 +130,8 @@ const RegisterSection = (props: Props) => {
 
                     <AuthPasswordInput
                         label="Confirm Password"
-                        defaultValue={"0123456789"}
                         id="reg_confirm_password"
+                        autoComplete="new-password webauthn"
                         isError={!!errors.confirmPassword}
                         errorMessage={errors.confirmPassword?.message}
                         placeholder="************"
@@ -120,7 +143,7 @@ const RegisterSection = (props: Props) => {
                 </div>
 
                 <div className="mt-4">
-                    <SubmitButton text="Register" type="submit" />
+                    <SubmitButton text={isLoading ? "Please wait..." : "Register"} type="submit" disabled={isLoading} />
                 </div>
 
                 <div className="mt-3 flex justify-center gap-2 text-gray-500">
