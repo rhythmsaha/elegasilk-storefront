@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineMenu, AiOutlineSearch, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 
 import NavigationMenu from "./NavigationMenu";
 import UserMenu from "./UserMenu";
@@ -18,10 +18,16 @@ const Header: React.FC<Props> = () => {
 
     return (
         <header className="shadow-2xl relative z-10">
-            <div className="max-w-screen-2xl mx-auto w-11/12 flex justify-between items-center h-20 ">
-                <Link href="/" className="cursor-pointer">
-                    <Image src="/logo_black.svg" alt="Logo" width={250} height={46} className="w-20 lg:w-24" />
-                </Link>
+            <div className="max-w-screen-2xl mx-auto w-11/12 flex justify-between items-center h-20">
+                <div className="flex items-center gap-4">
+                    <button className="p-2 lg:hidden">
+                        <AiOutlineMenu className="text-2xl" />
+                    </button>
+
+                    <Link href="/" className="cursor-pointer">
+                        <Image src="/logo_black.svg" alt="Logo" width={250} height={46} className="w-20 lg:w-24" />
+                    </Link>
+                </div>
 
                 <NavigationMenu />
 
@@ -32,9 +38,9 @@ const Header: React.FC<Props> = () => {
 
                     <UserMenu />
 
-                    <button className="text-2xl">
+                    <Link href="" className="text-2xl hidden lg:inline-flex">
                         <AiOutlineHeart />
-                    </button>
+                    </Link>
 
                     <CartIcon qty={45} />
                 </div>

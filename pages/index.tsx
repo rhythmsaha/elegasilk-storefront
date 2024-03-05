@@ -7,35 +7,101 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css/bundle";
 
+import { Source_Serif_4 } from "next/font/google";
+
+const sourceSerif = Source_Serif_4({
+    subsets: ["latin"],
+});
+
 const HomePage: NextPageWithLayout = () => {
     return (
         <div className="">
             <Swiper spaceBetween={0} slidesPerView={1} onSlideChange={() => console.log("slide change")} onSwiper={(swiper) => console.log(swiper)}>
-                <SwiperSlide className="">
-                    <div className="">
-                        {/* <img src="/banner/queens.jpg" alt="" className="w-full h-52 sm:h-auto object-cover" /> */}
-                        <img src="/banner/mobile/queens-m.jpg" alt="" className="w-full  h-64 object-top sm:h-auto object-cover" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className="">
-                    <div className="">
-                        {/* <img src="/banner/wedding.webp" alt="" className="w-full h-52 sm:h-auto object-cover" /> */}
-                        <img src="/banner/mobile/wedding-m.webp" alt="" className="w-full h-64 object-top sm:h-auto object-cover" />
-                    </div>
-                </SwiperSlide>
                 <SwiperSlide className=" ">
                     <div className="">
-                        {/* <img src="/banner/chanderi.webp" alt="" className="w-full h-52 sm:h-auto object-cover" /> */}
-                        <img src="/banner/mobile/chanderi-m.webp" alt="" className="w-full h-64 object-top sm:h-auto object-cover" />
+                        <picture>
+                            <source media="(min-width:1024px)" srcSet="/banner/wedding.jpg" />
+                            <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full" />
+                        </picture>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className="">
                     <div className="">
-                        {/* <img src="/banner/kanchi.jpg" alt="" className="w-full h-52 sm:h-auto object-cover" /> */}
-                        <img src="/banner/mobile/kanchi-m.webp" alt="" className="w-full h-64 object-top sm:h-auto object-cover" />
+                        <picture>
+                            <source media="(min-width:1024px)" srcSet="/banner/classics.jpg" />
+                            <img src="/banner/classics-m.jpg" alt="Flowers" className="w-full" />
+                        </picture>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide className="">
+                    <div className="">
+                        <picture>
+                            <source media="(min-width:1024px)" srcSet="/banner/cotton.jpg" />
+                            <img src="/banner/cotton-m.jpg" alt="Flowers" className="w-full" />
+                        </picture>
+                    </div>
+                </SwiperSlide>
+
+                <SwiperSlide className="">
+                    <div className="">
+                        <picture>
+                            <source media="(min-width:1024px)" srcSet="/banner/dbe.jpg" />
+                            <img src="/banner/dbe-m.jpg" alt="Flowers" className="w-full" />
+                        </picture>
                     </div>
                 </SwiperSlide>
             </Swiper>
+
+            <section className="mt-10 w-11/12 mx-auto">
+                <div className="grid lg:grid-cols-4 gap-x-10">
+                    <div className="lg:col-span-1 ">
+                        <h2 className={`${sourceSerif.className} text-4xl lg:text-4xl text-center `}>Explore Our Best-Selling Styles!</h2>
+                    </div>
+                    <div className="lg:col-span-3 flex items-center gap-6">
+                        <div className="flex items-center justify-center bg-red-200 h-full w-full">
+                            {" "}
+                            <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full object-cover h-full" />
+                        </div>
+                        <div className="flex items-center justify-center bg-red-200 h-full w-full">
+                            {" "}
+                            <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full object-cover h-full" />
+                        </div>
+                        <div className="flex items-center justify-center bg-red-200 h-full w-full">
+                            {" "}
+                            <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full object-cover h-full" />
+                        </div>
+                        <div className="flex items-center justify-center bg-red-200 h-full w-full">
+                            {" "}
+                            <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full object-cover h-full" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="mt-20 w-11/12 mx-auto">
+                <div>
+                    <h2 className={`${sourceSerif.className} text-4xl lg:text-4xl text-center `}>Our Collections</h2>
+                </div>
+
+                <div className="flex items-center gap-6 mt-10">
+                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
+                        {" "}
+                        <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full object-cover h-full" />
+                    </div>
+                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
+                        {" "}
+                        <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full object-cover h-full" />
+                    </div>
+                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
+                        {" "}
+                        <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full object-cover h-full" />
+                    </div>
+                    <div className="flex items-center justify-center bg-red-200 h-full w-full  aspect-square">
+                        {" "}
+                        <img src="/banner/wedding-m.jpg" alt="Flowers" className="w-full object-cover h-full" />
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };

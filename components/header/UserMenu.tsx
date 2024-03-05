@@ -12,7 +12,7 @@ const UserMenu = (props: Props) => {
     const [isHovering, setIsHovering] = useState(false);
 
     return (
-        <div className="relative flex  items-center" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+        <div className="hidden relative lg:flex  items-center" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
             <button className="text-2xl py-4">
                 <AiOutlineUser />
             </button>
