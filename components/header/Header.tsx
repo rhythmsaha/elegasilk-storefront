@@ -17,7 +17,7 @@ const Header: React.FC<Props> = () => {
     };
 
     return (
-        <header className="shadow-2xl relative z-10">
+        <header className="shadow-2xl z-10 sticky top-0 backdrop-blur-sm bg-white">
             <div className="max-w-screen-2xl mx-auto w-11/12 flex justify-between items-center h-20">
                 <div className="flex items-center gap-4">
                     <button className="p-2 lg:hidden">
