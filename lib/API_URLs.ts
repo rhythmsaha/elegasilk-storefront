@@ -4,6 +4,7 @@ const API_URLs = {
     verifyaccount: "/user/verifyaccount",
     resendverification: "/user/resendverificationlink",
     login: "/user/login",
+    refreshSession: "user/refresh-session",
 };
 
 export default API_URLs;

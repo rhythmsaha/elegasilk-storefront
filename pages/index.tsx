@@ -137,7 +137,11 @@ const HomePage: NextPageWithLayout = () => {
 HomePage.getLayout = (page) => {
     return (
         <MainLayout>
-            <div className="mb-20">{page}</div>
+            <div className="mb-20">
+                {/*  */}
+                {/* {page} */}
+                {/*  */}
+            </div>
         </MainLayout>
     );
 };

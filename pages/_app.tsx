@@ -1,3 +1,4 @@
+import AuthProvider from "@/providers/AuthProvider";
 import "@/styles/globals.css";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
@@ -22,10 +23,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                 <title>Elegasilk</title>
             </Head>
 
-            <>
+            <AuthProvider>
                 {getLayout(<Component {...pageProps} />)}
                 <Toaster position="top-center" reverseOrder={false} />
-            </>
+            </AuthProvider>
         </>
     );
 }

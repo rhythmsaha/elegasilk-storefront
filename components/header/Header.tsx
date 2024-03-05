@@ -6,10 +6,12 @@ import { AiOutlineHeart, AiOutlineMenu, AiOutlineSearch, AiOutlineShoppingCart, 
 import NavigationMenu from "./NavigationMenu";
 import UserMenu from "./UserMenu";
 import CartIcon from "./CartIcon";
+import { useAuthStore } from "@/store/auth/useAuthStore";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
+    const isAuthenticated = useAuthStore((state) => state.authStatus) === "AUTHENTICATED";
     const [showSearch, setShowSearch] = useState(true);
 
     const showSearchBar = () => {
@@ -38,7 +40,7 @@ const Header: React.FC<Props> = () => {
 
                     <UserMenu />
 
-                    <Link href="" className="text-2xl hidden lg:inline-flex">
+                    <Link href={isAuthenticated ? "/" : "/login?referUrl=/"} className="text-2xl hidden lg:inline-flex">
                         <AiOutlineHeart />
                     </Link>
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NextPageWithLayout } from "../_app";
 import NoNavLayout from "@/components/layouts/NoNavLayout";
 import Link from "next/link";
@@ -10,6 +10,9 @@ import AuthPasswordInput from "@/components/authentication/inputs/AuthPasswordIn
 import SubmitButton from "@/components/authentication/SubmitButton";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import axios from "@/utils/axios";
+import API_URLs from "@/lib/API_URLs";
+import { useAuthStore } from "@/store/auth/useAuthStore";
 
 interface IFormInput {
     email: string;
@@ -17,6 +20,8 @@ interface IFormInput {
 }
 
 const LoginPage: NextPageWithLayout = () => {
+    const [loading, setLoading] = useState(false);
+    const login = useAuthStore((state) => state.login);
     const router = useRouter();
 
     const referUrl = router.query.referUrl as string;
@@ -24,18 +29,44 @@ const LoginPage: NextPageWithLayout = () => {
     const {
         register,
         handleSubmit,
-        getValues,
         formState: { errors, isSubmitting },
     } = useForm<IFormInput>({});
 
-    const onSubmit = (data: IFormInput) => {
+    const onSubmit = async (data: IFormInput) => {
         if (isSubmitting) return;
+        if (loading) return;
         toast.dismiss();
-        console.log(data);
-        if (referUrl) {
-            router.push(referUrl);
+        setLoading(true);
+
+        try {
+            const response = await axios.post(API_URLs.login, data);
+            const { data: responseData } = response;
+
+            if (!responseData.success) return toast.error(responseData.message);
+
+            login(responseData.user, responseData.accessToken);
+
+            if (referUrl) {
+                router.replace(referUrl);
+            } else {
+                router.replace("/");
+            }
+
+            toast.success("Logged in successfully!");
+        } catch (error: any) {
+            if (error.response) {
+                const { data } = error.response;
+                toast.error(data.message);
+            } else if (error.request) {
+                toast.error("Network error. Please try again later.");
+            } else if (error.message) {
+                toast.error(error.message);
+            } else {
+                toast.error("Something went wrong!");
+            }
+        } finally {
+            setLoading(false);
         }
-        toast.success("Logged in successfully!");
     };
 
     return (
