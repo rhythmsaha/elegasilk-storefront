@@ -21,9 +21,8 @@ const Header: React.FC<Props> = () => {
 
     return (
         <header className="border-b z-10 sticky top-0 backdrop-blur-sm bg-white">
-            <div className="max-w-screen-2xl mx-auto w-11/12 flex justify-between items-center h-20">
+            <div className="max-w-screen-2xl mx-auto w-11/12 flex justify-between items-center h-16 lg:h-20">
                 <HeaderLeft />
-
                 <NavigationMenu menu={NAV_LINKS} />
 
                 <div className="flex items-center gap-4">

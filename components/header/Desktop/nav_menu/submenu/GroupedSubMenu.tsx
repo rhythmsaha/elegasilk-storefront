@@ -21,7 +21,7 @@ const GroupedSubMenu = ({ menuGroups, title }: Props) => {
                                 <SubMenuHeading title={_subMenu.title} />
 
                                 <div className="mt-4 space-y-1">
-                                    {_subMenu.links.map((link, index) => (
+                                    {_subMenu.subMenu.map((link, index) => (
                                         <Link href={link.path} className="block text-gray-500 hover:text-black font-light cursor-pointer min-w-max tracking-wider text-sm" key={link._id + index}>
                                             {link.title}
                                         </Link>

@@ -9,7 +9,7 @@ export interface ISubmenu {
 export interface ISubmenuGroup {
     _id: string;
     title: string;
-    links: ISubmenu[];
+    subMenu: ISubmenu[];
 }
 
 export interface INavLink {
@@ -39,7 +39,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "NaturalFabrics",
                 title: "Natural Fabrics",
-                links: [
+                subMenu: [
                     {
                         _id: "657348b78840612d2a0a8c6a",
                         title: "Cotton Sarees",
@@ -93,7 +93,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "SyntheticFabrics",
                 title: "Synthetic Fabrics",
-                links: [
+                subMenu: [
                     {
                         _id: "657378dc7c5a3cb5bae7156f",
                         title: "Chiffon Sarees",
@@ -135,7 +135,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "BlendedFabrics",
                 title: "Blended Fabrics",
-                links: [
+                subMenu: [
                     {
                         _id: "659309132784df2d7ed92608",
                         title: "Cotton Silk Sarees",
@@ -217,7 +217,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "classicSilkSarees",
                 title: "Classic Silk",
-                links: [
+                subMenu: [
                     {
                         _id: "659300dc6933dc3de5e5c7a3",
                         title: "Banarasi Sarees",
@@ -265,7 +265,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "EthnicRegionalSarees",
                 title: "Ethnic Regional",
-                links: [
+                subMenu: [
                     {
                         _id: "659307362784df2d7ed92546",
                         title: "Bengali Sarees",
@@ -313,7 +313,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "ArtisanalCraftedSarees",
                 title: "Artisanal Crafted",
-                links: [
+                subMenu: [
                     {
                         _id: "659304072784df2d7ed9253d",
                         title: "Chikankari Sarees",
@@ -375,7 +375,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "ContemporaryDesignerSarees",
                 title: "Contemporary Designer",
-                links: [
+                subMenu: [
                     {
                         _id: "659307c72784df2d7ed9258b",
                         title: "Soft Silk Sarees",
@@ -432,7 +432,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "NorthIndia",
                 title: "North India",
-                links: [
+                subMenu: [
                     {
                         _id: "659320eee600b8b93d027f5c",
                         title: "Banaras Sarees",
@@ -466,7 +466,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "SouthIndia",
                 title: "South India",
-                links: [
+                subMenu: [
                     {
                         _id: "659320eee600b8b93d027f58",
                         title: "Andhra and Telangana Sarees",
@@ -520,7 +520,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "EastIndia",
                 title: "East India",
-                links: [
+                subMenu: [
                     {
                         _id: "659320eee600b8b93d027f59",
                         title: "Assam Sarees",
@@ -556,7 +556,7 @@ const NAV_LINKS: INavLink[] = [
             {
                 _id: "WestAndCentralIndia",
                 title: "West & Central India",
-                links: [
+                subMenu: [
                     {
                         _id: "659320eee600b8b93d027f5a",
                         title: "Bagh Sarees",

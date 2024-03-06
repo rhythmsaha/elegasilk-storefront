@@ -139,7 +139,7 @@ HomePage.getLayout = (page) => {
         <MainLayout>
             <div className="mb-20">
                 {/*  */}
-                {page}
+                {/* {page} */}
                 {/*  */}
             </div>
         </MainLayout>

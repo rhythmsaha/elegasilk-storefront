@@ -2,7 +2,7 @@ import { ISubmenu, ISubmenuGroup } from "@/lib/NavLinks";
 import React from "react";
 
 interface Props {
-    links: ISubmenuGroup["links"];
+    links: ISubmenuGroup["subMenu"];
 }
 
 const NavSubMenu = ({ links }: Props) => {
