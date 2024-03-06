@@ -6,7 +6,7 @@ interface Props {
     qty: number;
 }
 
-const CartIcon: React.FC<Props> = ({ qty }) => {
+const CartButton: React.FC<Props> = ({ qty }) => {
     const cartQty = qty > 9 ? "9+" : qty.toString();
 
     return (
@@ -18,4 +18,4 @@ const CartIcon: React.FC<Props> = ({ qty }) => {
     );
 };
 
-export default CartIcon;
+export default CartButton;

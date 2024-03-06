@@ -9,7 +9,7 @@ interface Props {}
 
 const UserMenu = (props: Props) => {
     const [isHovering, setIsHovering] = useState(false);
-    const { logout, authStatus, user } = useAuthStore((state) => state);
+    const authStatus = useAuthStore((state) => state.authStatus);
 
     const isAuthenticated = authStatus === "AUTHENTICATED";
     const isUnauthenticated = authStatus === "UNAUTHENTICATED";
@@ -24,10 +24,10 @@ const UserMenu = (props: Props) => {
             <Transition
                 as={"div"}
                 show={isHovering && !isAuthLoading}
-                enter="transition ease-out duration-75"
+                enter="transition ease-out duration-250"
                 enterFrom="transform opacity-0"
                 enterTo="transform opacity-100"
-                leave="transition ease-in duration-75"
+                leave="transition ease-in duration-250"
                 leaveFrom="transform opacity-100"
                 leaveTo="transform opacity-0"
                 className="absolute right-0 top-12 w-max border border-gray-100 shadow-lg bg-white rounded-lg  p-4"

@@ -1,17 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
-import { AiOutlineHeart, AiOutlineMenu, AiOutlineSearch, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
-
-import NavigationMenu from "./NavigationMenu";
-import UserMenu from "./UserMenu";
-import CartIcon from "./CartIcon";
+import NavigationMenu from "./Desktop/nav_menu/NavigationMenu";
+import UserMenu from "./Desktop/usermenu/UserMenu";
 import { useAuthStore } from "@/store/auth/useAuthStore";
+import NAV_LINKS from "@/lib/NavLinks";
+import HeaderLeft from "./Desktop/HeaderLeft";
+import SearchButton from "./SearchButton";
+import WishListButton from "./WishListButton";
+import CartButton from "./CartButton";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
     const isAuthenticated = useAuthStore((state) => state.authStatus) === "AUTHENTICATED";
+
     const [showSearch, setShowSearch] = useState(true);
 
     const showSearchBar = () => {
@@ -19,32 +20,17 @@ const Header: React.FC<Props> = () => {
     };
 
     return (
-        <header className="shadow-2xl z-10 sticky top-0 backdrop-blur-sm bg-white">
+        <header className="border-b z-10 sticky top-0 backdrop-blur-sm bg-white">
             <div className="max-w-screen-2xl mx-auto w-11/12 flex justify-between items-center h-20">
-                <div className="flex items-center gap-4">
-                    <button className="p-2 lg:hidden">
-                        <AiOutlineMenu className="text-2xl" />
-                    </button>
+                <HeaderLeft />
 
-                    <Link href="/" className="cursor-pointer">
-                        <Image src="/logo_black.svg" alt="Logo" width={250} height={46} className="w-20 lg:w-24" />
-                    </Link>
-                </div>
-
-                <NavigationMenu />
+                <NavigationMenu menu={NAV_LINKS} />
 
                 <div className="flex items-center gap-4">
-                    <button className="text-2xl" onClick={showSearchBar}>
-                        <AiOutlineSearch />
-                    </button>
-
+                    <SearchButton className="text-2xl" onClick={showSearchBar} />
                     <UserMenu />
-
-                    <Link href={isAuthenticated ? "/" : "/login?referUrl=/"} className="text-2xl hidden lg:inline-flex">
-                        <AiOutlineHeart />
-                    </Link>
-
-                    <CartIcon qty={45} />
+                    <WishListButton href={isAuthenticated ? "/" : "/login?referUrl=/"} className="text-2xl" />
+                    <CartButton qty={0} />
                 </div>
             </div>
 
