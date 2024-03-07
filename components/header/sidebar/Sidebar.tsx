@@ -93,26 +93,17 @@ const Sidebar = () => {
 
                     {isAuthenticated && (
                         <div className="">
-                            <Link
-                                href=""
-                                className="flex items-center px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800"
-                            >
+                            <Link href="" className="sidebar-item">
                                 <AiOutlineHeart className="mr-2 text-lg" />
                                 Wishlist
                             </Link>
 
-                            <Link
-                                href=""
-                                className="flex items-center px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800"
-                            >
+                            <Link href="" className="sidebar-item">
                                 <IoBagCheckOutline className="mr-2 text-lg" />
                                 My Orders
                             </Link>
 
-                            <Link
-                                href=""
-                                className="flex items-center px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800"
-                            >
+                            <Link href="" className="sidebar-item">
                                 <AiOutlineUser className="mr-2 text-lg" />
                                 My Account
                             </Link>
@@ -134,7 +125,7 @@ const Sidebar = () => {
                             Welcome, {user?.firstName} {user?.lastName}
                         </div>
                     ) : (
-                        <div>
+                        <>
                             <div className="text-gray-300 mb-4 max-w-96">
                                 Not a Member Yet? Join Elegasilk for great
                                 discounts and exclusive member benefits &
@@ -143,18 +134,18 @@ const Sidebar = () => {
 
                             <Link
                                 href="/login"
-                                className="block text-center bg-white text-gray-900 border-2 border-white py-3 rounded-md font-medium"
+                                className="sidebar-auth-item bg-white text-gray-900"
                             >
                                 Login
                             </Link>
 
                             <Link
                                 href="/register"
-                                className="block text-center bg-gray-900 text-white border-2 border-gray-700 py-3 rounded-md mt-3 font-medium"
+                                className="sidebar-auth-item bg-gray-900 text-white mt-3"
                             >
                                 Register
                             </Link>
-                        </div>
+                        </>
                     )}
                 </div>
             </div>

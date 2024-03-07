@@ -8,6 +8,16 @@
     }
 }
 
+@layer components {
+    .sidebar-auth-item {
+        @apply block text-center border-2 border-white py-3 rounded-md font-medium;
+    }
+
+    .sidebar-item {
+        @apply flex items-center w-full px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800;
+    }
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
