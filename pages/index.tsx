@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 
 import { Source_Serif_4 } from "next/font/google";
+import ProductItem from "@/components/products/product/ProductItem";
 
 const sourceSerif = Source_Serif_4({
     subsets: ["latin"],
@@ -15,128 +16,79 @@ const sourceSerif = Source_Serif_4({
 
 const HomePage: NextPageWithLayout = () => {
     return (
-        <div className="">
-            <Swiper
-                spaceBetween={0}
-                slidesPerView={1}
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
-            >
-                <SwiperSlide className=" ">
-                    <div className="">
-                        <picture>
-                            <source
-                                media="(min-width:1024px)"
-                                srcSet="/banner/wedding.jpg"
-                            />
-                            <img
-                                src="/banner/wedding-m.jpg"
-                                alt="Flowers"
-                                className="w-full"
-                            />
-                        </picture>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className="">
-                    <div className="">
-                        <picture>
-                            <source
-                                media="(min-width:1024px)"
-                                srcSet="/banner/classics.jpg"
-                            />
-                            <img
-                                src="/banner/classics-m.jpg"
-                                alt="Flowers"
-                                className="w-full"
-                            />
-                        </picture>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className="">
-                    <div className="">
-                        <picture>
-                            <source
-                                media="(min-width:1024px)"
-                                srcSet="/banner/cotton.jpg"
-                            />
-                            <img
-                                src="/banner/cotton-m.jpg"
-                                alt="Flowers"
-                                className="w-full"
-                            />
-                        </picture>
-                    </div>
-                </SwiperSlide>
+        <div>
+            <section className="mx-auto">
+                <Swiper
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    onSlideChange={() => console.log("slide change")}
+                    onSwiper={(swiper) => console.log(swiper)}
+                >
+                    <SwiperSlide className=" ">
+                        <div className="">
+                            <picture>
+                                <source
+                                    media="(min-width:1024px)"
+                                    srcSet="/banner/wedding.jpg"
+                                />
+                                <img
+                                    src="/banner/wedding-m.jpg"
+                                    alt="Flowers"
+                                    className="w-full"
+                                />
+                            </picture>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide className="">
+                        <div className="">
+                            <picture>
+                                <source
+                                    media="(min-width:1024px)"
+                                    srcSet="/banner/classics.jpg"
+                                />
+                                <img
+                                    src="/banner/classics-m.jpg"
+                                    alt="Flowers"
+                                    className="w-full"
+                                />
+                            </picture>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide className="">
+                        <div className="">
+                            <picture>
+                                <source
+                                    media="(min-width:1024px)"
+                                    srcSet="/banner/cotton.jpg"
+                                />
+                                <img
+                                    src="/banner/cotton-m.jpg"
+                                    alt="Flowers"
+                                    className="w-full"
+                                />
+                            </picture>
+                        </div>
+                    </SwiperSlide>
 
-                <SwiperSlide className="">
-                    <div className="">
-                        <picture>
-                            <source
-                                media="(min-width:1024px)"
-                                srcSet="/banner/dbe.jpg"
-                            />
-                            <img
-                                src="/banner/dbe-m.jpg"
-                                alt="Flowers"
-                                className="w-full"
-                            />
-                        </picture>
-                    </div>
-                </SwiperSlide>
-            </Swiper>
-
-            <section className="mt-10 w-11/12 mx-auto">
-                <div className="grid lg:grid-cols-4 gap-x-10">
-                    <div className="lg:col-span-1 flex flex-col justify-between items-center gap-2">
-                        <h2
-                            className={`${sourceSerif.className} text-4xl lg:text-4xl text-center `}
-                        >
-                            Explore Our Best-Selling Sarees!
-                        </h2>
-                        <p className="text-xs">Discover the Favorites</p>
-                        <button className="bg-black px-6 py-2 text-white">
-                            Shop Now
-                        </button>
-                    </div>
-
-                    <div className="lg:col-span-3 flex items-center gap-6">
-                        <div className="flex items-center justify-center bg-red-200 h-full w-full">
-                            {" "}
-                            <img
-                                src="/banner/wedding-m.jpg"
-                                alt="Flowers"
-                                className="w-full object-cover h-full"
-                            />
+                    <SwiperSlide className="">
+                        <div className="">
+                            <picture>
+                                <source
+                                    media="(min-width:1024px)"
+                                    srcSet="/banner/dbe.jpg"
+                                />
+                                <img
+                                    src="/banner/dbe-m.jpg"
+                                    alt="Flowers"
+                                    className="w-full"
+                                />
+                            </picture>
                         </div>
-                        <div className="flex items-center justify-center bg-red-200 h-full w-full">
-                            {" "}
-                            <img
-                                src="/banner/wedding-m.jpg"
-                                alt="Flowers"
-                                className="w-full object-cover h-full"
-                            />
-                        </div>
-                        <div className="flex items-center justify-center bg-red-200 h-full w-full">
-                            {" "}
-                            <img
-                                src="/banner/wedding-m.jpg"
-                                alt="Flowers"
-                                className="w-full object-cover h-full"
-                            />
-                        </div>
-                        <div className="flex items-center justify-center bg-red-200 h-full w-full">
-                            {" "}
-                            <img
-                                src="/banner/wedding-m.jpg"
-                                alt="Flowers"
-                                className="w-full object-cover h-full"
-                            />
-                        </div>
-                    </div>
-                </div>
+                    </SwiperSlide>
+                </Swiper>
             </section>
 
-            <section className="mt-20 w-11/12 mx-auto">
+            <section className="mt-20 w-11/12 max-w-screen-2xl mx-auto">
                 <div>
                     <h2
                         className={`${sourceSerif.className} text-4xl lg:text-4xl text-center `}
@@ -145,84 +97,13 @@ const HomePage: NextPageWithLayout = () => {
                     </h2>
                 </div>
 
-                <div className="flex items-center gap-6 mt-10">
-                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
-                        {" "}
-                        <img
-                            src="/banner/wedding-m.jpg"
-                            alt="Flowers"
-                            className="w-full object-cover h-full"
-                        />
-                    </div>
-                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
-                        {" "}
-                        <img
-                            src="/banner/wedding-m.jpg"
-                            alt="Flowers"
-                            className="w-full object-cover h-full"
-                        />
-                    </div>
-                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
-                        {" "}
-                        <img
-                            src="/banner/wedding-m.jpg"
-                            alt="Flowers"
-                            className="w-full object-cover h-full"
-                        />
-                    </div>
-                    <div className="flex items-center justify-center bg-red-200 h-full w-full  aspect-square">
-                        {" "}
-                        <img
-                            src="/banner/wedding-m.jpg"
-                            alt="Flowers"
-                            className="w-full object-cover h-full"
-                        />
-                    </div>
-                </div>
-            </section>
-
-            <section className="mt-20 w-11/12 mx-auto">
-                <div>
-                    <h2
-                        className={`${sourceSerif.className} text-4xl lg:text-4xl text-center `}
-                    >
-                        Trending Collections
-                    </h2>
-                </div>
-
-                <div className="flex items-center gap-6 mt-10">
-                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
-                        {" "}
-                        <img
-                            src="/banner/wedding-m.jpg"
-                            alt="Flowers"
-                            className="w-full object-cover h-full"
-                        />
-                    </div>
-                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
-                        {" "}
-                        <img
-                            src="/banner/wedding-m.jpg"
-                            alt="Flowers"
-                            className="w-full object-cover h-full"
-                        />
-                    </div>
-                    <div className="flex items-center justify-center bg-red-200 h-full w-full aspect-square">
-                        {" "}
-                        <img
-                            src="/banner/wedding-m.jpg"
-                            alt="Flowers"
-                            className="w-full object-cover h-full"
-                        />
-                    </div>
-                    <div className="flex items-center justify-center bg-red-200 h-full w-full  aspect-square">
-                        {" "}
-                        <img
-                            src="/banner/wedding-m.jpg"
-                            alt="Flowers"
-                            className="w-full object-cover h-full"
-                        />
-                    </div>
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 xl:gap-6 mt-10">
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
                 </div>
             </section>
         </div>
@@ -234,7 +115,7 @@ HomePage.getLayout = (page) => {
         <MainLayout>
             <div className="mb-20">
                 {/*  */}
-                {/* {page} */}
+                {page}
                 {/*  */}
             </div>
         </MainLayout>

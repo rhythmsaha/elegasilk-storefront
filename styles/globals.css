@@ -6,6 +6,10 @@
     .text-balance {
         text-wrap: balance;
     }
+
+    .text-15 {
+        font-size: 15px;
+    }
 }
 
 @layer components {
@@ -15,6 +19,10 @@
 
     .sidebar-item {
         @apply flex items-center w-full px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800;
+    }
+
+    .add-to-cart-button {
+        @apply w-full flex items-center justify-center gap-2 py-1.5 text-sm border md:border-2 border-black lg:shadow-inset-0-black lg:hover:shadow-add-to-cart-button-slide-effect lg:hover:text-white  transition duration-300 ease-linear font-normal md:font-medium bg-black text-white lg:bg-white lg:text-black;
     }
 }
 
