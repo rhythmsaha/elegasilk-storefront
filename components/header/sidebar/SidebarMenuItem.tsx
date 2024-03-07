@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { INavItem } from "./Sidebar";
 import { HiChevronRight } from "react-icons/hi2";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 export interface SidebarMenuItemProps {
     menuItem: INavItem;
@@ -13,17 +14,26 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
     parent,
 }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
     const hasSubmenu = menuItem.subMenu && menuItem.subMenu.length > 0;
     const hasSubmenuProp =
         menuItem.hasSubmenu === "GROUPED" || menuItem.hasSubmenu === "SINGLE";
 
+    const handleClickLink = () => {
+        if (menuItem.path) {
+            return router.push(menuItem.path);
+        } else if (hasSubmenu) {
+            setIsOpen((val) => !val);
+        }
+    };
+
     return (
         <div>
             <button
-                onClick={() => hasSubmenu && setIsOpen((val) => !val)}
+                onClick={handleClickLink}
                 className={`${parent && "border-b border-gray-800"} ${
                     parent ? "px-6 py-4 bg-gray-900 text-gray-300" : "px-6 py-4"
-                } ${isOpen && hasSubmenuProp && "bg-gray-950 !text-white"} ${
+                } ${isOpen && hasSubmenuProp && "bg-gray-900 !text-white"} ${
                     isOpen && !parent ? "font-medium" : ""
                 } w-full text-left flex items-center justify-between`}
             >

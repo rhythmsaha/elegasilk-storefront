@@ -1,10 +1,20 @@
 import { useSidebarStore } from "@/store/sidebar/useSidebarStore";
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { AiOutlineClose } from "react-icons/ai";
+import {
+    AiOutlineClose,
+    AiOutlineHeart,
+    AiOutlineLogout,
+    AiOutlineShoppingCart,
+    AiOutlineUser,
+} from "react-icons/ai";
 import NAV_LINKS from "@/lib/NavLinks";
 import { motion } from "framer-motion";
 import SidebarMenuItem from "./SidebarMenuItem";
+import Link from "next/link";
+import { IoBagCheckOutline } from "react-icons/io5";
+import { useAuthStore } from "@/store/auth/useAuthStore";
+import { useRouter } from "next/router";
 
 export interface INavItem {
     _id: string;
@@ -18,6 +28,11 @@ export interface INavItem {
 const Sidebar = () => {
     const closeSidebar = useSidebarStore((state) => state.closeSidebar);
     const isOpen = useSidebarStore((state) => state.isOpen);
+    const AuthStatus = useAuthStore((state) => state.authStatus);
+    const isAuthenticated = AuthStatus === "AUTHENTICATED";
+    const user = useAuthStore((state) => state.user);
+    const logout = useAuthStore((state) => state.logout);
+    const router = useRouter();
 
     useEffect(() => {
         if (isOpen) {
@@ -26,6 +41,20 @@ const Sidebar = () => {
             document.body.classList.remove("overflow-hidden");
         }
     }, [isOpen]);
+
+    useEffect(() => {
+        // Close the sidebar whenever a route change completes
+        const handleRouteChange = () => {
+            closeSidebar();
+        };
+
+        router.events.on("routeChangeComplete", handleRouteChange);
+
+        // Clean up the event listener when the component is unmounted
+        return () => {
+            router.events.off("routeChangeComplete", handleRouteChange);
+        };
+    }, [router, closeSidebar]);
 
     return (
         <motion.aside
@@ -52,6 +81,7 @@ const Sidebar = () => {
                         <AiOutlineClose className="text-2xl text-white" />
                     </button>
                 </header>
+
                 <div className="flex-1">
                     {NAV_LINKS.map((menuItem) => (
                         <SidebarMenuItem
@@ -60,13 +90,72 @@ const Sidebar = () => {
                             parent
                         />
                     ))}
+
+                    {isAuthenticated && (
+                        <div className="">
+                            <Link
+                                href=""
+                                className="flex items-center px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800"
+                            >
+                                <AiOutlineHeart className="mr-2 text-lg" />
+                                Wishlist
+                            </Link>
+
+                            <Link
+                                href=""
+                                className="flex items-center px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800"
+                            >
+                                <IoBagCheckOutline className="mr-2 text-lg" />
+                                My Orders
+                            </Link>
+
+                            <Link
+                                href=""
+                                className="flex items-center px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800"
+                            >
+                                <AiOutlineUser className="mr-2 text-lg" />
+                                My Account
+                            </Link>
+
+                            <button
+                                className="flex w-full items-center px-6 py-4 bg-gray-900 text-gray-300 border-b border-gray-800"
+                                onClick={logout}
+                            >
+                                <AiOutlineLogout className="mr-2 text-lg" />
+                                Logout
+                            </button>
+                        </div>
+                    )}
                 </div>
 
-                <div className="p-4 text-gray-400 text-xs">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Delectus est veniam non incidunt quam harum unde illum
-                    libero iste. Animi non fugit nobis odit veritatis dolore
-                    quas nemo aliquid pariatur.
+                <div className="p-4">
+                    {isAuthenticated ? (
+                        <div className="text-gray-300 text-sm capitalize">
+                            Welcome, {user?.firstName} {user?.lastName}
+                        </div>
+                    ) : (
+                        <div>
+                            <div className="text-gray-300 mb-4 max-w-96">
+                                Not a Member Yet? Join Elegasilk for great
+                                discounts and exclusive member benefits &
+                                offers.
+                            </div>
+
+                            <Link
+                                href="/login"
+                                className="block text-center bg-white text-gray-900 border-2 border-white py-3 rounded-md font-medium"
+                            >
+                                Login
+                            </Link>
+
+                            <Link
+                                href="/register"
+                                className="block text-center bg-gray-900 text-white border-2 border-gray-700 py-3 rounded-md mt-3 font-medium"
+                            >
+                                Register
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
         </motion.aside>
