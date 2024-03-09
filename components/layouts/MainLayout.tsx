@@ -18,9 +18,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
     return (
         <>
             <Header />
-            {children}
-            <AnimatePresence>{isSidebarOpen && <Sidebar />}</AnimatePresence>
-
+            <main>{children}</main>
             <footer className="bg-gray-950 text-white">
                 <main className="max-w-screen-2xl w-11/12 mx-auto py-12 lg:py-20">
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -128,6 +126,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
                     </div>
                 </section>
             </footer>
+            <AnimatePresence>{isSidebarOpen && <Sidebar />}</AnimatePresence>
         </>
     );
 };
