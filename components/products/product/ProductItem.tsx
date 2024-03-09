@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { CiShoppingCart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 
