@@ -191,120 +191,7 @@ const FilterOptions = {
             hex: "#0000FF",
         },
     ],
-    collections: [
-        {
-            _id: "659304072784df2d7ed9253d",
-            name: "Chikankari Sarees",
-        },
-        {
-            _id: "65930e7b2784df2d7ed92647",
-            name: "Gotapatti Sarees",
-        },
-        {
-            _id: "65930ed62784df2d7ed926a2",
-            name: "Woven Sarees",
-        },
-        {
-            _id: "65930e972784df2d7ed92671",
-            name: "Mukaish Sarees",
-        },
-        {
-            _id: "65930e882784df2d7ed9265c",
-            name: "Bagru Sarees",
-        },
-        {
-            _id: "65930eb82784df2d7ed92694",
-            name: "Block Printed sarees",
-        },
-        {
-            _id: "659308292784df2d7ed925bd",
-            name: "Ajrakh Sarees",
-        },
-        {
-            _id: "65e208bc4912d29385d26a9a",
-            name: "Woven Sarees",
-        },
-        {
-            _id: "659307892784df2d7ed92570",
-            name: "Pochampalli Sarees",
-        },
-        {
-            _id: "65930ee62784df2d7ed926a9",
-            name: "Tie & Dye Sarees",
-        },
-        {
-            _id: "65930e832784df2d7ed92655",
-            name: "Leheriya Sarees",
-        },
-        {
-            _id: "65930ea42784df2d7ed92686",
-            name: "Sanganeri Sarees",
-        },
-        {
-            _id: "659307462784df2d7ed92554",
-            name: "Bhagalpuri Sarees",
-        },
-        {
-            _id: "65930e922784df2d7ed9266a",
-            name: "Shibori Sarees",
-        },
-        {
-            _id: "659303d92784df2d7ed9251d",
-            name: "Maheshwari Sarees",
-        },
-        {
-            _id: "65930e772784df2d7ed92640",
-            name: "Bandhani Sarees",
-        },
-        {
-            _id: "659303d32784df2d7ed92516",
-            name: "Chanderi Sarees",
-        },
-        {
-            _id: "65930ea02784df2d7ed9267f",
-            name: "Dabu Sarees",
-        },
-        {
-            _id: "65930e722784df2d7ed92639",
-            name: "Brocade Sarees",
-        },
-        {
-            _id: "659307c72784df2d7ed9258b",
-            name: "Soft Silk Sarees",
-        },
-        {
-            _id: "659307362784df2d7ed92546",
-            name: "Bengali Sarees",
-        },
-        {
-            _id: "659307812784df2d7ed92569",
-            name: "Kalamkari Sarees",
-        },
-        {
-            _id: "65930ebf2784df2d7ed9269b",
-            name: "Embroidery Sarees",
-        },
-        {
-            _id: "659303e92784df2d7ed9252b",
-            name: "Batik Sarees",
-        },
-        {
-            _id: "65930e7f2784df2d7ed9264e",
-            name: "Ikat Sarees",
-        },
-        {
-            _id: "659300dc6933dc3de5e5c7a3",
-            name: "Banarasi Sarees",
-        },
-        {
-            _id: "659307752784df2d7ed92562",
-            name: "Kanjivaram Sarees",
-        },
-        {
-            _id: "6593073a2784df2d7ed9254d",
-            name: "Jamdani Sarees",
-        },
-    ],
+
     attributes: [
         {
             _id: "657079723d9601c4f9cb5ec4",
@@ -629,6 +516,19 @@ const FilterOptions = {
             ],
         },
     ],
+
+    price: [
+        {
+            _id: "priceId1",
+            name: "Under ₹1999",
+        },
+        { _id: "priceId2", name: "₹2000 - ₹2999" },
+        { _id: "priceId3", name: "₹3000 - ₹3999" },
+        { _id: "priceId4", name: "₹4000 - ₹4999" },
+        { _id: "priceId5", name: "₹5000 - ₹5999" },
+        { _id: "priceId6", name: "₹6000 and above" },
+    ],
 };
+// INR
 
 export default FilterOptions;

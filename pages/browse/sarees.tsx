@@ -22,7 +22,7 @@ const SareesPage: NextPageWithLayout = () => {
             <StickyBox
                 offsetTop={81}
                 offsetBottom={20}
-                className="hidden lg:block mt-5 py-5 bg-white z-10"
+                className="hidden lg:block mt-5 py-5 bg-white z-10 -mx-1 px-1"
             >
                 <div className="flex items-center justify-between gap-10 bg-white">
                     <div className="flex items-center justify-between gap-8">
@@ -64,170 +64,48 @@ const SareesPage: NextPageWithLayout = () => {
                 </div>
             </StickyBox>
 
-            <div className="flex items-start gap-10 w-full">
+            <div className="flex items-start gap-10 w-full mb-20 mt-10 lg:mt-0">
                 <StickyBox
                     offsetTop={78 + 81}
                     offsetBottom={20}
-                    className="w-1/5 bg-white"
+                    className="w-1/5 bg-white hidden lg:block "
                 >
                     <div className="mt-6">
                         <FilterMenu />
                     </div>
                 </StickyBox>
 
-                <div className="grid flex-1 mt-10">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Excepturi beatae magnam molestias saepe aliquid non facilis
-                    vero labore ratione voluptate quis, id totam quam. Tempora
-                    officia natus voluptatem id delectus? Lorem ipsum dolor sit
-                    amet consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus? Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Excepturi beatae magnam
-                    molestias saepe aliquid non facilis vero labore ratione
-                    voluptate quis, id totam quam. Tempora officia natus
-                    voluptatem id delectus?
+                <div className="flex-1">
+                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                        <ProductItem />
+                    </div>
                 </div>
             </div>
         </div>
