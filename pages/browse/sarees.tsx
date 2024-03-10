@@ -1,13 +1,9 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NextPageWithLayout } from "../_app";
 import MainLayout from "@/components/layouts/MainLayout";
-import { RxReset } from "react-icons/rx";
-import { BiChevronLeft } from "react-icons/bi";
 import { IBM_Plex_Sans } from "next/font/google";
-import SortByMenu from "@/components/browse/SortByMenu";
-import ProductItem from "@/components/products/product/ProductItem";
-import StickyBox from "react-sticky-box";
-import FilterMenu from "@/components/browse/FilterMenu";
+import { useRouter } from "next/router";
+import BrowseProductsSection from "@/sections/products/BrowseProductsSection";
 
 const PlexFont = IBM_Plex_Sans({
     subsets: ["latin"],
@@ -15,99 +11,90 @@ const PlexFont = IBM_Plex_Sans({
 });
 
 const SareesPage: NextPageWithLayout = () => {
-    return (
-        <div
-            className={`max-w-screen-2xl mx-auto w-11/12 ${PlexFont.className}`}
-        >
-            <StickyBox
-                offsetTop={81}
-                offsetBottom={20}
-                className="hidden lg:block mt-5 py-5 bg-white z-10 -mx-1 px-1"
-            >
-                <div className="flex items-center justify-between gap-10 bg-white">
-                    <div className="flex items-center justify-between gap-8">
-                        <h4
-                            className={`text-base uppercase text-gray-600 tracking-wider`}
-                        >
-                            Filter By
-                        </h4>
+    const [selectedAttribute, setSelectedAttribute] = useState<string[]>([]);
+    const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
-                        <button className="flex items-center text-sm text-gray-500 gap-1">
-                            Reset
-                            <RxReset className="text-sm" />
-                        </button>
+    const [isProductsLoading, setIsProductsLoading] = useState(true);
+    const [isFiltersLoading, setIsFiltersLoading] = useState(true);
 
-                        <button className="bg-black text-white rounded-full p-0.5 xl:p-1">
-                            <BiChevronLeft className="text-xl" />
-                        </button>
-                    </div>
+    const router = useRouter();
+    const attributesQuery = router.query.attributes;
+    const colorsQuery = router.query.colors;
 
-                    <div className="flex-1">
-                        <div className="flex items-center gap-4">
-                            <span className="px-3 py-1.5 rounded-full border text-xs">
-                                Cotton
-                            </span>
+    const fetchProducts = useCallback(async () => {
+        if (!router.isReady) return;
+        setIsProductsLoading(true);
+        const myQuery = {
+            attributes: attributesQuery,
+            colors: colorsQuery,
+            selectedAttribute,
+            selectedColors,
+        };
+        await new Promise((resolve) => setTimeout(resolve, 200));
+        setIsProductsLoading(false);
+        console.log("Fetching Products");
+    }, [router.isReady, attributesQuery, colorsQuery, selectedAttribute, selectedColors]);
 
-                            <span className="px-3 py-1.5 rounded-full border text-xs">
-                                Cotton
-                            </span>
-                            <span className="px-3 py-1.5 rounded-full border text-xs">
-                                Cotton
-                            </span>
-                            <span className="px-3 py-1.5 rounded-full border text-xs">
-                                Cotton
-                            </span>
-                        </div>
-                    </div>
+    const fetchFilters = useCallback(async () => {
+        if (!router.isReady) return;
+        setIsFiltersLoading(true);
+        const myQuery = {
+            attributes: attributesQuery,
+            colors: colorsQuery,
+        };
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        setIsFiltersLoading(false);
+        console.log("fetching filters");
+    }, [router.isReady, attributesQuery, colorsQuery]);
 
-                    <SortByMenu />
-                </div>
-            </StickyBox>
+    useEffect(() => {
+        fetchProducts();
+    }, [fetchProducts]);
 
-            <div className="flex items-start gap-10 w-full mb-20 mt-10 lg:mt-0">
-                <StickyBox
-                    offsetTop={78 + 81}
-                    offsetBottom={20}
-                    className="w-1/5 bg-white hidden lg:block "
-                >
-                    <div className="mt-6">
-                        <FilterMenu />
-                    </div>
-                </StickyBox>
+    useEffect(() => {
+        fetchFilters();
+    }, [fetchFilters]);
 
-                <div className="flex-1">
-                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                    </div>
-                </div>
+    const handleAttributeChange = (id: string) => {
+        const _selected = [...selectedAttribute];
+        const index = _selected.indexOf(id);
+        if (index === -1) {
+            _selected.push(id);
+        } else {
+            _selected.splice(index, 1);
+        }
+
+        setSelectedAttribute(_selected);
+    };
+
+    const handleColorChange = (id: string) => {
+        const _selected = [...selectedColors];
+        const index = _selected.indexOf(id);
+        if (index === -1) {
+            _selected.push(id);
+        } else {
+            _selected.splice(index, 1);
+        }
+
+        setSelectedColors(_selected);
+    };
+
+    if (isFiltersLoading) {
+        return (
+            <div className="flex items-center justify-center h-page-main">
+                <h1>Loading...</h1>
             </div>
+        );
+    }
+
+    return (
+        <div className={`max-w-screen-2xl mx-auto w-11/12 ${PlexFont.className}`}>
+            <BrowseProductsSection
+                onSelectColor={handleColorChange}
+                onSelectattribute={handleAttributeChange}
+                selectedAttribute={selectedAttribute}
+                selectedColors={selectedColors}
+            />
         </div>
     );
 };

@@ -8,6 +8,9 @@ interface Props {
     onExpand: (id: string) => void;
     items?: { name: string; _id: string; hex?: string }[];
     color?: boolean;
+
+    selectedItems?: string[];
+    onSelect?: (item: any) => void;
 }
 
 const FilterItemGroup: React.FC<Props> = ({
@@ -17,11 +20,18 @@ const FilterItemGroup: React.FC<Props> = ({
     expandedId,
     onExpand,
     color,
+    onSelect,
 }) => {
     const isExpanded = expandedId === filterid;
 
     const toggleExpandHandler = () => {
         onExpand(filterid);
+    };
+
+    const selectFilterHandler = (id: string) => {
+        if (onSelect) {
+            onSelect(id);
+        }
     };
 
     return (
@@ -32,9 +42,7 @@ const FilterItemGroup: React.FC<Props> = ({
             >
                 {name}
 
-                <BiChevronDown
-                    className={`text-xl ${isExpanded && "rotate-180"} `}
-                />
+                <BiChevronDown className={`text-xl ${isExpanded && "rotate-180"} `} />
             </div>
 
             {isExpanded && (
@@ -48,6 +56,7 @@ const FilterItemGroup: React.FC<Props> = ({
                             <input
                                 id={item._id}
                                 name={item.name}
+                                onChange={selectFilterHandler.bind(null, item._id)}
                                 type="checkbox"
                                 className="filter-checkbox"
                             />
