@@ -45,7 +45,9 @@ const BrowseProductsSection: React.FC<Props> = ({
         }
     };
 
-    const onMSortChange = () => {
+    const onMSortChange = (item: ISortItem) => {
+        onSortChange(item);
+
         if (isMSortOpen) {
             closeMSort();
         }
@@ -110,7 +112,9 @@ const BrowseProductsSection: React.FC<Props> = ({
                     />
                 )}
 
-                {isMSortOpen && <SortMenu onClose={closeMSort} />}
+                {isMSortOpen && (
+                    <SortMenu onClose={closeMSort} onChange={onMSortChange} sortBy={sortBy} />
+                )}
             </>
         </div>
     );
