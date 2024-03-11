@@ -27,7 +27,7 @@ const MobileBottomMenu: React.FC<Props> = (props) => {
     const { openMFilter, openMSort } = useFilterBarStore((state) => state);
 
     return (
-        <div className="lg:hidden sticky w-full bg-black bg-opacity-90 backdrop-blur z-20 bottom-0 inset-x-0 py-2 text-white">
+        <div className="lg:hidden sticky w-full bg-black bg-opacity-90 backdrop-blur bottom-0 inset-x-0 py-2 text-white">
             <div className="w-full h-full grid grid-cols-2 place-items-center py-2">
                 <MenuButton Icon={MdSort} label="Sort By" onClick={openMSort} />
                 <MenuButton Icon={FiFilter} label="Filter" onClick={openMFilter} />

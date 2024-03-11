@@ -1,5 +1,7 @@
 import BrowseTop from "@/components/browse/BrowseTop";
 import FilterMenu from "@/components/browse/FilterMenu";
+import MFilterMenu from "@/components/browse/mobile/MFilterMenu";
+import SortMenu from "@/components/browse/mobile/SortMenu";
 import { IFilterOptions } from "@/hooks/products/useFilters";
 import { ISortItem } from "@/lib/Products_SortData";
 import { useFilterBarStore } from "@/store/filter/useBottomFilter";
@@ -94,35 +96,22 @@ const BrowseProductsSection: React.FC<Props> = ({
                 </div>
             </div>
 
-            {filterOptions && isMFilterOpen && (
-                <div className="lg:hidden fixed z-30 inset-0 backdrop-blur flex items-end">
-                    <div className="overflow-auto w-full p-6 h-3/4 mt-auto bg-white flex flex-col justify-between">
-                        <FilterMenu
-                            onSelectattribute={onSelectattribute}
-                            onSelectColor={onSelectColor}
-                            selectedAttribute={selectedAttribute}
-                            selectedColors={selectedColors}
-                            filterOptions={filterOptions}
-                        />
+            {/* Mobile Sort and Filter Menu */}
+            <>
+                {filterOptions && isMFilterOpen && (
+                    <MFilterMenu
+                        onSelectattribute={onSelectattribute}
+                        onSelectColor={onSelectColor}
+                        selectedAttribute={selectedAttribute}
+                        selectedColors={selectedColors}
+                        filterOptions={filterOptions}
+                        onResetFilters={onResetFilters}
+                        closeMFilter={closeMFilter}
+                    />
+                )}
 
-                        <div className="grid grid-cols-2 gap-4">
-                            <button
-                                className="w-full bg-white text-black  border-2 border-black rounded-full p-2"
-                                onClick={onResetFilters}
-                            >
-                                Reset
-                            </button>
-
-                            <button
-                                className="w-full bg-black text-white rounded-full p-2  border-2 border-black"
-                                onClick={closeMFilter}
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+                {isMSortOpen && <SortMenu onClose={closeMSort} />}
+            </>
         </div>
     );
 };
