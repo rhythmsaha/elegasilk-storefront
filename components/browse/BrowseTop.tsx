@@ -4,12 +4,15 @@ import { RxReset } from "react-icons/rx";
 import StickyBox from "react-sticky-box";
 import SortByMenu from "./SortByMenu";
 import { IColorFilter, ISubCategoryFilter } from "@/hooks/products/useFilters";
+import { ISortItem } from "@/lib/Products_SortData";
 
 interface Props {
     selectedAttribute: string[];
     selectedColors: string[];
     onReset: () => void;
     filterOptions: (ISubCategoryFilter | IColorFilter)[];
+    sortBy: ISortItem;
+    onSortChange: React.Dispatch<React.SetStateAction<ISortItem>>;
 }
 
 const BrowseTop: React.FC<Props> = ({
@@ -17,22 +20,21 @@ const BrowseTop: React.FC<Props> = ({
     selectedColors,
     onReset,
     filterOptions,
+    sortBy,
+    onSortChange,
 }) => {
     const [selected, setSelected] = useState<any[]>([]);
 
     useEffect(() => {
         const _selected = [...selectedAttribute, ...selectedColors];
-
         const filteredOptions = filterOptions.filter((option: any) => {
             return _selected.includes(option._id);
         });
-
         // check if all object._id are unique in the array
         const unique = new Set(filteredOptions.map((item: any) => item._id));
         const uniqueArray = Array.from(unique).map((id) => {
             return filteredOptions.find((item: any) => item._id === id);
         });
-
         setSelected(uniqueArray);
     }, [filterOptions, selectedAttribute, selectedColors]);
 
@@ -74,7 +76,7 @@ const BrowseTop: React.FC<Props> = ({
                     </div>
                 </div>
 
-                <SortByMenu />
+                <SortByMenu sortBy={sortBy} onSortChange={onSortChange} />
             </div>
         </StickyBox>
     );

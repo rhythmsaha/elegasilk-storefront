@@ -1,11 +1,9 @@
 import BrowseTop from "@/components/browse/BrowseTop";
 import FilterMenu from "@/components/browse/FilterMenu";
-import SortByMenu from "@/components/browse/SortByMenu";
 import { IFilterOptions } from "@/hooks/products/useFilters";
+import { ISortItem } from "@/lib/Products_SortData";
 import { useFilterBarStore } from "@/store/filter/useBottomFilter";
 import React from "react";
-import { BiChevronLeft } from "react-icons/bi";
-import { RxReset } from "react-icons/rx";
 import StickyBox from "react-sticky-box";
 
 interface Props {
@@ -15,6 +13,8 @@ interface Props {
     selectedColors: string[];
     filterOptions: IFilterOptions | null;
     resetFilters: () => void;
+    sortBy: ISortItem;
+    onSortChange: React.Dispatch<React.SetStateAction<ISortItem>>;
 }
 
 const BrowseProductsSection: React.FC<Props> = ({
@@ -24,8 +24,10 @@ const BrowseProductsSection: React.FC<Props> = ({
     selectedColors,
     filterOptions,
     resetFilters,
+    onSortChange,
+    sortBy,
 }) => {
-    const { closeMSort, closeMFilter, isMFilterOpen, isMSortOpen } = useFilterBarStore(
+    const { isMFilterOpen, isMSortOpen, closeMSort, closeMFilter } = useFilterBarStore(
         (state) => state
     );
 
@@ -33,6 +35,19 @@ const BrowseProductsSection: React.FC<Props> = ({
         ...(filterOptions?.attributes?.flatMap((attr) => attr.subcategories) || []),
         ...(filterOptions?.colors || []),
     ];
+
+    const onResetFilters = () => {
+        resetFilters();
+        if (isMFilterOpen) {
+            closeMFilter();
+        }
+    };
+
+    const onMSortChange = () => {
+        if (isMSortOpen) {
+            closeMSort();
+        }
+    };
 
     return (
         <div>
@@ -42,6 +57,8 @@ const BrowseProductsSection: React.FC<Props> = ({
                     selectedColors={selectedColors}
                     onReset={resetFilters}
                     filterOptions={filters}
+                    sortBy={sortBy}
+                    onSortChange={onSortChange}
                 />
             )}
 
@@ -78,7 +95,7 @@ const BrowseProductsSection: React.FC<Props> = ({
             </div>
 
             {filterOptions && isMFilterOpen && (
-                <div className="fixed z-30 inset-0 backdrop-blur flex items-end">
+                <div className="lg:hidden fixed z-30 inset-0 backdrop-blur flex items-end">
                     <div className="overflow-auto w-full p-6 h-3/4 mt-auto bg-white flex flex-col justify-between">
                         <FilterMenu
                             onSelectattribute={onSelectattribute}
@@ -91,14 +108,14 @@ const BrowseProductsSection: React.FC<Props> = ({
                         <div className="grid grid-cols-2 gap-4">
                             <button
                                 className="w-full bg-white text-black  border-2 border-black rounded-full p-2"
-                                onClick={resetFilters}
+                                onClick={onResetFilters}
                             >
                                 Reset
                             </button>
 
                             <button
                                 className="w-full bg-black text-white rounded-full p-2  border-2 border-black"
-                                onClick={resetFilters}
+                                onClick={closeMFilter}
                             >
                                 Close
                             </button>

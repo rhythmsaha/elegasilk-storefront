@@ -7,8 +7,7 @@ import useFilters from "@/hooks/products/useFilters";
 import useProducts from "@/hooks/products/useProducts";
 import LoadingScreen from "@/screens/LoadingScreen";
 import MobileBottomMenu from "@/components/browse/mobile/MobileBottomMenu";
-import FilterMenu from "@/components/browse/FilterMenu";
-import { useFilterBarStore } from "@/store/filter/useBottomFilter";
+import sortData, { ISortItem } from "@/lib/Products_SortData";
 
 const PlexFont = IBM_Plex_Sans({
     subsets: ["latin"],
@@ -18,11 +17,9 @@ const PlexFont = IBM_Plex_Sans({
 const SareesPage: NextPageWithLayout = () => {
     const [selectedAttribute, setSelectedAttribute] = useState<string[]>([]);
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
+    const [selectedSort, setSelectedSort] = useState<ISortItem>(sortData[0]);
     const { filterOptions, isFiltersLoading } = useFilters();
     const { productLoading, products } = useProducts(selectedAttribute, selectedColors);
-    const { closeMSort, closeMFilter, isMFilterOpen, isMSortOpen } = useFilterBarStore(
-        (state) => state
-    );
 
     const handleAttributeChange = (id: string) => {
         const _selected = [...selectedAttribute];
@@ -51,14 +48,6 @@ const SareesPage: NextPageWithLayout = () => {
     const resetFilters = () => {
         setSelectedAttribute([]);
         setSelectedColors([]);
-
-        if (isMFilterOpen) {
-            closeMFilter();
-        }
-
-        if (isMSortOpen) {
-            closeMSort();
-        }
     };
 
     if (isFiltersLoading) {
@@ -66,18 +55,22 @@ const SareesPage: NextPageWithLayout = () => {
     }
 
     return (
-        <div className={`max-w-screen-2xl mx-auto w-11/12 ${PlexFont.className}`}>
-            <BrowseProductsSection
-                onSelectColor={handleColorChange}
-                onSelectattribute={handleAttributeChange}
-                selectedAttribute={selectedAttribute}
-                selectedColors={selectedColors}
-                filterOptions={filterOptions}
-                resetFilters={resetFilters}
-            />
+        <>
+            <div className={`max-w-screen-2xl mx-auto w-11/12 ${PlexFont.className}`}>
+                <BrowseProductsSection
+                    onSelectColor={handleColorChange}
+                    onSelectattribute={handleAttributeChange}
+                    selectedAttribute={selectedAttribute}
+                    selectedColors={selectedColors}
+                    filterOptions={filterOptions}
+                    resetFilters={resetFilters}
+                    sortBy={selectedSort}
+                    onSortChange={setSelectedSort}
+                />
+            </div>
 
-            <MobileBottomMenu />
-        </div>
+            {filterOptions && <MobileBottomMenu />}
+        </>
     );
 };
 
