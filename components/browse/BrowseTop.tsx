@@ -42,7 +42,7 @@ const BrowseTop: React.FC<Props> = ({
         <StickyBox
             offsetTop={81}
             offsetBottom={20}
-            className="hidden lg:block mt-5 py-5 bg-white z-10 -mx-1 px-1 max-w-full select-none"
+            className="hidden lg:block mt-5 py-5 bg-white -mx-1 px-1 max-w-full select-none"
         >
             <div className="flex items-center justify-between gap-10 bg-white w-full">
                 <div className="flex items-center justify-between gap-8 min-w-max">

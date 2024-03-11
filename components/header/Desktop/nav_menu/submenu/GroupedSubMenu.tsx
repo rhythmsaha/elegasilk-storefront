@@ -11,7 +11,7 @@ interface Props {
 
 const GroupedSubMenu = ({ menuGroups, title }: Props) => {
     return (
-        <div className="fixed inset-x-0 bg-white  max-w-screen-lg mx-auto px-14 pt-6 pb-12 rounded-xl shadow-xl">
+        <div className="fixed z-10 inset-x-0 bg-white  max-w-screen-lg mx-auto px-14 pt-6 pb-12 rounded-xl shadow-xl">
             <div className="flex justify-around gap-8 bg-white">
                 {menuGroups &&
                     menuGroups.length > 0 &&
@@ -22,7 +22,11 @@ const GroupedSubMenu = ({ menuGroups, title }: Props) => {
 
                                 <div className="mt-4 space-y-1">
                                     {_subMenu.subMenu.map((link, index) => (
-                                        <Link href={link.path} className="block text-gray-500 hover:text-black font-light cursor-pointer min-w-max tracking-wider text-sm" key={link._id + index}>
+                                        <Link
+                                            href={link.path}
+                                            className="block text-gray-500 hover:text-black font-light cursor-pointer min-w-max tracking-wider text-sm"
+                                            key={link._id + index}
+                                        >
                                             {link.title}
                                         </Link>
                                     ))}

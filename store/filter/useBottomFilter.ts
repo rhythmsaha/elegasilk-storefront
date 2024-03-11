@@ -15,7 +15,7 @@ export const useFilterBarStore = create<IFilterBarStore>()(
     devtools(
         (set) => ({
             isMFilterOpen: false,
-            isMSortOpen: true,
+            isMSortOpen: false,
 
             openMFilter: () => {
                 set({ isMFilterOpen: true }, false, "filterBar/openMFilter");

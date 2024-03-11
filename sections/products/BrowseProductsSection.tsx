@@ -86,7 +86,7 @@ const BrowseProductsSection: React.FC<Props> = ({
                 </StickyBox>
                 <div className="flex-1">
                     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-                        {[...Array(12)].map((_, i) => (
+                        {[...Array(30)].map((_, i) => (
                             <div key={i}>
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
                                 quisquam ab fugit rerum error libero architecto molestiae non
