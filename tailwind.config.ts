@@ -6,6 +6,7 @@ const config: Config = {
         "./components/**/*.{js,ts,jsx,tsx,mdx}",
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
         "./sections/**/*.{js,ts,jsx,tsx,mdx}",
+        "./screens/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
         extend: {
@@ -21,9 +22,6 @@ const config: Config = {
             },
         },
     },
-    plugins: [
-        require("@tailwindcss/line-clamp"),
-        require("tailwind-scrollbar"),
-    ],
+    plugins: [require("@tailwindcss/line-clamp"), require("tailwind-scrollbar")],
 };
 export default config;

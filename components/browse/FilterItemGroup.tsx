@@ -1,14 +1,15 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
+import FilterItem from "./FilterItem";
 
 interface Props {
     name: string;
     filterid: string;
     expandedId?: string;
     onExpand: (id: string) => void;
-    items?: { name: string; _id: string; hex?: string }[];
+    items: { name: string; _id: string; hex?: string; selected?: boolean }[];
     color?: boolean;
-
     selectedItems?: string[];
     onSelect?: (item: any) => void;
 }
@@ -21,8 +22,16 @@ const FilterItemGroup: React.FC<Props> = ({
     onExpand,
     color,
     onSelect,
+    selectedItems,
 }) => {
     const isExpanded = expandedId === filterid;
+
+    const _items = items?.map((item) => {
+        if (selectedItems?.includes(item._id)) {
+            return { ...item, selected: true };
+        }
+        return item;
+    });
 
     const toggleExpandHandler = () => {
         onExpand(filterid);
@@ -47,30 +56,13 @@ const FilterItemGroup: React.FC<Props> = ({
 
             {isExpanded && (
                 <div className="mt-8 space-y-4">
-                    {items?.map((item) => (
-                        <label
-                            htmlFor={item._id}
-                            className="flex items-center gap-2 cursor-pointer hover:text-black"
+                    {_items?.map((item) => (
+                        <FilterItem
                             key={item._id}
-                        >
-                            <input
-                                id={item._id}
-                                name={item.name}
-                                onChange={selectFilterHandler.bind(null, item._id)}
-                                type="checkbox"
-                                className="filter-checkbox"
-                            />
-                            <span className="leading-none flex items-center gap-2">
-                                {item.name}
-
-                                {color && (
-                                    <span
-                                        className="h-4 w-4 rounded-full opacity-70"
-                                        style={{ backgroundColor: item.hex }}
-                                    />
-                                )}
-                            </span>
-                        </label>
+                            item={item}
+                            color={color}
+                            onSelect={selectFilterHandler}
+                        />
                     ))}
                 </div>
             )}

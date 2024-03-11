@@ -516,18 +516,6 @@ const FilterOptions = {
             ],
         },
     ],
-
-    price: [
-        {
-            _id: "priceId1",
-            name: "Under ₹1999",
-        },
-        { _id: "priceId2", name: "₹2000 - ₹2999" },
-        { _id: "priceId3", name: "₹3000 - ₹3999" },
-        { _id: "priceId4", name: "₹4000 - ₹4999" },
-        { _id: "priceId5", name: "₹5000 - ₹5999" },
-        { _id: "priceId6", name: "₹6000 and above" },
-    ],
 };
 // INR
 

@@ -1,9 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NextPageWithLayout } from "../_app";
 import MainLayout from "@/components/layouts/MainLayout";
 import { IBM_Plex_Sans } from "next/font/google";
-import { useRouter } from "next/router";
 import BrowseProductsSection from "@/sections/products/BrowseProductsSection";
+import useFilters from "@/hooks/products/useFilters";
+import useProducts from "@/hooks/products/useProducts";
+import LoadingScreen from "@/screens/LoadingScreen";
+import MobileBottomMenu from "@/components/browse/mobile/MobileBottomMenu";
+import FilterMenu from "@/components/browse/FilterMenu";
+import { useFilterBarStore } from "@/store/filter/useBottomFilter";
 
 const PlexFont = IBM_Plex_Sans({
     subsets: ["latin"],
@@ -13,47 +18,11 @@ const PlexFont = IBM_Plex_Sans({
 const SareesPage: NextPageWithLayout = () => {
     const [selectedAttribute, setSelectedAttribute] = useState<string[]>([]);
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
-
-    const [isProductsLoading, setIsProductsLoading] = useState(true);
-    const [isFiltersLoading, setIsFiltersLoading] = useState(true);
-
-    const router = useRouter();
-    const attributesQuery = router.query.attributes;
-    const colorsQuery = router.query.colors;
-
-    const fetchProducts = useCallback(async () => {
-        if (!router.isReady) return;
-        setIsProductsLoading(true);
-        const myQuery = {
-            attributes: attributesQuery,
-            colors: colorsQuery,
-            selectedAttribute,
-            selectedColors,
-        };
-        await new Promise((resolve) => setTimeout(resolve, 200));
-        setIsProductsLoading(false);
-        console.log("Fetching Products");
-    }, [router.isReady, attributesQuery, colorsQuery, selectedAttribute, selectedColors]);
-
-    const fetchFilters = useCallback(async () => {
-        if (!router.isReady) return;
-        setIsFiltersLoading(true);
-        const myQuery = {
-            attributes: attributesQuery,
-            colors: colorsQuery,
-        };
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        setIsFiltersLoading(false);
-        console.log("fetching filters");
-    }, [router.isReady, attributesQuery, colorsQuery]);
-
-    useEffect(() => {
-        fetchProducts();
-    }, [fetchProducts]);
-
-    useEffect(() => {
-        fetchFilters();
-    }, [fetchFilters]);
+    const { filterOptions, isFiltersLoading } = useFilters();
+    const { productLoading, products } = useProducts(selectedAttribute, selectedColors);
+    const { closeMSort, closeMFilter, isMFilterOpen, isMSortOpen } = useFilterBarStore(
+        (state) => state
+    );
 
     const handleAttributeChange = (id: string) => {
         const _selected = [...selectedAttribute];
@@ -79,12 +48,21 @@ const SareesPage: NextPageWithLayout = () => {
         setSelectedColors(_selected);
     };
 
+    const resetFilters = () => {
+        setSelectedAttribute([]);
+        setSelectedColors([]);
+
+        if (isMFilterOpen) {
+            closeMFilter();
+        }
+
+        if (isMSortOpen) {
+            closeMSort();
+        }
+    };
+
     if (isFiltersLoading) {
-        return (
-            <div className="flex items-center justify-center h-page-main">
-                <h1>Loading...</h1>
-            </div>
-        );
+        return <LoadingScreen />;
     }
 
     return (
@@ -94,7 +72,11 @@ const SareesPage: NextPageWithLayout = () => {
                 onSelectattribute={handleAttributeChange}
                 selectedAttribute={selectedAttribute}
                 selectedColors={selectedColors}
+                filterOptions={filterOptions}
+                resetFilters={resetFilters}
             />
+
+            <MobileBottomMenu />
         </div>
     );
 };

@@ -2,6 +2,8 @@ import { Nunito_Sans } from "next/font/google";
 import React, { useEffect, useState } from "react";
 import FilterItemGroup from "./FilterItemGroup";
 import FilterOptions from "@/lib/FilterOptions";
+import { IFilterOptions } from "@/hooks/products/useFilters";
+import { useRouter } from "next/router";
 
 const NunitoFont = Nunito_Sans({
     subsets: ["latin"],
@@ -13,6 +15,7 @@ interface Props {
     onSelectColor: (id: string) => void;
     selectedAttribute: string[];
     selectedColors: string[];
+    filterOptions: IFilterOptions;
 }
 
 const FilterMenu: React.FC<Props> = ({
@@ -20,6 +23,7 @@ const FilterMenu: React.FC<Props> = ({
     onSelectColor,
     selectedAttribute,
     selectedColors,
+    filterOptions,
 }) => {
     const [expandedFilterMenu, ExpandedFilterMenu] = useState<string>();
 
@@ -31,23 +35,52 @@ const FilterMenu: React.FC<Props> = ({
         ExpandedFilterMenu(id);
     };
 
-    return (
-        <div
-            className={`${NunitoFont.className} tracking-wider text-gray-800 select-none max-h-full overflow-y-auto `}
-        >
-            {FilterOptions.attributes.map((filter, index) => (
-                <FilterItemGroup
-                    key={filter._id}
-                    filterid={filter._id}
-                    expandedId={expandedFilterMenu}
-                    onExpand={onExpandMenuHandler}
-                    name={filter.name}
-                    items={filter.subcategories}
-                    onSelect={onSelectattribute}
-                />
-            ))}
+    const router = useRouter();
 
-            {FilterOptions.colors && (
+    let attributesQuery = router.query.attributes;
+
+    if (typeof attributesQuery === "string") {
+        attributesQuery = attributesQuery.split(",") as string[];
+    } else if (typeof attributesQuery === "object" && attributesQuery.length > 0) {
+        attributesQuery = attributesQuery;
+    } else {
+        attributesQuery = [];
+    }
+
+    let colorsQuery = router.query.colors;
+
+    if (typeof colorsQuery === "string") {
+        colorsQuery = colorsQuery.split(",") as string[];
+    } else if (typeof colorsQuery === "object" && colorsQuery.length > 0) {
+        colorsQuery = colorsQuery;
+    } else {
+        colorsQuery = [];
+    }
+
+    const _selectedAttributes: string[] = selectedAttribute.length
+        ? [...selectedAttribute]
+        : attributesQuery;
+
+    const _selectedColors: string[] = selectedColors.length ? selectedColors : colorsQuery;
+
+    return (
+        <div className={`${NunitoFont.className} tracking-wider text-gray-800 select-none `}>
+            {filterOptions.attributes &&
+                filterOptions.attributes.length > 0 &&
+                filterOptions.attributes.map((filter, index) => (
+                    <FilterItemGroup
+                        key={filter._id}
+                        filterid={filter._id}
+                        expandedId={expandedFilterMenu}
+                        onExpand={onExpandMenuHandler}
+                        name={filter.name}
+                        items={filter.subcategories}
+                        onSelect={onSelectattribute}
+                        selectedItems={_selectedAttributes}
+                    />
+                ))}
+
+            {filterOptions.colors && filterOptions.colors.length > 0 && filterOptions.colors && (
                 <FilterItemGroup
                     filterid={"colorsFilter"}
                     expandedId={expandedFilterMenu}
@@ -55,6 +88,7 @@ const FilterMenu: React.FC<Props> = ({
                     name={"Colors"}
                     items={FilterOptions.colors}
                     onSelect={onSelectColor}
+                    selectedItems={_selectedColors}
                     color
                 />
             )}

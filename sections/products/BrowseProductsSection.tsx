@@ -1,5 +1,8 @@
+import BrowseTop from "@/components/browse/BrowseTop";
 import FilterMenu from "@/components/browse/FilterMenu";
 import SortByMenu from "@/components/browse/SortByMenu";
+import { IFilterOptions } from "@/hooks/products/useFilters";
+import { useFilterBarStore } from "@/store/filter/useBottomFilter";
 import React from "react";
 import { BiChevronLeft } from "react-icons/bi";
 import { RxReset } from "react-icons/rx";
@@ -10,6 +13,8 @@ interface Props {
     onSelectColor: (id: string) => void;
     selectedAttribute: string[];
     selectedColors: string[];
+    filterOptions: IFilterOptions | null;
+    resetFilters: () => void;
 }
 
 const BrowseProductsSection: React.FC<Props> = ({
@@ -17,42 +22,28 @@ const BrowseProductsSection: React.FC<Props> = ({
     onSelectattribute,
     selectedAttribute,
     selectedColors,
+    filterOptions,
+    resetFilters,
 }) => {
+    const { closeMSort, closeMFilter, isMFilterOpen, isMSortOpen } = useFilterBarStore(
+        (state) => state
+    );
+
+    const filters = [
+        ...(filterOptions?.attributes?.flatMap((attr) => attr.subcategories) || []),
+        ...(filterOptions?.colors || []),
+    ];
+
     return (
         <div>
-            <StickyBox
-                offsetTop={81}
-                offsetBottom={20}
-                className="hidden lg:block mt-5 py-5 bg-white z-10 -mx-1 px-1"
-            >
-                <div className="flex items-center justify-between gap-10 bg-white">
-                    <div className="flex items-center justify-between gap-8">
-                        <h4 className={`text-base uppercase text-gray-600 tracking-wider`}>
-                            Filter By
-                        </h4>
-
-                        <button className="flex items-center text-sm text-gray-500 gap-1">
-                            Reset
-                            <RxReset className="text-sm" />
-                        </button>
-
-                        <button className="bg-black text-white rounded-full p-0.5 xl:p-1">
-                            <BiChevronLeft className="text-xl" />
-                        </button>
-                    </div>
-
-                    <div className="flex-1">
-                        <div className="flex items-center gap-4">
-                            <span className="px-3 py-1.5 rounded-full border text-xs">Cotton</span>
-                            <span className="px-3 py-1.5 rounded-full border text-xs">Cotton</span>
-                            <span className="px-3 py-1.5 rounded-full border text-xs">Cotton</span>
-                            <span className="px-3 py-1.5 rounded-full border text-xs">Cotton</span>
-                        </div>
-                    </div>
-
-                    <SortByMenu />
-                </div>
-            </StickyBox>
+            {filterOptions && (
+                <BrowseTop
+                    selectedAttribute={selectedAttribute}
+                    selectedColors={selectedColors}
+                    onReset={resetFilters}
+                    filterOptions={filters}
+                />
+            )}
 
             <div className="flex items-start gap-10 w-full mb-20 mt-10 lg:mt-0">
                 <StickyBox
@@ -61,120 +52,60 @@ const BrowseProductsSection: React.FC<Props> = ({
                     className="w-1/5 bg-white hidden lg:block "
                 >
                     <div className="mt-6">
+                        {filterOptions && (
+                            <FilterMenu
+                                onSelectattribute={onSelectattribute}
+                                onSelectColor={onSelectColor}
+                                selectedAttribute={selectedAttribute}
+                                selectedColors={selectedColors}
+                                filterOptions={filterOptions}
+                            />
+                        )}
+                    </div>
+                </StickyBox>
+                <div className="flex-1">
+                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+                        {[...Array(12)].map((_, i) => (
+                            <div key={i}>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
+                                quisquam ab fugit rerum error libero architecto molestiae non
+                                repellat. Facere quas enim impedit. Quas repudiandae exercitationem,
+                                debitis provident rem error.
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {filterOptions && isMFilterOpen && (
+                <div className="fixed z-30 inset-0 backdrop-blur flex items-end">
+                    <div className="overflow-auto w-full p-6 h-3/4 mt-auto bg-white flex flex-col justify-between">
                         <FilterMenu
                             onSelectattribute={onSelectattribute}
                             onSelectColor={onSelectColor}
                             selectedAttribute={selectedAttribute}
                             selectedColors={selectedColors}
+                            filterOptions={filterOptions}
                         />
-                    </div>
-                </StickyBox>
 
-                <div className="flex-1">
-                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-                        {/* <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem /> */}
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
-                        </div>
-                        <div>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                            quisquam ab fugit rerum error libero architecto molestiae non repellat.
-                            Facere quas enim impedit. Quas repudiandae exercitationem, debitis
-                            provident rem error.
+                        <div className="grid grid-cols-2 gap-4">
+                            <button
+                                className="w-full bg-white text-black  border-2 border-black rounded-full p-2"
+                                onClick={resetFilters}
+                            >
+                                Reset
+                            </button>
+
+                            <button
+                                className="w-full bg-black text-white rounded-full p-2  border-2 border-black"
+                                onClick={resetFilters}
+                            >
+                                Close
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

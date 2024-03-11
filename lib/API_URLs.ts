@@ -5,6 +5,11 @@ const API_URLs = {
     resendverification: "/user/resendverificationlink",
     login: "/user/login",
     refreshSession: "user/refresh-session",
+
+    // products
+    products: {
+        filters: "/products/filters",
+    },
 };
 
 export default API_URLs;
