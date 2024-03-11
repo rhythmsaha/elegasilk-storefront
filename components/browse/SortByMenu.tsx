@@ -62,14 +62,14 @@ const SortByMenu: React.FC<Props> = ({ sortBy, onSortChange }) => {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-sm scrollbar-thin scrollbar-thumb-gray-200  scrollbar-track-transparent">
+                            <Listbox.Options className="absolute z-10 mt-2 max-h-56 w-full overflow-auto rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-sm scrollbar-thin scrollbar-thumb-gray-200  scrollbar-track-transparent">
                                 {sortData.map((sort) => (
                                     <Listbox.Option
                                         key={sort.id}
                                         className={({ active }) =>
                                             classNames(
                                                 active ? "bg-gray-600 text-white" : "text-gray-900",
-                                                "relative cursor-default select-none py-2 pl-3 pr-9"
+                                                "relative select-none py-2 pl-3 pr-9 cursor-pointer"
                                             )
                                         }
                                         value={sort}
