@@ -2,6 +2,7 @@ import BrowseTop from "@/components/browse/BrowseTop";
 import FilterMenu from "@/components/browse/FilterMenu";
 import MFilterMenu from "@/components/browse/mobile/MFilterMenu";
 import SortMenu from "@/components/browse/mobile/SortMenu";
+import ProductItem from "@/components/products/product/ProductItem";
 import { IFilterOptions } from "@/hooks/products/useFilters";
 import { ISortItem } from "@/lib/Products_SortData";
 import { useFilterBarStore } from "@/store/filter/useBottomFilter";
@@ -91,12 +92,7 @@ const BrowseProductsSection: React.FC<Props> = ({
                 <div className="flex-1">
                     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
                         {[...Array(30)].map((_, i) => (
-                            <div key={i}>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis
-                                quisquam ab fugit rerum error libero architecto molestiae non
-                                repellat. Facere quas enim impedit. Quas repudiandae exercitationem,
-                                debitis provident rem error.
-                            </div>
+                            <ProductItem key={i} />
                         ))}
                     </div>
                 </div>

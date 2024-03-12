@@ -39,11 +39,7 @@ const BrowseTop: React.FC<Props> = ({
     }, [filterOptions, selectedAttribute, selectedColors]);
 
     return (
-        <StickyBox
-            offsetTop={81}
-            offsetBottom={20}
-            className="hidden lg:block mt-5 py-5 bg-white -mx-1 px-1 max-w-full select-none"
-        >
+        <div className="hidden lg:block mt-5 py-5 bg-white -mx-2 px-2 select-none sticky top-20 z-10">
             <div className="flex items-center justify-between gap-10 bg-white w-full">
                 <div className="flex items-center justify-between gap-8 min-w-max">
                     <h4 className={`text-base uppercase text-gray-600 tracking-wider`}>
@@ -78,7 +74,7 @@ const BrowseTop: React.FC<Props> = ({
 
                 <SortByMenu sortBy={sortBy} onSortChange={onSortChange} />
             </div>
-        </StickyBox>
+        </div>
     );
 };
 
