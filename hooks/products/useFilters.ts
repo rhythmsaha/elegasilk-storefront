@@ -1,3 +1,4 @@
+import API_URLs from "@/lib/API_URLs";
 import axios from "@/utils/axios";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
@@ -35,6 +36,7 @@ const useFilters = () => {
 
     const fetchFilters = useCallback(async () => {
         if (!router.isReady) return;
+
         setIsFiltersLoading(true);
 
         const myQuery = {} as {
@@ -77,7 +79,7 @@ const useFilters = () => {
         }
 
         try {
-            const response = await axios.get("/products/filters", {
+            const response = await axios.get(API_URLs.products.filters, {
                 params: myQuery,
             });
             if (response.status !== 200 || !response.data.success) {

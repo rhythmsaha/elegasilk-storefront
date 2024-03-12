@@ -9,6 +9,7 @@ const API_URLs = {
     // products
     products: {
         filters: "/products/filters",
+        all: "/products",
     },
 };
 

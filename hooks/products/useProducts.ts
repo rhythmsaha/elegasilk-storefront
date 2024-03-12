@@ -1,3 +1,5 @@
+import API_URLs from "@/lib/API_URLs";
+import axios from "@/utils/axios";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 
@@ -8,19 +10,20 @@ const useProducts = (
 ) => {
     const [productLoading, setProductLoading] = useState(true);
     const [products, setProducts] = useState<any[]>([]);
+    const [productsError, setProductsError] = useState<any>(false);
 
     const router = useRouter();
-
     const attributesQuery = router.query.attributes;
     const colorsQuery = router.query.colors;
     const collectionsQuery = router.query.collections;
 
     const fetchProducts = useCallback(async () => {
         if (!router.isReady) return;
+
         setProductLoading(true);
 
         const myQuery = {} as {
-            [key: string]: string[];
+            [key: string]: string[] | string;
         };
 
         if (attributesQuery) {
@@ -79,26 +82,40 @@ const useProducts = (
             if (myQuery[key].length === 0) {
                 delete myQuery[key];
             } else {
-                myQuery[key] = Array.from(new Set(myQuery[key]));
+                myQuery[key] = Array.from(new Set(myQuery[key])).join(",");
             }
         }
 
-        setProductLoading(false);
+        try {
+            const response = await axios.get(API_URLs.products.all, {
+                params: myQuery,
+            });
+
+            if (response.status !== 200 || !response.data.success) {
+                throw new Error("Error fetching products");
+            }
+
+            setProducts(response.data.products);
+        } catch (error) {
+            setProductsError(error);
+        } finally {
+            setProductLoading(false);
+        }
     }, [
         router.isReady,
         attributesQuery,
-        collectionsQuery,
         colorsQuery,
+        collectionsQuery,
         selectedAttribute,
-        selectedCollection,
         selectedColors,
+        selectedCollection,
     ]);
 
     useEffect(() => {
         fetchProducts();
     }, [fetchProducts]);
 
-    return { productLoading, products };
+    return { productLoading, products, productsError };
 };
 
 export default useProducts;

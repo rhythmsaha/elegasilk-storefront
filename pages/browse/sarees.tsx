@@ -19,7 +19,10 @@ const SareesPage: NextPageWithLayout = () => {
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
     const [selectedSort, setSelectedSort] = useState<ISortItem>(sortData[0]);
     const { filterOptions, isFiltersLoading } = useFilters();
-    const { productLoading, products } = useProducts(selectedAttribute, selectedColors);
+    const { productLoading, products, productsError } = useProducts(
+        selectedAttribute,
+        selectedColors
+    );
 
     const handleAttributeChange = (id: string) => {
         const _selected = [...selectedAttribute];
