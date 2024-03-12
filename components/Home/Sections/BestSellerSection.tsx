@@ -43,7 +43,7 @@ const BestSellerSection: React.FC<Props> = ({ bestSellerData }) => {
                 subHeading="Discover the Sarees Everyone's Talking About"
             />
 
-            <div className="mt-6 md:mt-8 lg:mt-10 relative">
+            <div className="mt-6 md:mt-8 lg:mt-10 relative flex">
                 <Swiper
                     className="relative"
                     slidesPerView={2}
@@ -71,46 +71,12 @@ const BestSellerSection: React.FC<Props> = ({ bestSellerData }) => {
                 >
                     <SwiperButtonNext />
                     <SwiperButtonPrev />
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <ProductItem />
-                    </SwiperSlide>
+                    {bestSellerData.length > 0 &&
+                        bestSellerData.map((product, index) => (
+                            <SwiperSlide key={product._id} className="">
+                                <ProductItem product={product} />
+                            </SwiperSlide>
+                        ))}
                 </Swiper>
             </div>
         </SectionContainer>

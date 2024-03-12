@@ -23,7 +23,7 @@ const MFilterMenu: React.FC<Props> = ({
 }) => {
     return (
         <div className="lg:hidden fixed z-30 inset-0 backdrop-blur flex items-end">
-            <div className="overflow-auto w-full max-h-[75%] mt-auto bg-white flex flex-col justify-between">
+            <div className="overflow-auto w-full mt-auto bg-white flex flex-col justify-between browse-filter-size">
                 <div className="px-6 py-4">
                     <FilterMenu
                         onSelectattribute={onSelectattribute}

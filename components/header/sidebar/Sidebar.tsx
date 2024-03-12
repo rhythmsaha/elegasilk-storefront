@@ -65,7 +65,7 @@ const Sidebar = () => {
             className="fixed inset-0 bg-gray-900 z-30 h-screen overflow-y-auto"
         >
             <div className="flex flex-col h-full">
-                <header className="relative flex items-center border-b border-gray-900 justify-center h-16 bg-gray-950">
+                <header className="relative flex items-center border-b border-gray-900 justify-center min-h-16 bg-gray-950">
                     <Image
                         src="/logo_white.svg"
                         alt="Logo"
@@ -84,11 +84,7 @@ const Sidebar = () => {
 
                 <div className="flex-1">
                     {NAV_LINKS.map((menuItem) => (
-                        <SidebarMenuItem
-                            key={menuItem._id}
-                            menuItem={menuItem}
-                            parent
-                        />
+                        <SidebarMenuItem key={menuItem._id} menuItem={menuItem} parent />
                     ))}
 
                     {isAuthenticated && (
@@ -127,9 +123,8 @@ const Sidebar = () => {
                     ) : (
                         <>
                             <div className="text-gray-300 mb-4 max-w-96">
-                                Not a Member Yet? Join Elegasilk for great
-                                discounts and exclusive member benefits &
-                                offers.
+                                Not a Member Yet? Join Elegasilk for great discounts and exclusive
+                                member benefits & offers.
                             </div>
 
                             <Link

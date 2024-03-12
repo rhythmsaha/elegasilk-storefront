@@ -27,7 +27,7 @@ const ProductItem: React.FC<Props> = ({
 
     return (
         <div
-            className="bg-gray-50 shadow rounded overflow-hidden flex flex-col justify-between"
+            className="bg-gray-50 shadow rounded overflow-hidden flex flex-col justify-between h-full"
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >
@@ -68,7 +68,9 @@ const ProductItem: React.FC<Props> = ({
                 </div>
 
                 <div className="product_info p-3">
-                    <h4 className="line-clamp-2 text-15 text-black capitalize">{name}</h4>
+                    <h4 className="text-sm sm:text-base line-clamp-2 text-15 text-black capitalize">
+                        {name}
+                    </h4>
 
                     <div className="flex items-center gap-2 gap-y-1 flex-wrap">
                         <span className="text-black font-semibold">₹{MRP}</span>
