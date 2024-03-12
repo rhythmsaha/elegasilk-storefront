@@ -20,6 +20,10 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "www.karagiri.com",
             },
+            {
+                protocol: "https",
+                hostname: "*",
+            },
         ],
     },
 };

@@ -74,7 +74,7 @@ const NAV_LINKS: INavLink[] = [
                         _id: "659308ee2784df2d7ed925d7",
                         title: "Eri Sarees",
                         status: true,
-                        path: "/browse/sarees?attributes=659308ee278",
+                        path: "/browse/sarees?attributes=659308ee2784df2d7ed925d7",
                     },
                     {
                         _id: "659309042784df2d7ed925fa",

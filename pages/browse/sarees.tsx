@@ -60,9 +60,9 @@ const SareesPage: NextPageWithLayout = () => {
         return <LoadingScreen />;
     }
 
-    if (productsError) {
-        return router.replace("/404") as any;
-    }
+    // if (productsError) {
+    //     return router.replace("/404") as any;
+    // }
 
     return (
         <>

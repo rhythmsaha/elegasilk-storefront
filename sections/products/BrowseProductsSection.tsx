@@ -6,7 +6,7 @@ import ProductItem from "@/components/products/product/ProductItem";
 import { IFilterOptions } from "@/hooks/products/useFilters";
 import { ISortItem } from "@/lib/Products_SortData";
 import { useFilterBarStore } from "@/store/filter/useBottomFilter";
-import React from "react";
+import React, { useState } from "react";
 import StickyBox from "react-sticky-box";
 
 interface Props {
@@ -34,6 +34,8 @@ const BrowseProductsSection: React.FC<Props> = ({
     productLoading,
     products,
 }) => {
+    const [isFiltersCollapsed, setIsFiltersCollapsed] = useState(false);
+
     const { isMFilterOpen, isMSortOpen, closeMSort, closeMFilter } = useFilterBarStore(
         (state) => state
     );
@@ -58,6 +60,10 @@ const BrowseProductsSection: React.FC<Props> = ({
         }
     };
 
+    const filterCollapseToggle = () => {
+        setIsFiltersCollapsed((isFiltersCollapsed) => !isFiltersCollapsed);
+    };
+
     return (
         <div>
             {filterOptions && (
@@ -68,32 +74,44 @@ const BrowseProductsSection: React.FC<Props> = ({
                     filterOptions={filters}
                     sortBy={sortBy}
                     onSortChange={onSortChange}
+                    onFilterToggle={filterCollapseToggle}
                 />
             )}
 
             <div className="flex items-start gap-10 w-full mb-20 mt-10 lg:mt-0">
-                <StickyBox
-                    offsetTop={78 + 81}
-                    offsetBottom={20}
-                    className="w-1/5 bg-white hidden lg:block "
-                >
-                    <div className="mt-6">
-                        {filterOptions && (
-                            <FilterMenu
-                                onSelectattribute={onSelectattribute}
-                                onSelectColor={onSelectColor}
-                                selectedAttribute={selectedAttribute}
-                                selectedColors={selectedColors}
-                                filterOptions={filterOptions}
-                            />
-                        )}
-                    </div>
-                </StickyBox>
+                {!isFiltersCollapsed && (
+                    <StickyBox
+                        offsetTop={78 + 81}
+                        offsetBottom={20}
+                        className="w-1/5 bg-white hidden lg:block "
+                    >
+                        <div className="mt-6">
+                            {filterOptions && (
+                                <FilterMenu
+                                    onSelectattribute={onSelectattribute}
+                                    onSelectColor={onSelectColor}
+                                    selectedAttribute={selectedAttribute}
+                                    selectedColors={selectedColors}
+                                    filterOptions={filterOptions}
+                                />
+                            )}
+                        </div>
+                    </StickyBox>
+                )}
+
                 <div className="flex-1">
-                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-                        {[...Array(30)].map((_, i) => (
-                            <ProductItem key={i} />
-                        ))}
+                    <div
+                        className={`grid grid-cols-2 gap-4 md:grid-cols-3  ${
+                            isFiltersCollapsed
+                                ? "lg:grid-cols-4 xl:grid-cols-5"
+                                : "lg:grid-cols-3 xl:grid-cols-4"
+                        }`}
+                    >
+                        {products &&
+                            products.length > 0 &&
+                            products.map((product, i) => (
+                                <ProductItem key={product._id} product={product} />
+                            ))}
                     </div>
                 </div>
             </div>

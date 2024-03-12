@@ -12,6 +12,7 @@ interface Props {
     filterOptions: (ISubCategoryFilter | IColorFilter)[];
     sortBy: ISortItem;
     onSortChange: React.Dispatch<React.SetStateAction<ISortItem>>;
+    onFilterToggle: () => void;
 }
 
 const BrowseTop: React.FC<Props> = ({
@@ -21,6 +22,7 @@ const BrowseTop: React.FC<Props> = ({
     filterOptions,
     sortBy,
     onSortChange,
+    onFilterToggle,
 }) => {
     const [selected, setSelected] = useState<any[]>([]);
 
@@ -53,7 +55,10 @@ const BrowseTop: React.FC<Props> = ({
                         <RxReset className="text-sm" />
                     </button>
 
-                    <button className="bg-black text-white  rounded-full p-0.5 xl:p-1">
+                    <button
+                        className="bg-black text-white  rounded-full p-0.5 xl:p-1"
+                        onClick={onFilterToggle}
+                    >
                         <BiChevronLeft className="text-xl" />
                     </button>
                 </div>

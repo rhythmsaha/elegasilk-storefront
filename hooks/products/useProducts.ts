@@ -15,7 +15,7 @@ const useProducts = (
     const router = useRouter();
     const attributesQuery = router.query.attributes;
     const colorsQuery = router.query.colors;
-    const collectionsQuery = router.query.collections;
+    const collectionsQuery = router.query.collectionId;
 
     const fetchProducts = useCallback(async () => {
         if (!router.isReady) return;

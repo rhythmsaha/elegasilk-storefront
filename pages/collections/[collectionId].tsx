@@ -67,6 +67,8 @@ const CollectionsPage: NextPageWithLayout = () => {
                     resetFilters={resetFilters}
                     sortBy={selectedSort}
                     onSortChange={setSelectedSort}
+                    products={products}
+                    productLoading={productLoading}
                 />
             </div>
 
