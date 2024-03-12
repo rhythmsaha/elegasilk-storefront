@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BiChevronLeft } from "react-icons/bi";
 import { RxReset } from "react-icons/rx";
-import StickyBox from "react-sticky-box";
 import SortByMenu from "./SortByMenu";
 import { IColorFilter, ISubCategoryFilter } from "@/hooks/products/useFilters";
 import { ISortItem } from "@/lib/Products_SortData";
