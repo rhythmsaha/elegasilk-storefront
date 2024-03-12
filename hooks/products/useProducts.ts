@@ -95,7 +95,7 @@ const useProducts = (
                 throw new Error("Error fetching products");
             }
 
-            setProducts(response.data.products);
+            setProducts(response.data.data);
         } catch (error) {
             setProductsError(error);
         } finally {

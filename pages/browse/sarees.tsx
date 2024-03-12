@@ -8,6 +8,7 @@ import useProducts from "@/hooks/products/useProducts";
 import LoadingScreen from "@/screens/LoadingScreen";
 import MobileBottomMenu from "@/components/browse/mobile/MobileBottomMenu";
 import sortData, { ISortItem } from "@/lib/Products_SortData";
+import { useRouter } from "next/navigation";
 
 const PlexFont = IBM_Plex_Sans({
     subsets: ["latin"],
@@ -23,6 +24,8 @@ const SareesPage: NextPageWithLayout = () => {
         selectedAttribute,
         selectedColors
     );
+
+    const router = useRouter();
 
     const handleAttributeChange = (id: string) => {
         const _selected = [...selectedAttribute];
@@ -57,6 +60,10 @@ const SareesPage: NextPageWithLayout = () => {
         return <LoadingScreen />;
     }
 
+    if (productsError) {
+        return router.replace("/404") as any;
+    }
+
     return (
         <>
             <div className={`max-w-screen-2xl mx-auto w-11/12 ${PlexFont.className}`}>
@@ -69,6 +76,8 @@ const SareesPage: NextPageWithLayout = () => {
                     resetFilters={resetFilters}
                     sortBy={selectedSort}
                     onSortChange={setSelectedSort}
+                    products={products}
+                    productLoading={productLoading}
                 />
             </div>
 

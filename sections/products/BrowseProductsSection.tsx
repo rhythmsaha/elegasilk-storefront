@@ -17,6 +17,8 @@ interface Props {
     resetFilters: () => void;
     sortBy: ISortItem;
     onSortChange: React.Dispatch<React.SetStateAction<ISortItem>>;
+    products: any[];
+    productLoading: boolean;
 }
 
 const BrowseProductsSection: React.FC<Props> = ({
@@ -28,6 +30,8 @@ const BrowseProductsSection: React.FC<Props> = ({
     resetFilters,
     onSortChange,
     sortBy,
+    productLoading,
+    products,
 }) => {
     const { isMFilterOpen, isMSortOpen, closeMSort, closeMFilter } = useFilterBarStore(
         (state) => state

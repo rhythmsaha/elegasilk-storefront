@@ -12,7 +12,6 @@ const ProductItem = (props: Props) => {
                 <Image
                     src="https://www.karagiri.com/cdn/shop/products/RoshnibhatiainwinepurpleSaree_2_300x.jpg?v=1665555721"
                     alt="Product Image"
-                    layout="responsive"
                     height={450}
                     width={300}
                     className="object-cover w-full rounded"
@@ -36,18 +35,13 @@ const ProductItem = (props: Props) => {
 
             <div className="product_info p-3">
                 <h4 className="line-clamp-2 text-15 text-black">
-                    ROSHNI BHATIA in Wine Purple Woven Kanjivaram Saree -
-                    Special Wedding Edition
+                    ROSHNI BHATIA in Wine Purple Woven Kanjivaram Saree - Special Wedding Edition
                 </h4>
 
                 <div className="flex items-center gap-2 gap-y-1 flex-wrap">
                     <span className="text-black font-semibold">₹4,100</span>
-                    <span className="text-gray-400 line-through font-light text-sm">
-                        ₹16,999
-                    </span>
-                    <span className="text-xs sm:text-sm  text-red-500">
-                        (75% off)
-                    </span>
+                    <span className="text-gray-400 line-through font-light text-sm">₹16,999</span>
+                    <span className="text-xs sm:text-sm  text-red-500">(75% off)</span>
                 </div>
             </div>
 
