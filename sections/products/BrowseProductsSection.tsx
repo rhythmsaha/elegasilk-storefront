@@ -1,10 +1,12 @@
 import BrowseTop from "@/components/browse/BrowseTop";
 import FilterMenu from "@/components/browse/FilterMenu";
+import Pagination from "@/components/browse/Pagination";
 import MFilterMenu from "@/components/browse/mobile/MFilterMenu";
 import SortMenu from "@/components/browse/mobile/SortMenu";
 import ProductItem from "@/components/products/product/ProductItem";
 import { IFilterOptions } from "@/hooks/products/useFilters";
 import { ISortItem } from "@/lib/Products_SortData";
+import LoadingScreen from "@/screens/LoadingScreen";
 import { useFilterBarStore } from "@/store/filter/useBottomFilter";
 import React, { useState } from "react";
 import StickyBox from "react-sticky-box";
@@ -20,6 +22,10 @@ interface Props {
     onSortChange: React.Dispatch<React.SetStateAction<ISortItem>>;
     products: any[];
     productLoading: boolean;
+    page: number;
+    maxPage: number;
+    onNext: () => void;
+    onPrev: () => void;
 }
 
 const BrowseProductsSection: React.FC<Props> = ({
@@ -33,6 +39,10 @@ const BrowseProductsSection: React.FC<Props> = ({
     sortBy,
     productLoading,
     products,
+    page,
+    maxPage,
+    onNext,
+    onPrev,
 }) => {
     const [isFiltersCollapsed, setIsFiltersCollapsed] = useState(false);
 
@@ -100,19 +110,31 @@ const BrowseProductsSection: React.FC<Props> = ({
                 )}
 
                 <div className="flex-1">
-                    <div
-                        className={`grid grid-cols-2 gap-4 md:grid-cols-3  ${
-                            isFiltersCollapsed
-                                ? "lg:grid-cols-4 xl:grid-cols-5"
-                                : "lg:grid-cols-3 xl:grid-cols-4"
-                        }`}
-                    >
-                        {products &&
-                            products.length > 0 &&
-                            products.map((product, i) => (
-                                <ProductItem key={product._id} product={product} />
-                            ))}
-                    </div>
+                    {productLoading && (
+                        <div>
+                            <LoadingScreen />
+                        </div>
+                    )}
+
+                    {products.length === 0 && !productLoading && <div>No Products Found</div>}
+
+                    {!productLoading && products.length > 0 && (
+                        <div
+                            className={`grid grid-cols-2 gap-4 md:grid-cols-3  ${
+                                isFiltersCollapsed
+                                    ? "lg:grid-cols-4 xl:grid-cols-5"
+                                    : "lg:grid-cols-3 xl:grid-cols-4"
+                            }`}
+                        >
+                            {products &&
+                                products.length > 0 &&
+                                products.map((product, i) => (
+                                    <ProductItem key={product._id} product={product} />
+                                ))}
+                        </div>
+                    )}
+
+                    <Pagination page={page} maxPage={maxPage} onNext={onNext} onPrev={onPrev} />
                 </div>
             </div>
 

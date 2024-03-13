@@ -12,6 +12,26 @@ const useProducts = (
     const [products, setProducts] = useState<any[]>([]);
     const [productsError, setProductsError] = useState<any>(false);
 
+    const [pageSize, setPageSize] = useState(30);
+    const [maxPage, setMaxPage] = useState(1);
+    const [page, setPage] = useState(1);
+
+    const onNext = () => {
+        if (page < maxPage) {
+            setPage((prev) => prev + 1);
+        } else {
+            return;
+        }
+    };
+
+    const onPrev = () => {
+        if (page > 1) {
+            setPage((prev) => prev - 1);
+        } else {
+            return;
+        }
+    };
+
     const router = useRouter();
     const attributesQuery = router.query.attributes;
     const colorsQuery = router.query.colors;
@@ -86,6 +106,9 @@ const useProducts = (
             }
         }
 
+        if (page) myQuery.page = page.toString();
+        if (pageSize) myQuery.pageSize = pageSize.toString();
+
         try {
             const response = await axios.get(API_URLs.products.all, {
                 params: myQuery,
@@ -96,6 +119,7 @@ const useProducts = (
             }
 
             setProducts(response.data.data);
+            setMaxPage(+response.data.maxPage);
         } catch (error) {
             setProductsError(error);
         } finally {
@@ -109,13 +133,19 @@ const useProducts = (
         selectedAttribute,
         selectedColors,
         selectedCollection,
+        page,
+        pageSize,
     ]);
 
     useEffect(() => {
         fetchProducts();
+
+        return () => {
+            window.scrollTo(0, 0);
+        };
     }, [fetchProducts]);
 
-    return { productLoading, products, productsError };
+    return { productLoading, products, productsError, page, maxPage, pageSize, onNext, onPrev };
 };
 
 export default useProducts;

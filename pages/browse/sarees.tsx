@@ -9,6 +9,8 @@ import LoadingScreen from "@/screens/LoadingScreen";
 import MobileBottomMenu from "@/components/browse/mobile/MobileBottomMenu";
 import sortData, { ISortItem } from "@/lib/Products_SortData";
 import { useRouter } from "next/navigation";
+import { BiChevronLeft } from "react-icons/bi";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 const PlexFont = IBM_Plex_Sans({
     subsets: ["latin"],
@@ -19,11 +21,10 @@ const SareesPage: NextPageWithLayout = () => {
     const [selectedAttribute, setSelectedAttribute] = useState<string[]>([]);
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
     const [selectedSort, setSelectedSort] = useState<ISortItem>(sortData[0]);
+
     const { filterOptions, isFiltersLoading } = useFilters();
-    const { productLoading, products, productsError } = useProducts(
-        selectedAttribute,
-        selectedColors
-    );
+    const { productLoading, products, productsError, maxPage, page, onNext, onPrev, pageSize } =
+        useProducts(selectedAttribute, selectedColors);
 
     const router = useRouter();
 
@@ -78,6 +79,10 @@ const SareesPage: NextPageWithLayout = () => {
                     onSortChange={setSelectedSort}
                     products={products}
                     productLoading={productLoading}
+                    page={page}
+                    maxPage={maxPage}
+                    onNext={onNext}
+                    onPrev={onPrev}
                 />
             </div>
 

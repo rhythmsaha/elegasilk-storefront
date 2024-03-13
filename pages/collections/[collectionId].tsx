@@ -20,7 +20,10 @@ const CollectionsPage: NextPageWithLayout = () => {
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
     const [selectedSort, setSelectedSort] = useState<ISortItem>(sortData[0]);
     const { filterOptions, isFiltersLoading } = useFilters();
-    const { productLoading, products } = useProducts(selectedAttribute, selectedColors);
+    const { productLoading, products, maxPage, page, onNext, onPrev, pageSize } = useProducts(
+        selectedAttribute,
+        selectedColors
+    );
 
     const handleAttributeChange = (id: string) => {
         const _selected = [...selectedAttribute];
@@ -69,6 +72,10 @@ const CollectionsPage: NextPageWithLayout = () => {
                     onSortChange={setSelectedSort}
                     products={products}
                     productLoading={productLoading}
+                    page={page}
+                    maxPage={maxPage}
+                    onNext={onNext}
+                    onPrev={onPrev}
                 />
             </div>
 
