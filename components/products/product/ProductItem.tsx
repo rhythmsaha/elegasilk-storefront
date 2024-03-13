@@ -31,7 +31,7 @@ const ProductItem: React.FC<Props> = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >
-            <div className="cursor-pointer">
+            <Link href={`/product/${slug}`} className="cursor-pointer">
                 <div className="product_image relative overflow-hidden">
                     {images.length > 0 && isHovering ? (
                         <Image
@@ -80,7 +80,7 @@ const ProductItem: React.FC<Props> = ({
                         <span className="text-xs sm:text-sm  text-red-500">(75% off)</span>
                     </div>
                 </div>
-            </div>
+            </Link>
 
             <div className="product_bottom px-3 pb-3 mt-1">
                 <button className="add-to-cart-button" onClick={() => console.log("Hello")}>

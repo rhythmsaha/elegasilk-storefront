@@ -28,7 +28,7 @@ const SwiperButtonPrev = () => {
     return (
         <button
             className={`absolute z-50 left-2 top-1/3 rounded-full shadow-lg flex items-center justify-center text-gray-600 bg-white h-8 w-8 sm:h-10 sm:w-10`}
-            onClick={() => swiper.slidePrev()}
+            onClick={() => swiper.slideTo(0)}
         >
             <IoChevronBackOutline className="text-2xl sm:text-2xl" />
         </button>
@@ -71,6 +71,7 @@ const BestSellerSection: React.FC<Props> = ({ bestSellerData }) => {
                 >
                     <SwiperButtonNext />
                     <SwiperButtonPrev />
+
                     {bestSellerData.length > 0 &&
                         bestSellerData.map((product, index) => (
                             <SwiperSlide key={product._id} className="">
