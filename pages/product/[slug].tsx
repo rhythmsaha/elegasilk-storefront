@@ -42,7 +42,7 @@ const ProductPage: NextPageWithLayout<Props> = () => {
             <MobileProductImage images={Product.images} />
 
             <div className="max-w-screen-2xl w-11/12 mx-auto">
-                <div className="mt-1 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-6 lg:place-items-start">
+                <div className="mt-1 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-6 lg:gap-8 lg:place-items-start">
                     <DesktopImage images={Product.images} />
 
                     <section className="flex flex-col">

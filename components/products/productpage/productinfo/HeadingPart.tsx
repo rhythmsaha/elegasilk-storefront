@@ -6,7 +6,7 @@ interface Props {}
 const HeadingPart: React.FC<Props> = () => {
     return (
         <div>
-            <h2 className="capitalize text-xl sm:text-2xl lg:text-3xl font-normal text-gray-950 tracking-wide">
+            <h2 className="capitalize text-xl sm:text-2xl lg:text-3xl font-normal lg:font-medium lg:leading-10 text-gray-950 tracking-wide">
                 Onion Pink Chanderi All-Over Ikat Print Saree with Contrast Borders
             </h2>
 

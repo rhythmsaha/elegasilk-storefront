@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Description from "./Description";
 import ProductSpecs from "./ProductSpecs";
+import ReviewsSection from "./ReviewsSection";
 
 interface Props {}
 
@@ -34,7 +35,7 @@ const ProductBottomTabs: React.FC<Props> = (props) => {
 
     return (
         <section className="mt-20">
-            <div className="grid grid-cols-3 place-items-center max-w-screen-lg mx-auto">
+            <div className="grid grid-cols-3 place-items-center mx-auto">
                 {TabItems.map(({ name, id }) => (
                     <button
                         key={id}
@@ -51,7 +52,7 @@ const ProductBottomTabs: React.FC<Props> = (props) => {
             <div className="mt-10">
                 {selectedTab === TabIDs.Description && <Description />}
                 {selectedTab === TabIDs.Specifications && <ProductSpecs />}
-                {selectedTab === TabIDs.Reviews && <div>Reviews</div>}
+                {selectedTab === TabIDs.Reviews && <ReviewsSection />}
             </div>
         </section>
     );

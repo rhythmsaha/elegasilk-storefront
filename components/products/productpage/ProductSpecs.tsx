@@ -69,7 +69,7 @@ const ProductSpecs: React.FC<Props> = (props) => {
     return (
         <div className="">
             <div className="grid grid-flow-row lg:grid-cols-1 gap-x-4">
-                <div className="flex items-center bg-amber-400 text-black font-medium py-1">
+                <div className="flex items-center bg-gray-200 text-black font-medium py-1">
                     <div className="py-2 px-3 flex items-center justify-start  w-1/2 md:w-1/4">
                         Feature
                     </div>
