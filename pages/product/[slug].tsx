@@ -4,121 +4,64 @@ import { NextPageWithLayout } from "../_app";
 import MainLayout from "@/components/layouts/MainLayout";
 import { Rating } from "react-simple-star-rating";
 import { BsShieldCheck } from "react-icons/bs";
-import { IoCubeOutline, IoRibbonOutline } from "react-icons/io5";
+import { IoCubeOutline, IoFlash, IoRibbonOutline } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 import CheckDelivery from "@/components/products/productpage/CheckDelivery";
+import MobileProductImage from "@/components/products/productpage/mobile/product/MobileProductImage";
+import "swiper/css/bundle";
+import ProductBottomTabs from "@/components/products/productpage/ProductBottomTabs";
+import HeadingPart from "@/components/products/productpage/productinfo/HeadingPart";
+import Pricing from "@/components/products/productpage/productinfo/Pricing";
+import Overview from "@/components/products/productpage/productinfo/Overview";
+import Assurance from "@/components/products/productpage/productinfo/Assurance";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import DesktopImage from "@/components/products/productpage/productImageDesktop/DesktopImage";
 
 interface Props {}
 
-const images = [
-    "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw74cd4711/images/Taneira/Catalog/SPH07L00099_1.jpg?sw=1000&sh=1500",
-    "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dwfd64d18c/images/Taneira/Catalog/SPH07L00099_2.jpg?sw=1000&sh=1500",
-    "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw3fca4d19/images/Taneira/Catalog/SPH07L00099_3.jpg?sw=1000&sh=1500",
-    "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw1e6c1740/images/Taneira/Catalog/SPH07L00099_4.jpg?sw=1000&sh=1500",
-    "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw1aeb669e/images/Taneira/Catalog/SPH07L00099_5.jpg?sw=1000&sh=1500",
-];
+const Product = {
+    _id: "65e9a707d0946d23ba2a1621",
+    name: "black ujjain pure cotton batik saree",
+    images: [
+        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw8a326bef/images/Taneira/Catalog/SPG08F00144_1.jpg?sw=1000&sh=1500",
+        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw2a29bbe9/images/Taneira/Catalog/SPG08F00144_2.jpg?sw=1000&sh=1500",
+        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw1683f131/images/Taneira/Catalog/SPG08F00144_3.jpg?sw=1000&sh=1500",
+        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw7b29c867/images/Taneira/Catalog/SPG08F00144_4.jpg?sw=1000&sh=1500",
+        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw7bf09cf9/images/Taneira/Catalog/SPG08F00144_5.jpg?sw=1000&sh=1500",
+    ],
+    MRP: 1299,
+    stock: 200,
+    published: true,
+    createdAt: "2024-03-07T11:37:44.063Z",
+    slug: "black-ujjain-pure-cotton-batik-saree",
+};
 
 const ProductPage: NextPageWithLayout<Props> = () => {
     return (
-        <div className="mt-8 sm:mt-10   ">
-            <div className="max-w-screen-2xl mx-auto w-11/12">
-                <div className="grid grid-cols-2 gap-6 place-items-start">
-                    <section>
-                        <div className="grid grid-cols-1 gap-4 ">
-                            {images.map((image, index) => (
-                                <img
-                                    key={index}
-                                    src={image}
-                                    alt=""
-                                    className="object-cover w-full aspect-[4/5] object-top"
-                                />
-                            ))}
-                        </div>
-                    </section>
+        <div className="mt-0 mb-20">
+            <MobileProductImage images={Product.images} />
+
+            <div className="max-w-screen-2xl w-11/12 mx-auto">
+                <div className="mt-1 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-6 lg:place-items-start">
+                    <DesktopImage images={Product.images} />
 
                     <section className="flex flex-col">
                         <div>
-                            <div>
-                                <span className="">Cotton</span>
-                            </div>
+                            <HeadingPart />
 
-                            <h2 className="capitalize text-3xl font- text-gray-800 tracking-wide">
-                                Onion Pink Chanderi All-Over Ikat Print Saree with Contrast Borders
-                            </h2>
+                            <Pricing />
 
-                            <div className="flex items-center leading-none gap-2 mt-2">
-                                <Rating
-                                    className=""
-                                    size={20}
-                                    iconsCount={5}
-                                    initialValue={2.4}
-                                    allowFraction
-                                    SVGclassName="inline"
-                                    readonly
-                                    transition
-                                />
-
-                                <span className="text-lg">2.4 (245 Review)</span>
-
-                                {/* Best Seller */}
-                                <span className="bg-pink-500 text-pink-50 text-[45%] sm:text-sm  px-2 sm:px-2.5 sm:pr-4 py-0.5 rounded-r-full">
-                                    Best Seller
-                                </span>
-                            </div>
-
-                            <div>
-                                <div className="flex items-center">
-                                    <span className="text-2xl font-bold text-gray-800">
-                                        ₹ 6,999
-                                    </span>
-
-                                    <span className="text-lg line-through text-gray-600 ml-2">
-                                        ₹ 8,999
-                                    </span>
-
-                                    <span className="text-green-600 text-lg ml-2">22% off</span>
-                                </div>
-
-                                <span className="text-gray-600">Inclusive of all taxes</span>
-                            </div>
-
-                            <div className="flex flex-col mt-4">
-                                <span className="h-6 w-6 inline-block bg-red-500 rounded-full ring-2 ring-offset-2 ring-gray-200" />
-                                <span className="flex items-center mt-1">
-                                    <span className="text-gray-800">Color: </span>
-                                    <span className="text-gray-600">Red</span>
-                                </span>
-
-                                <span className="inline-flex items-center gap-1">
-                                    <span className="text-gray-800">SKU: </span>
-                                    <span className="text-gray-600">SPH07L00099</span>
-                                </span>
-
-                                <span>
-                                    <span className="text-gray-800">Availability: </span>
-                                    <span className="text-green-600">In Stock</span>
-                                </span>
-                            </div>
-
-                            <div className="space-y-2 mt-4">
-                                <p className="flex items-center gap-1 leading-none">
-                                    <BsShieldCheck className="" /> Authentic & Quality Assured
-                                </p>
-
-                                <p className="flex items-center gap-1 leading-none">
-                                    <IoRibbonOutline className="" /> 100% money back guarantee
-                                    *Learn more
-                                </p>
-
-                                <p className="flex items-center gap-1 leading-none">
-                                    <IoCubeOutline className="" /> Free Shipping & Returns *Learn
-                                    more
-                                </p>
-                            </div>
+                            <Overview
+                                availability={Product.stock > 0 ? "In Stock" : "Out of Stock"}
+                                color={{ name: "Black", hex: "#000" }}
+                                sku="SPH07L00099"
+                            />
 
                             <CheckDelivery />
 
-                            <div className="mt-10">
+                            <Assurance />
+
+                            <div className="mt-4 xl:mt-8">
                                 <div className="flex border justify-between border-gray-200 max-w-32">
                                     <button className="flex items-center justify-center h-10 w-10 ">
                                         -
@@ -134,18 +77,23 @@ const ProductPage: NextPageWithLayout<Props> = () => {
                                     </button>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-2 mt-4">
-                                    <button className="bg-black text-white py-3 rounded-md">
-                                        Add To Bag
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4">
+                                    <button className="bg-yellow-300 text-black py-3 rounded-md flex items-center justify-center">
+                                        <AiOutlineShoppingCart className="mr-2" />
+                                        <span>Add to Cart</span>
                                     </button>
-                                    <button className="bg-black text-white py-3 rounded-md">
-                                        Buy Now
+
+                                    <button className="bg-black text-white py-3 rounded-md flex items-center justify-center">
+                                        <IoFlash className="mr-2" />
+                                        <span>Buy Now</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
+
+                <ProductBottomTabs />
             </div>
         </div>
     );

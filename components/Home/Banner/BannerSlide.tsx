@@ -11,14 +11,12 @@ interface Props {
 
 const BannerSlide = ({ name, path, src, srcMobile }: Props) => {
     return (
-        <SwiperSlide className="">
-            <Link href={path} className="">
-                <picture>
-                    <source media="(min-width:1024px)" srcSet={src} />
-                    <img src={srcMobile} alt={name} className="w-full" />
-                </picture>
-            </Link>
-        </SwiperSlide>
+        <Link href={path} className="">
+            <picture>
+                <source media="(min-width:1024px)" srcSet={src} />
+                <img src={srcMobile} alt={name} className="w-full" />
+            </picture>
+        </Link>
     );
 };
 

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --swiper-theme-color: #1b1b1b !important;
+}
+
 * {
     scroll-behavior: smooth;
 }
@@ -61,4 +65,8 @@ input::-webkit-inner-spin-button {
         height: 100%;
         max-height: min(75%, 600px);
     }
+}
+.swiper-pagination {
+    position: static !important;
+    padding: 0.5rem 0 0.25rem 0 !important;
 }

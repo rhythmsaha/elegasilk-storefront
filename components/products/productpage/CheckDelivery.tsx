@@ -9,13 +9,13 @@ const CheckDelivery: React.FC<Props> = (props) => {
     const [editable, setEditable] = useState(true);
 
     return (
-        <div className="mt-4">
-            <span className="flex items-center gap-1">
+        <div className="mt-4 xl:mt-6">
+            <span className="flex items-center gap-1 text-gray-800">
                 <TbTruckDelivery />
-                DELIVERY OPTIONS
+                Delivery Options
             </span>
 
-            <div className="flex items-center border max-w-max px-4 py-2 mt-2">
+            <div className="flex items-center border rounded max-w-max px-4 py-2 mt-2">
                 <input
                     type="text"
                     className="outline-none border-none focus:outline-none focus:border-none focus:ring-0 p-0 "
@@ -23,6 +23,7 @@ const CheckDelivery: React.FC<Props> = (props) => {
 
                 <button className="text-gray-800 hover:text-black font-medium">Check</button>
             </div>
+
             <span className="text-sm px-2 text-green-600">Delivery in 5 to 6 days</span>
         </div>
     );
