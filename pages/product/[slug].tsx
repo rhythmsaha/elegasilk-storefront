@@ -6,7 +6,7 @@ import { Rating } from "react-simple-star-rating";
 import { BsShieldCheck } from "react-icons/bs";
 import { IoCubeOutline, IoFlash, IoRibbonOutline } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
-import CheckDelivery from "@/components/products/productpage/CheckDelivery";
+import CheckDelivery from "@/components/products/productpage/productinfo/CheckDelivery";
 import MobileProductImage from "@/components/products/productpage/mobile/product/MobileProductImage";
 import "swiper/css/bundle";
 import ProductBottomTabs from "@/components/products/productpage/ProductBottomTabs";
