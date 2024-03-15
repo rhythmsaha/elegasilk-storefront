@@ -10,6 +10,7 @@ const API_URLs = {
     user: {
         updateEmail: (id: string) => `/user/email/${id}`,
         verifyEmail: (id: string) => `/user/email/verify/${id}`,
+        updateProfile: (id: string) => `/user/${id}`,
     },
 
     // products

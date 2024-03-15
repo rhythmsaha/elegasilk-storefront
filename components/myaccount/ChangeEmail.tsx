@@ -26,7 +26,7 @@ const ChangeEmail: React.FC<Props> = (props) => {
                 readOnly
             />
 
-            <button className="block ml-auto text-red-500 mt-2 hover:underline" onClick={openModal}>
+            <button className="block ml-auto text-red-500 mt-2 hover:underline" type="button" onClick={openModal}>
                 Change Email
             </button>
 

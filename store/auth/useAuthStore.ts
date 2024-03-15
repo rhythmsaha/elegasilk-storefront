@@ -36,7 +36,7 @@ interface IAuthStore {
     stopAuthLoading: () => void;
     login: (user: ISessionPayload, token: string) => void;
     logout: () => void;
-    updateAccount: (user: ISessionPayload) => void;
+    updateUser: (user: ISessionPayload) => void;
 }
 
 export const useAuthStore = create<IAuthStore>()(
@@ -66,8 +66,8 @@ export const useAuthStore = create<IAuthStore>()(
                 clearSessionFromLocalStorage();
             },
 
-            updateAccount: (user) => {
-                // implementation
+            updateUser: (user) => {
+                set({ user: user }, false, "authstore/update");
             },
         }),
         { name: "AuthStore" }

@@ -78,9 +78,15 @@ const EmailOtpForm: React.FC<Props> = ({ oncancel, openEmailForm, codeId, email,
                 <p className="text-sm text-gray-500">
                     Please enter your new email address. We will send you a verification code to this email address. did
                     not receive code?
-                    <button className="mx-1 hover:text-black cursor-pointer  font-medium underline">Resend Now</button>
+                    <button type="button" className="mx-1 hover:text-black cursor-pointer  font-medium underline">
+                        Resend Now
+                    </button>
                     Or change your
-                    <button className="hover:text-black cursor-pointer  font-medium underline" onClick={openEmailForm}>
+                    <button
+                        type="button"
+                        className="hover:text-black cursor-pointer  font-medium underline"
+                        onClick={openEmailForm}
+                    >
                         email address
                     </button>
                 </p>
