@@ -104,7 +104,7 @@ const MyAccountPage: NextPageWithLayout = () => {
     }
 
     return (
-        <div className="max-w-screen-lg mx-auto w-11/12">
+        <div className="max-w-screen-lg mx-auto w-11/12 mb-20">
             <section className="mt-8 lg:mt-20">
                 <div>
                     <h1 className="text-xl lg:text-2xl lg:font-semibold ">My Account</h1>
