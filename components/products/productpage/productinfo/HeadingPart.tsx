@@ -1,4 +1,5 @@
 import React from "react";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Rating } from "react-simple-star-rating";
 
 interface Props {
@@ -13,9 +14,15 @@ interface Props {
 const HeadingPart: React.FC<Props> = ({ name, rating, bestSeller }) => {
     return (
         <div>
-            <h2 className="capitalize text-xl sm:text-2xl lg:text-3xl font-normal lg:font-medium lg:leading-10 text-gray-950 tracking-wide">
-                {name}
-            </h2>
+            <div className="flex items-start justify-between gap-8">
+                <h2 className="capitalize text-xl sm:text-2xl lg:text-3xl font-normal lg:font-medium lg:leading-10 text-gray-950 tracking-wide">
+                    {name}
+                </h2>
+
+                <button className="flex items-center gap-2 mt-1 lg:mt-1.5">
+                    {true ? <IoMdHeart className="text-3xl text-pink-500" /> : <IoMdHeartEmpty className="text-3xl" />}
+                </button>
+            </div>
 
             <div className="mt-1 sm:mt-1.5 lg:mt-2 lg:flex lg:gap-2">
                 {bestSeller && (

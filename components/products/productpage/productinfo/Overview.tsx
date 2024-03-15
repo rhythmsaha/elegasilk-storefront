@@ -1,4 +1,7 @@
 import React from "react";
+import { BsShareFill } from "react-icons/bs";
+import { FaShare } from "react-icons/fa";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 interface Props {
     sku: string;
@@ -10,6 +13,8 @@ interface Props {
 }
 
 const Overview: React.FC<Props> = ({ availability, color, sku }) => {
+    const isTrue = true;
+
     return (
         <div className="flex flex-col mt-4">
             <span
