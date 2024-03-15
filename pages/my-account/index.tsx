@@ -8,7 +8,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "@/utils/axios";
 import API_URLs from "@/lib/API_URLs";
-import { useAuthStore } from "@/store/auth/useAuthStore";
+import { IUserState, useAuthStore } from "@/store/auth/useAuthStore";
+import useSWR from "swr";
+import AuthGuard from "@/guards/AuthGuard";
+import LoadingScreen from "@/screens/LoadingScreen";
+import { useRouter } from "next/router";
 
 interface IFormInput {
     firstName?: string;
@@ -18,11 +22,29 @@ interface IFormInput {
     confirmPassword?: string;
 }
 
+//
+
+const fetchUser = async (url: string) => {
+    try {
+        const response = await axios.get(url);
+        if (response.status !== 200) throw new Error("Failed to fetch user");
+
+        const user: IUserState = response.data.user;
+
+        return user;
+    } catch (error: any) {
+        throw new Error(error.message || "Something Went Wrong! Please try again later.");
+    }
+};
+
 const MyAccountPage: NextPageWithLayout = () => {
     const userId = useAuthStore((state) => state.user?._id);
     const updateUser = useAuthStore((state) => state.updateUser);
 
     const [changePassword, setChangePassword] = useState(false);
+    const router = useRouter();
+
+    const { data: user, error, isLoading, mutate } = useSWR(API_URLs.user.getProfile(userId!), fetchUser);
 
     const toggleChangePasswordHandler = () => {
         setChangePassword((val) => !val);
@@ -70,6 +92,17 @@ const MyAccountPage: NextPageWithLayout = () => {
         }
     };
 
+    const updateUserHandler = (user: IUserState) => {
+        mutate(user, false);
+        updateUser(user);
+    };
+
+    if (isLoading) return <LoadingScreen />;
+
+    if (error) {
+        return <LoadingScreen />;
+    }
+
     return (
         <div className="max-w-screen-lg mx-auto w-11/12">
             <section className="mt-8 lg:mt-20">
@@ -83,7 +116,7 @@ const MyAccountPage: NextPageWithLayout = () => {
                             id="firstName"
                             label="First Name"
                             type="text"
-                            defaultValue="Rhythm"
+                            defaultValue={user?.firstName || ""}
                             isError={!!errors.firstName}
                             errorMessage={errors.firstName?.message}
                             {...register("firstName", {
@@ -95,7 +128,7 @@ const MyAccountPage: NextPageWithLayout = () => {
                             id="lastName"
                             label="Last Name"
                             type="text"
-                            defaultValue="Saha"
+                            defaultValue={user?.lastName || ""}
                             isError={!!errors.lastName}
                             errorMessage={errors.lastName?.message}
                             {...register("lastName", {
@@ -103,7 +136,7 @@ const MyAccountPage: NextPageWithLayout = () => {
                             })}
                         />
 
-                        <ChangeEmail />
+                        <ChangeEmail defaultEmail={user?.email || ""} onUpdate={updateUserHandler} />
 
                         <div>
                             <div className="space-y-4">
@@ -194,5 +227,9 @@ const MyAccountPage: NextPageWithLayout = () => {
 export default MyAccountPage;
 
 MyAccountPage.getLayout = (page) => {
-    return <MainLayout>{page}</MainLayout>;
+    return (
+        <AuthGuard>
+            <MainLayout>{page}</MainLayout>
+        </AuthGuard>
+    );
 };

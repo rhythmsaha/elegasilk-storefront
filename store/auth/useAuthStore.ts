@@ -18,7 +18,7 @@ interface ISessionPayload {
     phone?: string;
 }
 
-interface IUserState {
+export interface IUserState {
     _id: string;
     firstName: string;
     lastName: string;

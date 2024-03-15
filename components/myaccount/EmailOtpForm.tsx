@@ -5,7 +5,7 @@ import ModalCancelButton from "./ModalCancelButton";
 import ModalSubmitButton from "./ModalSubmitButton";
 import axios from "@/utils/axios";
 import API_URLs from "@/lib/API_URLs";
-import { useAuthStore } from "@/store/auth/useAuthStore";
+import { IUserState, useAuthStore } from "@/store/auth/useAuthStore";
 import toast from "react-hot-toast";
 
 interface Props {
@@ -15,9 +15,10 @@ interface Props {
     codeId: string;
     email: string;
     onReset: () => void;
+    onUpdate: (user: IUserState) => void;
 }
 
-const EmailOtpForm: React.FC<Props> = ({ oncancel, openEmailForm, codeId, email, onReset }) => {
+const EmailOtpForm: React.FC<Props> = ({ oncancel, openEmailForm, codeId, email, onReset, onUpdate }) => {
     const id = useAuthStore((state) => state.user?._id);
     const [otp, setOtp] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +53,7 @@ const EmailOtpForm: React.FC<Props> = ({ oncancel, openEmailForm, codeId, email,
             }
 
             toast.success("Email Verified Successfully");
+            onUpdate(data.user);
             oncancel();
             onReset();
         } catch (error: any) {

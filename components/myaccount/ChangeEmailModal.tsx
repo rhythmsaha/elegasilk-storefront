@@ -2,10 +2,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import EmailForm from "./EmailForm";
 import EmailOtpForm from "./EmailOtpForm";
+import { IUserState } from "@/store/auth/useAuthStore";
 
 interface Props {
     isOpen: boolean;
     closeModal: () => void;
+
+    onUpdate: (user: IUserState) => void;
 }
 
 export enum EmailVerifyFormStep {
@@ -13,7 +16,7 @@ export enum EmailVerifyFormStep {
     VerifyEmail,
 }
 
-const ChangeEmailModal: React.FC<Props> = ({ isOpen, closeModal }) => {
+const ChangeEmailModal: React.FC<Props> = ({ isOpen, closeModal, onUpdate }) => {
     const [formStep, setFormStep] = useState(EmailVerifyFormStep.InputEmail);
     const [email, setEmail] = useState("");
     const [codeId, setCodeId] = useState("");
@@ -82,6 +85,7 @@ const ChangeEmailModal: React.FC<Props> = ({ isOpen, closeModal }) => {
                                         codeId={codeId}
                                         email={email}
                                         onReset={onReset}
+                                        onUpdate={onUpdate}
                                     />
                                 )}
                             </Dialog.Panel>

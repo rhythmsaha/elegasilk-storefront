@@ -1,10 +1,14 @@
 import React, { useState, Fragment } from "react";
 import AuthFormInput from "../authentication/inputs/AuthFormInput";
 import ChangeEmailModal from "./ChangeEmailModal";
+import { IUserState } from "@/store/auth/useAuthStore";
 
-interface Props {}
+interface Props {
+    defaultEmail: string;
+    onUpdate: (user: IUserState) => void;
+}
 
-const ChangeEmail: React.FC<Props> = (props) => {
+const ChangeEmail: React.FC<Props> = ({ defaultEmail, onUpdate }) => {
     let [isOpen, setIsOpen] = useState(false);
 
     function closeModal() {
@@ -21,7 +25,7 @@ const ChangeEmail: React.FC<Props> = (props) => {
                 label="Email Address"
                 type="email"
                 id="readonlyEmail"
-                defaultValue="rs.2001.saha@gmail.com"
+                defaultValue={defaultEmail}
                 disabled
                 readOnly
             />
@@ -30,7 +34,7 @@ const ChangeEmail: React.FC<Props> = (props) => {
                 Change Email
             </button>
 
-            <ChangeEmailModal isOpen={isOpen} closeModal={closeModal} />
+            <ChangeEmailModal isOpen={isOpen} closeModal={closeModal} onUpdate={onUpdate} />
         </div>
     );
 };
