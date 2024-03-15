@@ -25,7 +25,7 @@ const ChangeEmail: React.FC<Props> = ({ defaultEmail, onUpdate }) => {
                 label="Email Address"
                 type="email"
                 id="readonlyEmail"
-                defaultValue={defaultEmail}
+                value={defaultEmail}
                 disabled
                 readOnly
             />

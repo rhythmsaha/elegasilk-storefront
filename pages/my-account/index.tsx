@@ -93,7 +93,7 @@ const MyAccountPage: NextPageWithLayout = () => {
     };
 
     const updateUserHandler = (user: IUserState) => {
-        mutate(user, false);
+        mutate(user, true);
         updateUser(user);
     };
 
