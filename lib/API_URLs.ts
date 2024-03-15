@@ -6,6 +6,12 @@ const API_URLs = {
     login: "/user/login",
     refreshSession: "user/refresh-session",
 
+    // User
+    user: {
+        updateEmail: (id: string) => `/user/email/${id}`,
+        verifyEmail: (id: string) => `/user/email/verify/${id}`,
+    },
+
     // products
     products: {
         filters: "/products/filters",

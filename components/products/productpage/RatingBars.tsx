@@ -1,29 +1,35 @@
 import React from "react";
 
-interface Props {}
+interface Props {
+    bars: {
+        star: number;
+        count: number;
+    }[];
+    totalReivews: number;
+}
 
 const RatingBar: React.FC<{
-    rating: number;
+    rating: string | number;
     fillPercent: number;
 }> = ({ fillPercent, rating }) => {
     return (
         <div className="flex items-center gap-4">
             <span className="min-w-max">{rating} Star</span>
-            <div className="w-full bg-gray-300 rounded-full">
+            <div className="w-full bg-gray-300 rounded-full overflow-hidden">
                 <span style={{ width: `${fillPercent || 0}%` }} className="block bg-amber-400 rounded-full h-3 " />
             </div>
         </div>
     );
 };
 
-const RatingBars: React.FC<Props> = (props) => {
+const RatingBars: React.FC<Props> = ({ bars, totalReivews }) => {
+    const total = bars.reduce((acc, bar) => acc + bar.count, 0);
+
     return (
         <div className="w-full space-y-2">
-            <RatingBar rating={5} fillPercent={100} />
-            <RatingBar rating={4} fillPercent={80} />
-            <RatingBar rating={3} fillPercent={60} />
-            <RatingBar rating={2} fillPercent={40} />
-            <RatingBar rating={1} fillPercent={20} />
+            {bars.map((bar) => (
+                <RatingBar key={bar.star} rating={bar.star} fillPercent={(bar.count * 100) / total} />
+            ))}
         </div>
     );
 };

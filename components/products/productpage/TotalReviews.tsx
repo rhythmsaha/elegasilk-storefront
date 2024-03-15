@@ -1,14 +1,17 @@
 import React from "react";
 import { Rating } from "react-simple-star-rating";
 
-interface Props {}
+interface Props {
+    totalReviews: number;
+    rating: number;
+}
 
-const TotalReviews: React.FC<Props> = (props) => {
+const TotalReviews: React.FC<Props> = ({ totalReviews, rating }) => {
     return (
         <div className="min-w-64 flex items-start justify-start lg:items-center lg:border-r">
             <div className="min-w-max flex flex-col items-center">
                 <div>
-                    <span className="font-semibold text-6xl text-gray-900">4.8</span>
+                    <span className="font-semibold text-6xl text-gray-900">{rating}</span>
                     <span className="ml-2 font-medium text-xl text-gray-700">Out of 5</span>
                 </div>
 
@@ -17,15 +20,14 @@ const TotalReviews: React.FC<Props> = (props) => {
                         className=""
                         size={30}
                         iconsCount={5}
-                        initialValue={4.8}
+                        initialValue={rating}
                         allowFraction
                         SVGclassName="inline"
                         readonly
-                        transition
                     />
                 </div>
 
-                <p className="text-center text-slate-800 w-full">(107 Reviews)</p>
+                <p className="text-center text-slate-800 w-full">({totalReviews} Reviews)</p>
             </div>
         </div>
     );

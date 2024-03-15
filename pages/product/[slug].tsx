@@ -44,6 +44,7 @@ interface Props {
         stock: number;
         specs: [
             {
+                _id: string;
                 name: string;
                 value: string;
             }
@@ -110,15 +111,15 @@ const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
 
                 <section className="mt-20">
                     <DetailsContainer heading="Description">
-                        <Description />
+                        <Description description={product.description} />
                     </DetailsContainer>
 
                     <DetailsContainer heading="Product Informations">
-                        <ProductSpecs />
+                        <ProductSpecs specs={product.specs} />
                     </DetailsContainer>
 
                     <DetailsContainer heading="Ratings and Reviews">
-                        <ReviewsSection />
+                        <ReviewsSection rating={2.4} totalReviews={245} />
                     </DetailsContainer>
                 </section>
             </div>
