@@ -15,22 +15,8 @@ const Review: React.FC<Props> = (props) => {
         <div className="lg:max-w">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <Image
-                        height={40}
-                        width={40}
-                        src={
-                            "https://lh3.googleusercontent.com/a/ACg8ocJ_8dZUV59-JF0QEhnYG3ZJA-DnHUPxQhvEVrQAYZN4htxD=s288-c-no"
-                        }
-                        alt="Avatar"
-                        className="rounded-full"
-                    />
-
-                    <div className="">
-                        <h3 className="text-gray-800 font-medium leading-none">Rhythm Saha</h3>
-                        <span className="text-sm font-light leading-none text-gray-600">
-                            (Verified)
-                        </span>
-                    </div>
+                    <h3 className="text-gray-800 font-medium leading-none">Rhythm Saha</h3>
+                    <span className="text-sm font-light leading-none text-gray-600">(Verified)</span>
                 </div>
 
                 <span className="text-gray-700 text-sm">1 month ago</span>
@@ -50,19 +36,14 @@ const Review: React.FC<Props> = (props) => {
             </div>
 
             <div className="space-y-2 ">
-                <h4 className="font-semibold text-gray-700">
-                    Love It: My Recent Clothing Purchase
-                </h4>
+                <h4 className="font-semibold text-gray-700">Love It: My Recent Clothing Purchase</h4>
 
                 <p
-                    className={`${
-                        trunc ? "line-clamp-5 lg:line-clamp-10" : ""
-                    } text-sm sm:text-base `}
+                    className={`${trunc ? "line-clamp-5 lg:line-clamp-10" : ""} text-sm sm:text-base `}
                     onClick={onToggleTrunc}
                 >
-                    Delighted with my purchase from Elegasilk! Their saree exudes sheer elegance and
-                    charm, making every moment draped in it truly special. A must-have for anyone
-                    craving timeless grace in their wardrobe.
+                    Delighted with my purchase from Elegasilk! Their saree exudes sheer elegance and charm, making every
+                    moment draped in it truly special. A must-have for anyone craving timeless grace in their wardrobe.
                 </p>
             </div>
         </div>

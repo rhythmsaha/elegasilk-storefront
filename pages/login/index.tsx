@@ -92,7 +92,7 @@ const LoginPage: NextPageWithLayout = () => {
                         <AuthPasswordInput
                             label="Password"
                             id="login_password"
-                            defaultValue={"0123456789"}
+                            defaultValue={"7001120671"}
                             placeholder="************"
                             isError={!!errors.password}
                             errorMessage={errors.password?.message}

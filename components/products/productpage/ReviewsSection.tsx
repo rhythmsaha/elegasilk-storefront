@@ -8,7 +8,7 @@ interface Props {}
 const ReviewsSection: React.FC<Props> = (props) => {
     return (
         <section>
-            <div className="max-w-screen-xl mx-auto flex flex-col items-start lg:flex-row lg:items-center gap-10 pb-10 border-b">
+            <div className="max-w-screen-xl flex flex-col items-start lg:flex-row lg:items-center gap-10 lg:gap-28 pb-10 border-b">
                 <TotalReviews />
                 <RatingBars />
             </div>

@@ -1,90 +1,59 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { NextPageWithLayout } from "../_app";
 import MainLayout from "@/components/layouts/MainLayout";
-import { Rating } from "react-simple-star-rating";
-import { BsShieldCheck } from "react-icons/bs";
-import { IoCubeOutline, IoFlash, IoRibbonOutline } from "react-icons/io5";
-import { TbTruckDelivery } from "react-icons/tb";
-import CheckDelivery from "@/components/products/productpage/productinfo/CheckDelivery";
 import MobileProductImage from "@/components/products/productpage/mobile/product/MobileProductImage";
-import "swiper/css/bundle";
-import ProductBottomTabs from "@/components/products/productpage/ProductBottomTabs";
+import DesktopImage from "@/components/products/productpage/productImageDesktop/DesktopImage";
 import HeadingPart from "@/components/products/productpage/productinfo/HeadingPart";
 import Pricing from "@/components/products/productpage/productinfo/Pricing";
 import Overview from "@/components/products/productpage/productinfo/Overview";
+import CheckDelivery from "@/components/products/productpage/productinfo/CheckDelivery";
 import Assurance from "@/components/products/productpage/productinfo/Assurance";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import DesktopImage from "@/components/products/productpage/productImageDesktop/DesktopImage";
-import { GetStaticPaths, GetStaticProps } from "next";
 import axios from "@/utils/axios";
 import API_URLs from "@/lib/API_URLs";
+import DetailsContainer from "@/components/products/productpage/DetailsContainer";
+import Description from "@/components/products/productpage/Description";
+import ProductSpecs from "@/components/products/productpage/ProductSpecs";
+import ReviewsSection from "@/components/products/productpage/ReviewsSection";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { IoFlash } from "react-icons/io5";
+import "swiper/css/bundle";
 
 interface Props {
     product: {
         _id: string;
-
         name: string;
-
         slug?: string;
-
         description: string;
-
         content?: string;
-
         images: string[];
-
         sku: string;
-
         MRP: number;
-
         discount: number;
-
         published: boolean;
-
         colors: {
             _id: string;
             name: string;
             hex: string;
         }[];
-
         collections?: {
             _id: string;
             name: string;
         }[];
-
         stock: number;
-
         specs: [
             {
                 name: string;
                 value: string;
             }
         ];
-
         rating?: {
             average: number;
             count: number;
         };
     };
 }
-
-const Product = {
-    _id: "65e9a707d0946d23ba2a1621",
-    name: "black ujjain pure cotton batik saree",
-    images: [
-        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw8a326bef/images/Taneira/Catalog/SPG08F00144_1.jpg?sw=1000&sh=1500",
-        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw2a29bbe9/images/Taneira/Catalog/SPG08F00144_2.jpg?sw=1000&sh=1500",
-        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw1683f131/images/Taneira/Catalog/SPG08F00144_3.jpg?sw=1000&sh=1500",
-        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw7b29c867/images/Taneira/Catalog/SPG08F00144_4.jpg?sw=1000&sh=1500",
-        "https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dw7bf09cf9/images/Taneira/Catalog/SPG08F00144_5.jpg?sw=1000&sh=1500",
-    ],
-    MRP: 1299,
-    stock: 200,
-    published: true,
-    createdAt: "2024-03-07T11:37:44.063Z",
-    slug: "black-ujjain-pure-cotton-batik-saree",
-};
 
 const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
     return (
@@ -139,7 +108,19 @@ const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
                     </section>
                 </div>
 
-                <ProductBottomTabs />
+                <section className="mt-20">
+                    <DetailsContainer heading="Description">
+                        <Description />
+                    </DetailsContainer>
+
+                    <DetailsContainer heading="Product Informations">
+                        <ProductSpecs />
+                    </DetailsContainer>
+
+                    <DetailsContainer heading="Ratings and Reviews">
+                        <ReviewsSection />
+                    </DetailsContainer>
+                </section>
             </div>
         </div>
     );

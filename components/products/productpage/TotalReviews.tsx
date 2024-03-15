@@ -5,7 +5,7 @@ interface Props {}
 
 const TotalReviews: React.FC<Props> = (props) => {
     return (
-        <div className="min-w-64 flex items-start justify-start lg:items-center lg:justify-center lg:border-r">
+        <div className="min-w-64 flex items-start justify-start lg:items-center lg:border-r">
             <div className="min-w-max flex flex-col items-center">
                 <div>
                     <span className="font-semibold text-6xl text-gray-900">4.8</span>

@@ -10,10 +10,7 @@ const RatingBar: React.FC<{
         <div className="flex items-center gap-4">
             <span className="min-w-max">{rating} Star</span>
             <div className="w-full bg-gray-300 rounded-full">
-                <span
-                    style={{ width: `${fillPercent || 0}%` }}
-                    className="block bg-amber-400 rounded-full h-3 "
-                />
+                <span style={{ width: `${fillPercent || 0}%` }} className="block bg-amber-400 rounded-full h-3 " />
             </div>
         </div>
     );
