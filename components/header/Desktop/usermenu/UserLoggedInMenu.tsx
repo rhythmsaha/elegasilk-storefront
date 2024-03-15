@@ -18,19 +18,34 @@ const UserLoggedInMenu = (props: Props) => {
             </div>
 
             <div className="flex flex-col mt-3">
-                <Link href="" className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline">
+                <Link
+                    href="/my-account"
+                    className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline"
+                >
                     <AiOutlineUser className="w-6 h-6" />
                     <span>Your Account</span>
                 </Link>
-                <Link href="" className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline">
+
+                <Link
+                    href="/wishlist"
+                    className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline"
+                >
                     <AiOutlineHeart className="w-6 h-6" />
                     <span>Wishlist</span>
                 </Link>
-                <Link href="" className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline">
+
+                <Link
+                    href="/orders"
+                    className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline"
+                >
                     <IoBagCheckOutline className="w-6 h-6" />
                     Your Orders
                 </Link>
-                <button className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline" onClick={logout}>
+
+                <button
+                    className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline"
+                    onClick={logout}
+                >
                     <IoLogOutOutline className="w-6 h-6" />
                     Logout
                 </button>

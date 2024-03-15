@@ -29,7 +29,7 @@ const Header: React.FC<Props> = () => {
                     <SearchButton className="text-2xl" onClick={showSearchBar} />
                     <UserMenu />
                     <WishListButton
-                        href={isAuthenticated ? "/" : "/login?referUrl=/"}
+                        href={isAuthenticated ? "/wishlist" : "/login?referUrl=/wishlist"}
                         className="text-2xl"
                     />
                     <CartButton qty={0} />

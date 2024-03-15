@@ -24,8 +24,8 @@ const DesktopImage: React.FC<Props> = ({ images }) => {
             <div className="grid grid-cols-1 gap-4 h-full flex-1 w-full overflow relative">
                 <Image
                     src={images[0]}
-                    height={576}
-                    width={384}
+                    height={1500}
+                    width={1000}
                     objectFit="cover"
                     alt="Product Image"
                     className="object-cover object-top w-full xl:aspect-[4.5/5]"

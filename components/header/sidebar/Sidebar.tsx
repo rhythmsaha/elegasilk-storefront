@@ -1,13 +1,7 @@
 import { useSidebarStore } from "@/store/sidebar/useSidebarStore";
 import React, { useEffect } from "react";
 import Image from "next/image";
-import {
-    AiOutlineClose,
-    AiOutlineHeart,
-    AiOutlineLogout,
-    AiOutlineShoppingCart,
-    AiOutlineUser,
-} from "react-icons/ai";
+import { AiOutlineClose, AiOutlineHeart, AiOutlineLogout, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import NAV_LINKS from "@/lib/NavLinks";
 import { motion } from "framer-motion";
 import SidebarMenuItem from "./SidebarMenuItem";
@@ -66,13 +60,7 @@ const Sidebar = () => {
         >
             <div className="flex flex-col h-full">
                 <header className="relative flex items-center border-b border-gray-900 justify-center min-h-16 bg-gray-950">
-                    <Image
-                        src="/logo_white.svg"
-                        alt="Logo"
-                        width={250}
-                        height={46}
-                        className="w-20"
-                    />
+                    <Image src="/logo_white.svg" alt="Logo" width={250} height={46} className="w-20" />
 
                     <button
                         onClick={closeSidebar}
@@ -89,17 +77,17 @@ const Sidebar = () => {
 
                     {isAuthenticated && (
                         <div className="">
-                            <Link href="" className="sidebar-item">
+                            <Link href="/wishlist" className="sidebar-item">
                                 <AiOutlineHeart className="mr-2 text-lg" />
                                 Wishlist
                             </Link>
 
-                            <Link href="" className="sidebar-item">
+                            <Link href="/orders" className="sidebar-item">
                                 <IoBagCheckOutline className="mr-2 text-lg" />
                                 My Orders
                             </Link>
 
-                            <Link href="" className="sidebar-item">
+                            <Link href="/my-account" className="sidebar-item">
                                 <AiOutlineUser className="mr-2 text-lg" />
                                 My Account
                             </Link>
@@ -123,21 +111,15 @@ const Sidebar = () => {
                     ) : (
                         <>
                             <div className="text-gray-300 mb-4 max-w-96">
-                                Not a Member Yet? Join Elegasilk for great discounts and exclusive
-                                member benefits & offers.
+                                Not a Member Yet? Join Elegasilk for great discounts and exclusive member benefits &
+                                offers.
                             </div>
 
-                            <Link
-                                href="/login"
-                                className="sidebar-auth-item bg-white text-gray-900"
-                            >
+                            <Link href="/login" className="sidebar-auth-item bg-white text-gray-900">
                                 Login
                             </Link>
 
-                            <Link
-                                href="/register"
-                                className="sidebar-auth-item bg-gray-900 text-white mt-3"
-                            >
+                            <Link href="/register" className="sidebar-auth-item bg-gray-900 text-white mt-3">
                                 Register
                             </Link>
                         </>

@@ -10,6 +10,8 @@ const API_URLs = {
     products: {
         filters: "/products/filters",
         all: "/products",
+        paths: "/products/paths",
+        getProduct: (slug: string) => `/products/${slug}`,
     },
 };
 
