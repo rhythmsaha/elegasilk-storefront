@@ -8,6 +8,7 @@ const config: Config = {
         "./sections/**/*.{js,ts,jsx,tsx,mdx}",
         "./screens/**/*.{js,ts,jsx,tsx,mdx}",
     ],
+
     theme: {
         extend: {
             backgroundImage: {
@@ -18,6 +19,10 @@ const config: Config = {
             boxShadow: {
                 "add-to-cart-button-slide-effect": "inset 400px 0 0 0 #000",
                 "inset-0-black": "inset 0 0 0 0 #000",
+            },
+
+            screens: {
+                xs: "320px",
             },
         },
     },

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useRouter } from "next/router";
+import { TbLocation } from "react-icons/tb";
 
 export interface INavItem {
     _id: string;
@@ -80,6 +81,11 @@ const Sidebar = () => {
                             <Link href="/wishlist" className="sidebar-item">
                                 <AiOutlineHeart className="mr-2 text-lg" />
                                 Wishlist
+                            </Link>
+
+                            <Link href="/addresses" className="sidebar-item">
+                                <TbLocation className="mr-2 text-lg" />
+                                My Addresses
                             </Link>
 
                             <Link href="/orders" className="sidebar-item">

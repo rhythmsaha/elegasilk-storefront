@@ -17,16 +17,16 @@ const AuthGuard: React.FC<Props> = ({ children }) => {
         }
     }, [authState, router]);
 
-    if (authState === "AUTHENTICATED") {
-        return <>{children}</>;
-    }
-
     if (authState === "UNAUTHENTICATED") {
         return <LoadingScreen />;
     }
 
     if (authState === "LOADING") {
         return <LoadingScreen />;
+    }
+
+    if (authState === "AUTHENTICATED") {
+        return <>{children}</>;
     }
 
     return <LoadingScreen />;

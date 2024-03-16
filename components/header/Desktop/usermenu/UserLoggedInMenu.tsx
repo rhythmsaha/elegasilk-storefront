@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { use } from "react";
 import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
 import { IoBagCheckOutline, IoLogOutOutline } from "react-icons/io5";
+import { TbLocation } from "react-icons/tb";
 
 interface Props {}
 
@@ -32,6 +33,14 @@ const UserLoggedInMenu = (props: Props) => {
                 >
                     <AiOutlineHeart className="w-6 h-6" />
                     <span>Wishlist</span>
+                </Link>
+
+                <Link
+                    href="/addresses"
+                    className="flex items-center font-medium py-2 gap-2 text-gray-700 hover:text-gray-950 hover:underline"
+                >
+                    <TbLocation className="w-6 h-6" />
+                    <span>My Addresses</span>
                 </Link>
 
                 <Link

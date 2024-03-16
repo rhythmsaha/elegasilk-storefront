@@ -10,9 +10,8 @@ import axios from "@/utils/axios";
 import API_URLs from "@/lib/API_URLs";
 import { IUserState, useAuthStore } from "@/store/auth/useAuthStore";
 import useSWR from "swr";
-import AuthGuard from "@/guards/AuthGuard";
 import LoadingScreen from "@/screens/LoadingScreen";
-import { useRouter } from "next/router";
+import AuthLayout from "@/components/layouts/AuthLayout";
 
 interface IFormInput {
     firstName?: string;
@@ -42,7 +41,6 @@ const MyAccountPage: NextPageWithLayout = () => {
     const updateUser = useAuthStore((state) => state.updateUser);
 
     const [changePassword, setChangePassword] = useState(false);
-    const router = useRouter();
 
     const { data: user, error, isLoading, mutate } = useSWR(API_URLs.user.getProfile(userId!), fetchUser);
 
@@ -56,7 +54,12 @@ const MyAccountPage: NextPageWithLayout = () => {
         getValues,
         resetField,
         formState: { errors, isSubmitting },
-    } = useForm<IFormInput>({});
+    } = useForm<IFormInput>({
+        defaultValues: {
+            firstName: user?.firstName,
+            lastName: user?.lastName,
+        },
+    });
 
     const onSubmit = async (data: IFormInput) => {
         if (isSubmitting) return;
@@ -99,10 +102,6 @@ const MyAccountPage: NextPageWithLayout = () => {
 
     if (isLoading) return <LoadingScreen />;
 
-    if (error) {
-        return <LoadingScreen />;
-    }
-
     return (
         <div className="max-w-screen-lg mx-auto w-11/12 mb-20">
             <section className="mt-8 lg:mt-20">
@@ -116,7 +115,7 @@ const MyAccountPage: NextPageWithLayout = () => {
                             id="firstName"
                             label="First Name"
                             type="text"
-                            defaultValue={user?.firstName || ""}
+                            defaultValue={user?.firstName}
                             isError={!!errors.firstName}
                             errorMessage={errors.firstName?.message}
                             {...register("firstName", {
@@ -128,8 +127,8 @@ const MyAccountPage: NextPageWithLayout = () => {
                             id="lastName"
                             label="Last Name"
                             type="text"
-                            defaultValue={user?.lastName || ""}
                             isError={!!errors.lastName}
+                            defaultValue={user?.lastName}
                             errorMessage={errors.lastName?.message}
                             {...register("lastName", {
                                 required: "Last Name is required",
@@ -227,9 +226,5 @@ const MyAccountPage: NextPageWithLayout = () => {
 export default MyAccountPage;
 
 MyAccountPage.getLayout = (page) => {
-    return (
-        <AuthGuard>
-            <MainLayout>{page}</MainLayout>
-        </AuthGuard>
-    );
+    return <AuthLayout>{page}</AuthLayout>;
 };
