@@ -14,6 +14,16 @@ const API_URLs = {
         getProfile: (id: string) => `/user/${id}`,
     },
 
+    address: {
+        create: "/address/create",
+        update: (id: string) => `/address/${id}`,
+        delete: (id: string) => `/address/${id}`,
+        get: (id: string) => `/address/${id}`,
+        getAll: "/address",
+        setDefault: (id: string) => `/address/default/${id}`,
+        getDefault: "/address/default",
+    },
+
     // products
     products: {
         filters: "/products/filters",

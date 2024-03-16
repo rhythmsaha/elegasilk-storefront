@@ -8,7 +8,7 @@ interface Props {
 const Card: React.FC<Props> = ({ children, _default }) => {
     return (
         <div
-            className={`rounded-xl bg-white p-4 ${
+            className={`rounded-xl bg-white p-4 relative ${
                 _default ? "border shadow-xl border-gray-800" : "border shadow border-gray-100"
             }`}
         >

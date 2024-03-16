@@ -3,6 +3,8 @@ import { NextPageWithLayout } from "../_app";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import AddAddressCard from "@/components/addressbook/AddAddressCard";
 import AddressCard from "@/components/addressbook/AddressCard";
+import AddressListSection from "@/sections/addresses/AddressListSection";
+import { useAuthStore } from "@/store/auth/useAuthStore";
 
 interface Props {}
 
@@ -15,15 +17,7 @@ const AddressBookPage: NextPageWithLayout = () => {
                 </h1>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                <AddAddressCard />
-
-                <AddressCard _default />
-                <AddressCard />
-                <AddressCard />
-                <AddressCard />
-                <AddressCard />
-            </div>
+            <AddressListSection />
         </div>
     );
 };
