@@ -67,7 +67,7 @@ const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
 
                     <section className="flex flex-col w-full">
                         <div>
-                            <HeadingPart name={product.name} rating={{ average: 2.4, count: 245 }} />
+                            <HeadingPart name={product.name} rating={{ average: 2.4, count: 245 }} _id={product._id} />
 
                             <Pricing />
 

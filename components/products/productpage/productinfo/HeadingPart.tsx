@@ -1,8 +1,10 @@
+import useWishlist from "@/hooks/wishlist/useWishlist";
 import React from "react";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Rating } from "react-simple-star-rating";
 
 interface Props {
+    _id: string;
     name: string;
     bestSeller?: boolean;
     rating?: {
@@ -11,7 +13,8 @@ interface Props {
     };
 }
 
-const HeadingPart: React.FC<Props> = ({ name, rating, bestSeller }) => {
+const HeadingPart: React.FC<Props> = ({ name, rating, bestSeller, _id }) => {
+    const { addItemToWishlist, added, checkItemInWishlist, removeItemFromWishlist } = useWishlist(_id);
     return (
         <div>
             <div className="flex items-start justify-between gap-8">
@@ -19,8 +22,11 @@ const HeadingPart: React.FC<Props> = ({ name, rating, bestSeller }) => {
                     {name}
                 </h2>
 
-                <button className="flex items-center gap-2 mt-1 lg:mt-1.5">
-                    {true ? <IoMdHeart className="text-3xl text-pink-500" /> : <IoMdHeartEmpty className="text-3xl" />}
+                <button
+                    className="flex items-center gap-2 mt-1 lg:mt-1.5"
+                    onClick={added ? () => removeItemFromWishlist(_id) : () => addItemToWishlist(_id)}
+                >
+                    {added ? <IoMdHeart className="text-3xl text-pink-500" /> : <IoMdHeartEmpty className="text-3xl" />}
                 </button>
             </div>
 

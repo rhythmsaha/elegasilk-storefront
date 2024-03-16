@@ -31,6 +31,14 @@ const API_URLs = {
         paths: "/products/paths",
         getProduct: (slug: string) => `/products/${slug}`,
     },
+
+    wishlist: {
+        add: "/wishlist/add",
+        remove: (id: string) => `/wishlist/remove/${id}`,
+        getall: "/wishlist",
+        checkOne: (id: string) => `/wishlist/${id}`,
+        delete: (id: string) => `/wishlist/${id}`,
+    },
 };
 
 export default API_URLs;
