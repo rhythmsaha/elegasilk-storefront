@@ -70,7 +70,6 @@ const NewAddressPage: NextPageWithLayout = () => {
                         label="First Name"
                         id="first-name"
                         placeholder="John"
-                        autoComplete="name"
                         isError={!!errors.firstName}
                         errorMessage={errors.firstName?.message}
                         {...register("firstName", {

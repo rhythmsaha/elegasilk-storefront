@@ -1,6 +1,7 @@
 import React from "react";
 import { NextPageWithLayout } from "../_app";
 import MainLayout from "@/components/layouts/MainLayout";
+import AuthLayout from "@/components/layouts/AuthLayout";
 
 const OrdersPage: NextPageWithLayout = () => {
     return (
@@ -17,5 +18,5 @@ const OrdersPage: NextPageWithLayout = () => {
 export default OrdersPage;
 
 OrdersPage.getLayout = (page) => {
-    return <MainLayout>{page}</MainLayout>;
+    return <AuthLayout>{page}</AuthLayout>;
 };

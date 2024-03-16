@@ -77,6 +77,7 @@ const AddressListSection: React.FC<Props> = () => {
                             state={address.state}
                             pincode={address.pincode}
                             onSetDefault={() => setDefaultHandler(address._id)}
+                            onMutate={mutate}
                         />
                     ))}
             </div>
