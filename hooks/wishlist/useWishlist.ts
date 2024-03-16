@@ -11,6 +11,7 @@ export interface IWishlistItem {
     MRP: number;
     discount: number;
     images: string;
+    slug: string;
 }
 
 export interface Iwishlist {

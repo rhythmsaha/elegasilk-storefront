@@ -37,7 +37,7 @@ const API_URLs = {
         remove: (id: string) => `/wishlist/remove/${id}`,
         getall: "/wishlist",
         checkOne: (id: string) => `/wishlist/${id}`,
-        delete: (id: string) => `/wishlist/${id}`,
+        clear: (id: string) => `/wishlist/${id}`,
     },
 };
 

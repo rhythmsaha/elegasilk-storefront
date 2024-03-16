@@ -38,7 +38,7 @@ const fetchAddresses = async (url: string) => {
 interface Props {}
 
 const AddressListSection: React.FC<Props> = () => {
-    const { data, isLoading, mutate } = useSWR(`/address`, fetchAddresses);
+    const { data, isLoading, mutate } = useSWR(API_URLs.address.getAll, fetchAddresses);
 
     const setDefaultHandler = async (id: string) => {
         toast.dismiss();
