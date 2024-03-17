@@ -59,14 +59,6 @@ interface Props {
 }
 
 const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
-    const { addItemToCart, cheeckItemInCart } = useCartStore((state) => state);
-
-    const addHandler = () => {
-        addItemToCart(product._id, 1);
-    };
-
-    const isItemInCart = cheeckItemInCart(product._id);
-
     return (
         <div className="mt-0 mb-20">
             <MobileProductImage images={product.images} />
@@ -79,11 +71,11 @@ const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
                         <div>
                             <HeadingPart name={product.name} rating={{ average: 2.4, count: 245 }} _id={product._id} />
 
-                            <Pricing />
+                            <Pricing MRP={product.MRP} discount={product.discount} />
 
                             <Overview
-                                availability={product.stock > 0 ? "In Stock" : "Out of Stock"}
-                                color={product.colors[0]}
+                                availability={product.stock > 0 ? true : false}
+                                color={product.colors && product.colors[0]}
                                 sku="SPH07L00099"
                             />
 
@@ -91,7 +83,11 @@ const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
 
                             <Assurance />
 
-                            <BuyActions productId={product._id} />
+                            <BuyActions
+                                productId={product._id}
+                                available={product.stock > 0 ? true : false}
+                                stock={product.stock}
+                            />
                         </div>
                     </section>
                 </div>

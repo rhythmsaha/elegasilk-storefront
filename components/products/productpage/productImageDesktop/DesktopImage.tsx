@@ -39,7 +39,7 @@ const DesktopImage: React.FC<Props> = ({ images }) => {
                     width={1000}
                     objectFit="cover"
                     alt="Product Image"
-                    className="object-cover object-top w-full lg:aspect-[2/3] xl:aspect-[4.5/5] 2xl:aspect-[4.8/5]"
+                    className="object-cover object-top w-full lg:aspect-[2/3] xl:aspect-[4.2/5] 2xl:aspect-[4/5]"
                 />
             </div>
         </section>

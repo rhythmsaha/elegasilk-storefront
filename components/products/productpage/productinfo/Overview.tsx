@@ -1,7 +1,4 @@
 import React from "react";
-import { BsShareFill } from "react-icons/bs";
-import { FaShare } from "react-icons/fa";
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 interface Props {
     sku: string;
@@ -9,24 +6,22 @@ interface Props {
         name: string;
         hex: string;
     };
-    availability: string;
+    availability: boolean;
 }
 
 const Overview: React.FC<Props> = ({ availability, color, sku }) => {
-    const isTrue = true;
-
     return (
         <div className="flex flex-col mt-4">
             <span
                 style={{
-                    backgroundColor: color.hex,
+                    backgroundColor: color?.hex || "transparent",
                 }}
                 className="h-6 w-6 inline-block rounded-full ring-2 ring-offset-2 ring-gray-200"
             />
 
             <span className="mt-2">
                 <span className="text-gray-800">Color:</span>
-                <span className="text-gray-600 ml-1">{color.name}</span>
+                <span className="text-gray-600 ml-1">{color?.name || "Unknown"}</span>
             </span>
 
             <span>
@@ -36,7 +31,12 @@ const Overview: React.FC<Props> = ({ availability, color, sku }) => {
 
             <span>
                 <span className="text-gray-800">Availability:</span>
-                <span className="text-green-600 ml-1">{availability}</span>
+
+                {availability ? (
+                    <span className="text-green-600 ml-1">In Stock</span>
+                ) : (
+                    <span className="text-red-600 ml-1">Out of Stock</span>
+                )}
             </span>
         </div>
     );

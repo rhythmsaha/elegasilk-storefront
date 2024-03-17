@@ -140,11 +140,7 @@ const collectionsData = [
 const HomePage: NextPageWithLayout = () => {
     return (
         <>
-            <HomeCollections
-                collectionsData={collectionsData}
-                fabricsData={fabricsData}
-                occasionData={occasionData}
-            />
+            <HomeCollections collectionsData={collectionsData} fabricsData={fabricsData} occasionData={occasionData} />
             <HomeBrandStory />
         </>
     );

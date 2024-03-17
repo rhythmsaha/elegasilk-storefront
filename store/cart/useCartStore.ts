@@ -14,9 +14,10 @@ interface IProduct {
 }
 
 interface ICartItem {
+    _id: string;
     productId: IProduct;
     quantity: number;
-    total: number;
+    totalPrice: number;
 }
 
 interface ICartStore {
@@ -26,11 +27,9 @@ interface ICartStore {
     totalPrice: number;
 
     _updateCart: (cart: ICartStore) => void;
-    _addItemToCart?: (productId: string, quantity: number) => void;
 
     clearCart: () => Promise<void>;
     addItemToCart: (productId: string, quantity: number) => Promise<void>;
-    // incrementQuantity: (productId: string) => Promise<void>;
     decrementQuantity: (productId: string) => Promise<void>;
     removeItem: (productId: string) => Promise<void>;
     getCart: () => Promise<void>;
@@ -88,9 +87,7 @@ const useCartStore = create<ICartStore>()(
                 set({ isLoading: true });
 
                 try {
-                    if (!productId) {
-                        throw new Error("Product ID is required");
-                    }
+                    if (!productId) throw new Error("Product ID is required");
 
                     const response = await axios.post(API_URLs.cart.add, {
                         productId,
@@ -111,10 +108,75 @@ const useCartStore = create<ICartStore>()(
                 }
             },
 
-            removeItem: async () => {},
-            decrementQuantity: async () => {},
+            removeItem: async (productId) => {
+                if (get().isLoading) return;
+                set({ isLoading: true });
+                try {
+                    if (!productId) throw new Error("Product ID is required");
 
-            clearCart: async () => {},
+                    const response = await axios.post(API_URLs.cart.remove, {
+                        productId,
+                    });
+
+                    if (response.status !== 200) throw new Error("Failed to remove from cart");
+
+                    const { data } = response;
+
+                    if (!data.success) throw new Error("Failed to remove from cart");
+
+                    get()._updateCart(data.cart);
+                } catch (error: any) {
+                    toast.error(error.message || "Failed to remove from cart");
+                } finally {
+                    set({ isLoading: false });
+                }
+            },
+
+            decrementQuantity: async (productId) => {
+                if (get().isLoading) return;
+                set({ isLoading: true });
+
+                try {
+                    if (!productId) throw new Error("Product ID is required");
+
+                    const response = await axios.post(API_URLs.cart.decrement, {
+                        productId,
+                    });
+
+                    if (response.status !== 200) throw new Error("Failed to decrement quantity");
+
+                    const { data } = response;
+
+                    if (!data.success) throw new Error("Failed to decrement quantity");
+
+                    get()._updateCart(data.cart);
+                } catch (error: any) {
+                    toast.error(error.message || "Failed to decrement quantity");
+                } finally {
+                    set({ isLoading: false });
+                }
+            },
+
+            clearCart: async () => {
+                if (get().isLoading) return;
+                set({ isLoading: true });
+
+                try {
+                    const response = await axios.delete(API_URLs.cart.clear);
+
+                    if (response.status !== 200) throw new Error("Failed to clear cart");
+
+                    const { data } = response;
+
+                    if (!data.success) throw new Error("Failed to clear cart");
+
+                    get()._updateCart(data.cart);
+                } catch (error: any) {
+                    toast.error(error.message || "Failed to clear cart");
+                } finally {
+                    set({ isLoading: false });
+                }
+            },
 
             cheeckItemInCart: (productId) => {
                 const { products } = get();

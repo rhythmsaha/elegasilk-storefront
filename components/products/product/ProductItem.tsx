@@ -1,3 +1,5 @@
+import useCartStore from "@/store/cart/useCartStore";
+import { priceAfterDiscount } from "@/utils/calculateprice";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -24,6 +26,18 @@ const ProductItem: React.FC<Props> = ({
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
+
+    const { cheeckItemInCart, addItemToCart, removeItem } = useCartStore((state) => state);
+
+    const isItemInCart = cheeckItemInCart(_id);
+
+    const addToCart = () => {
+        addItemToCart(_id, 1);
+    };
+
+    const removeFromCart = () => {
+        removeItem(_id);
+    };
 
     return (
         <div
@@ -68,25 +82,33 @@ const ProductItem: React.FC<Props> = ({
                 </div>
 
                 <div className="product_info p-3">
-                    <h4 className="text-sm sm:text-base line-clamp-2 text-15 text-black capitalize">
-                        {name}
-                    </h4>
+                    <h4 className="text-sm sm:text-base line-clamp-2 text-15 text-black capitalize">{name}</h4>
 
                     <div className="flex items-center gap-2 gap-y-1 flex-wrap">
-                        <span className="text-black font-semibold">₹{MRP}</span>
-                        <span className="text-gray-400 line-through font-light text-sm">
-                            ₹{MRP}
-                        </span>
-                        <span className="text-xs sm:text-sm  text-red-500">(75% off)</span>
+                        <span className="text-black font-semibold"> ₹{priceAfterDiscount(MRP, discount!)}</span>
+
+                        {discount && discount > 0 && (
+                            <>
+                                <span className="text-gray-400 line-through font-light text-sm">₹{MRP}</span>
+                                <span className="text-xs sm:text-sm  text-red-500">(75% off)</span>
+                            </>
+                        )}
                     </div>
                 </div>
             </Link>
 
             <div className="product_bottom px-3 pb-3 mt-1">
-                <button className="add-to-cart-button" onClick={() => console.log("Hello")}>
-                    Add to cart
-                    <IoCartOutline className="inline-block" />
-                </button>
+                {stock > 0 ? (
+                    <button className="add-to-cart-button" onClick={isItemInCart ? removeFromCart : addToCart}>
+                        {!isItemInCart ? "Add to cart" : "Added to Cart"}
+                        <IoCartOutline className="inline-block" />
+                    </button>
+                ) : (
+                    <button className="outofstock-button">
+                        Out of Stock
+                        <IoCartOutline className="inline-block" />
+                    </button>
+                )}
             </div>
         </div>
     );

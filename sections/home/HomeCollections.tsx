@@ -34,7 +34,7 @@ const HomeCollections: React.FC<Props> = ({ collectionsData, fabricsData, occasi
                         ],
                         MRP: 11000,
                         discount: 25,
-                        stock: 188,
+                        stock: 0,
                         published: true,
                         createdAt: "2024-03-07T11:41:56.848Z",
                         slug: "red-pure-khadi-cotton-ajrakh-printed-saree",

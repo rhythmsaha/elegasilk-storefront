@@ -31,7 +31,6 @@ const Review: React.FC<Props> = (props) => {
                     allowFraction
                     SVGclassName="inline"
                     readonly
-                    transition
                 />
             </div>
 
