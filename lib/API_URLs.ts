@@ -39,6 +39,14 @@ const API_URLs = {
         checkOne: (id: string) => `/wishlist/${id}`,
         clear: (id: string) => `/wishlist/${id}`,
     },
+
+    cart: {
+        add: "/cart/add", // POST
+        decrement: `/cart/decrease`, // POST
+        remove: `/cart/remove`, // POST
+        clear: "/cart/clear", // DELETE
+        getCart: "/cart", // GET
+    },
 };
 
 export default API_URLs;

@@ -16,9 +16,11 @@ import DetailsContainer from "@/components/products/productpage/DetailsContainer
 import Description from "@/components/products/productpage/Description";
 import ProductSpecs from "@/components/products/productpage/ProductSpecs";
 import ReviewsSection from "@/components/products/productpage/ReviewsSection";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineCheck, AiOutlineShoppingCart } from "react-icons/ai";
 import { IoFlash } from "react-icons/io5";
 import "swiper/css/bundle";
+import useCartStore from "@/store/cart/useCartStore";
+import BuyActions from "@/components/products/productpage/BuyActions";
 
 interface Props {
     product: {
@@ -57,6 +59,14 @@ interface Props {
 }
 
 const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
+    const { addItemToCart, cheeckItemInCart } = useCartStore((state) => state);
+
+    const addHandler = () => {
+        addItemToCart(product._id, 1);
+    };
+
+    const isItemInCart = cheeckItemInCart(product._id);
+
     return (
         <div className="mt-0 mb-20">
             <MobileProductImage images={product.images} />
@@ -81,30 +91,7 @@ const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
 
                             <Assurance />
 
-                            <div className="mt-4 xl:mt-8">
-                                <div className="flex border justify-between border-gray-200 max-w-32">
-                                    <button className="flex items-center justify-center h-10 w-10 ">-</button>
-
-                                    <input
-                                        type="text"
-                                        className="col-span-2 min-w-0 max-w-none w-auto ring-0 focus:ring-0 border-y-0 border-x focus:border-x-gray-200 flex-1 p-0 border-gray-200 text-center"
-                                    />
-
-                                    <button className="flex items-center justify-center h-10 w-10">+</button>
-                                </div>
-
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4">
-                                    <button className="bg-yellow-300 text-black py-3 rounded-md flex items-center justify-center">
-                                        <AiOutlineShoppingCart className="mr-2" />
-                                        <span>Add to Cart</span>
-                                    </button>
-
-                                    <button className="bg-black text-white py-3 rounded-md flex items-center justify-center">
-                                        <IoFlash className="mr-2" />
-                                        <span>Buy Now</span>
-                                    </button>
-                                </div>
-                            </div>
+                            <BuyActions productId={product._id} />
                         </div>
                     </section>
                 </div>
