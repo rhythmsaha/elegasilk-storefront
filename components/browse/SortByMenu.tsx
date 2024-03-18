@@ -24,7 +24,7 @@ const sortData = [
     {
         id: 3,
         name: "Newest First",
-        value: "newset-first",
+        value: "newest-first",
     },
 ];
 
@@ -79,9 +79,7 @@ const SortByMenu: React.FC<Props> = ({ sortBy, onSortChange }) => {
                                                 <div className="flex items-center">
                                                     <span
                                                         className={classNames(
-                                                            selected
-                                                                ? "font-semibold"
-                                                                : "font-normal",
+                                                            selected ? "font-semibold" : "font-normal",
                                                             "ml-3 block truncate"
                                                         )}
                                                     >
@@ -96,10 +94,7 @@ const SortByMenu: React.FC<Props> = ({ sortBy, onSortChange }) => {
                                                             "absolute inset-y-0 right-0 flex items-center pr-4"
                                                         )}
                                                     >
-                                                        <HiCheck
-                                                            className="h-5 w-5"
-                                                            aria-hidden="true"
-                                                        />
+                                                        <HiCheck className="h-5 w-5" aria-hidden="true" />
                                                     </span>
                                                 ) : null}
                                             </>

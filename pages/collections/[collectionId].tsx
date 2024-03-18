@@ -22,7 +22,9 @@ const CollectionsPage: NextPageWithLayout = () => {
     const { filterOptions, isFiltersLoading } = useFilters();
     const { productLoading, products, maxPage, page, onNext, onPrev, pageSize } = useProducts(
         selectedAttribute,
-        selectedColors
+        selectedColors,
+        null,
+        selectedSort
     );
 
     const handleAttributeChange = (id: string) => {

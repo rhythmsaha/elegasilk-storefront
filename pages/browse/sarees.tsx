@@ -9,8 +9,6 @@ import LoadingScreen from "@/screens/LoadingScreen";
 import MobileBottomMenu from "@/components/browse/mobile/MobileBottomMenu";
 import sortData, { ISortItem } from "@/lib/Products_SortData";
 import { useRouter } from "next/navigation";
-import { BiChevronLeft } from "react-icons/bi";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 const PlexFont = IBM_Plex_Sans({
     subsets: ["latin"],
@@ -23,8 +21,12 @@ const SareesPage: NextPageWithLayout = () => {
     const [selectedSort, setSelectedSort] = useState<ISortItem>(sortData[0]);
 
     const { filterOptions, isFiltersLoading } = useFilters();
-    const { productLoading, products, productsError, maxPage, page, onNext, onPrev, pageSize } =
-        useProducts(selectedAttribute, selectedColors);
+    const { productLoading, products, productsError, maxPage, page, onNext, onPrev, pageSize } = useProducts(
+        selectedAttribute,
+        selectedColors,
+        null,
+        selectedSort
+    );
 
     const router = useRouter();
 
@@ -53,17 +55,15 @@ const SareesPage: NextPageWithLayout = () => {
     };
 
     const resetFilters = () => {
-        setSelectedAttribute([]);
-        setSelectedColors([]);
+        if (selectedAttribute.length > 0 || selectedColors.length > 0) {
+            setSelectedAttribute([]);
+            setSelectedColors([]);
+        }
     };
 
     if (isFiltersLoading) {
         return <LoadingScreen />;
     }
-
-    // if (productsError) {
-    //     return router.replace("/404") as any;
-    // }
 
     return (
         <>

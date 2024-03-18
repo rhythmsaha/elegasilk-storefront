@@ -1,4 +1,5 @@
 import API_URLs from "@/lib/API_URLs";
+import { ISortItem } from "@/lib/Products_SortData";
 import axios from "@/utils/axios";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
@@ -6,7 +7,8 @@ import { useCallback, useEffect, useState } from "react";
 const useProducts = (
     selectedAttribute: string[],
     selectedColors: string[],
-    selectedCollection: string[] | undefined | null = null
+    selectedCollection: string[] | undefined | null = null,
+    selectedSort: ISortItem
 ) => {
     const [productLoading, setProductLoading] = useState(true);
     const [products, setProducts] = useState<any[]>([]);
@@ -106,6 +108,10 @@ const useProducts = (
             }
         }
 
+        if (selectedSort) {
+            myQuery.sortby = selectedSort.value;
+        }
+
         if (page) myQuery.page = page.toString();
         if (pageSize) myQuery.pageSize = pageSize.toString();
 
@@ -135,6 +141,7 @@ const useProducts = (
         selectedCollection,
         page,
         pageSize,
+        selectedSort,
     ]);
 
     useEffect(() => {
