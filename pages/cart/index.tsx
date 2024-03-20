@@ -46,7 +46,7 @@ const CartPage: NextPageWithLayout = () => {
         setAddressFormRendered(false);
     }, []);
 
-    const onStripeCheckout = async () => {
+    const onCheckout = async () => {
         console.log("Stripe Checkout");
 
         const payload = {
@@ -74,15 +74,7 @@ const CartPage: NextPageWithLayout = () => {
                 setCheckoutStep(CheckoutStep.PAYMENT);
             }
         } else if (checkoutStep === CheckoutStep.PAYMENT) {
-            if (paymentMethod === PaymentMethod.STRIPE) {
-                onStripeCheckout();
-            } else if (paymentMethod === PaymentMethod.COD) {
-                toast.promise(new Promise((resolve, reject) => setTimeout(resolve, 1000)), {
-                    loading: "Creating Order...",
-                    success: "Order Placed Successfully",
-                    error: "Error in placing order",
-                });
-            }
+            onCheckout();
         }
     };
 

@@ -7,6 +7,7 @@ import { FadeLoader } from "react-spinners";
 import { PiCheckCircleDuotone } from "react-icons/pi";
 import { MdError } from "react-icons/md";
 import Link from "next/link";
+import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 
 interface Props {}
 
@@ -81,6 +82,8 @@ const SuccessPage: NextPageWithLayout = (props) => {
     if (!isError) {
         return (
             <div className="max-w-screen-xl mx-auto w-11/12 mt-[5vh] lg:mt-[10vh]">
+                <Fireworks autorun={{ speed: 3, duration: 1000 }} />
+
                 <PiCheckCircleDuotone className="text-green-500 text-8xl mx-auto" />
                 <h1 className="text-3xl font-semibold text-center">Order Placed Successfully</h1>
                 <p className="text-center mt-4">

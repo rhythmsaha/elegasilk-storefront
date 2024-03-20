@@ -35,6 +35,7 @@ const SelectAddress = forwardRef(
             try {
                 setIsLoading(true);
                 const addresses = await fetchAddresses(API_URLs.address.getAll);
+                if (addresses.length === 0) throw new Error("No Address Found");
                 setSavedAddresses(addresses);
             } catch (error: any) {
                 onRenderAddressForm();
