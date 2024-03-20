@@ -1,12 +1,7 @@
 import React from "react";
 import { NextPageWithLayout } from "../_app";
 import AuthLayout from "@/components/layouts/AuthLayout";
-import AddAddressCard from "@/components/addressbook/AddAddressCard";
-import AddressCard from "@/components/addressbook/AddressCard";
 import AddressListSection from "@/sections/addresses/AddressListSection";
-import { useAuthStore } from "@/store/auth/useAuthStore";
-
-interface Props {}
 
 const AddressBookPage: NextPageWithLayout = () => {
     return (

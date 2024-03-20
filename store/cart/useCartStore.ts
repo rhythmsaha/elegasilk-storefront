@@ -13,7 +13,7 @@ interface IProduct {
     slug: string;
 }
 
-interface ICartItem {
+export interface ICartItem {
     _id: string;
     productId: IProduct;
     quantity: number;
@@ -21,6 +21,7 @@ interface ICartItem {
 }
 
 interface ICartStore {
+    _id?: string;
     isLoading: boolean;
     products: ICartItem[];
     totalQuantity: number;
@@ -48,6 +49,7 @@ const useCartStore = create<ICartStore>()(
             _updateCart: (cart) => {
                 set(
                     {
+                        _id: cart._id,
                         products: cart.products,
                         totalQuantity: cart.totalQuantity,
                         totalPrice: cart.totalPrice,
@@ -59,7 +61,7 @@ const useCartStore = create<ICartStore>()(
 
             // Async Calls
             getCart: async () => {
-                set({ isLoading: true });
+                set({ isLoading: true }, false, "cart/start_loading");
 
                 try {
                     const response = await axios.get(API_URLs.cart.getCart);
@@ -78,13 +80,13 @@ const useCartStore = create<ICartStore>()(
 
                     // console.error("Failed to fetch cart");
                 } finally {
-                    set({ isLoading: false });
+                    set({ isLoading: false }, false, "cart/stop_loading");
                 }
             },
 
             addItemToCart: async (productId, quantity) => {
                 if (get().isLoading) return;
-                set({ isLoading: true });
+                set({ isLoading: true }, false, "cart/start_loading");
 
                 try {
                     if (!productId) throw new Error("Product ID is required");
@@ -104,13 +106,13 @@ const useCartStore = create<ICartStore>()(
                 } catch (error: any) {
                     toast.error(error.message);
                 } finally {
-                    set({ isLoading: false });
+                    set({ isLoading: false }, false, "cart/stop_loading");
                 }
             },
 
             removeItem: async (productId) => {
                 if (get().isLoading) return;
-                set({ isLoading: true });
+                set({ isLoading: true }, false, "cart/start_loading");
                 try {
                     if (!productId) throw new Error("Product ID is required");
 
@@ -128,13 +130,13 @@ const useCartStore = create<ICartStore>()(
                 } catch (error: any) {
                     toast.error(error.message || "Failed to remove from cart");
                 } finally {
-                    set({ isLoading: false });
+                    set({ isLoading: false }, false, "cart/stop_loading");
                 }
             },
 
             decrementQuantity: async (productId) => {
                 if (get().isLoading) return;
-                set({ isLoading: true });
+                set({ isLoading: true }, false, "cart/start_loading");
 
                 try {
                     if (!productId) throw new Error("Product ID is required");
@@ -153,13 +155,13 @@ const useCartStore = create<ICartStore>()(
                 } catch (error: any) {
                     toast.error(error.message || "Failed to decrement quantity");
                 } finally {
-                    set({ isLoading: false });
+                    set({ isLoading: false }, false, "cart/stop_loading");
                 }
             },
 
             clearCart: async () => {
                 if (get().isLoading) return;
-                set({ isLoading: true });
+                set({ isLoading: true }, false, "cart/start_loading");
 
                 try {
                     const response = await axios.delete(API_URLs.cart.clear);
@@ -174,7 +176,7 @@ const useCartStore = create<ICartStore>()(
                 } catch (error: any) {
                     toast.error(error.message || "Failed to clear cart");
                 } finally {
-                    set({ isLoading: false });
+                    set({ isLoading: false }, false, "cart/stop_loading");
                 }
             },
 

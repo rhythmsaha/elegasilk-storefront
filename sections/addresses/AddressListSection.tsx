@@ -24,7 +24,7 @@ export interface IAddress {
     isDefault: boolean;
 }
 
-const fetchAddresses = async (url: string) => {
+export const fetchAddresses = async (url: string) => {
     try {
         const response = await axios.get(url);
         if (response.status !== 200) throw new Error("Failed to fetch addresses");
