@@ -10,7 +10,6 @@ import { useAuthStore } from "@/store/auth/useAuthStore";
 import PageHeading from "@/components/cart/CartItem/PageHeading";
 import CartSummarySection from "@/sections/cart/CartSummarySection";
 import PriceSummarySection from "@/sections/cart/PriceSummarySection";
-import { motion } from "framer-motion";
 import SelectAddress from "@/sections/checkout/SelectAddress";
 import { IAddress } from "@/sections/addresses/AddressListSection";
 import PaymentSection from "@/sections/checkout/PaymentSection";
@@ -22,8 +21,8 @@ enum CheckoutStep {
 }
 
 export enum PaymentMethod {
-    COD,
-    STRIPE,
+    COD = "CASH_ON_DELIVERY",
+    STRIPE = "STRIPE",
 }
 
 const CartPage: NextPageWithLayout = () => {
@@ -48,16 +47,20 @@ const CartPage: NextPageWithLayout = () => {
     }, []);
 
     const onStripeCheckout = async () => {
-        const respone = await axios.post("/orders/create-checkout-session", {
-            cartId: _id,
-            userEmail: user?.email,
-        });
+        console.log("Stripe Checkout");
 
+        const payload = {
+            cartId: _id,
+            email: user?.email,
+            address: selectedAddress,
+            paymentMethod: paymentMethod,
+        };
+
+        const respone = await axios.post("/orders/create-checkout-session", payload);
         if (!respone.data.url) {
             toast.error("Error in creating checkout session");
             return;
         }
-
         window.location.href = respone.data.url;
     };
 
@@ -100,6 +103,17 @@ const CartPage: NextPageWithLayout = () => {
         //@ts-ignore
         form.submitForm();
     }, []);
+
+    const ButtonText = () => {
+        if (checkoutStep === CheckoutStep.CART) return "Choose Delivery Address";
+        if (checkoutStep === CheckoutStep.ADDRESS) return "Proceed to Payment";
+        if (checkoutStep === CheckoutStep.PAYMENT) {
+            if (paymentMethod === PaymentMethod.STRIPE) return "Proceed to Checkout";
+            if (paymentMethod === PaymentMethod.COD) return "Place Order";
+        }
+    };
+
+    console.log(paymentMethod);
 
     if (totalQuantity === 0 && !isLoading) return <EmptyState />;
 
@@ -153,7 +167,7 @@ const CartPage: NextPageWithLayout = () => {
                                         className="w-full py-2 px-4 border-2 border-black bg-black text-white rounded hover:bg-opacity-80 transition duration-200"
                                         onClick={onStepForward}
                                     >
-                                        Proceed to Checkout
+                                        {ButtonText()}
                                     </button>
                                 </div>
                             </section>
