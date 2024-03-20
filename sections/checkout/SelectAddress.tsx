@@ -30,7 +30,6 @@ const SelectAddress = forwardRef(
     ) => {
         const [savedAddresses, setSavedAddresses] = useState<IAddress[]>([]);
         const [isLoading, setIsLoading] = useState(true);
-        const [error, setError] = useState<any>(null);
 
         const fetchAddress = useCallback(async () => {
             try {
@@ -38,14 +37,13 @@ const SelectAddress = forwardRef(
                 const addresses = await fetchAddresses(API_URLs.address.getAll);
                 setSavedAddresses(addresses);
             } catch (error: any) {
-                setError(error.message);
+                onRenderAddressForm();
             } finally {
                 setIsLoading(false);
             }
         }, []);
 
         useEffect(() => {
-            console.log("fetching addresses");
             fetchAddress();
         }, [fetchAddress]);
 

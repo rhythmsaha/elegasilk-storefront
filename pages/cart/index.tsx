@@ -13,6 +13,7 @@ import PriceSummarySection from "@/sections/cart/PriceSummarySection";
 import { motion } from "framer-motion";
 import SelectAddress from "@/sections/checkout/SelectAddress";
 import { IAddress } from "@/sections/addresses/AddressListSection";
+import PaymentSection from "@/sections/checkout/PaymentSection";
 
 enum CheckoutStep {
     CART,
@@ -20,10 +21,18 @@ enum CheckoutStep {
     PAYMENT,
 }
 
+export enum PaymentMethod {
+    COD,
+    STRIPE,
+}
+
 const CartPage: NextPageWithLayout = () => {
     const [checkoutStep, setCheckoutStep] = useState<CheckoutStep>(CheckoutStep.CART);
     const [addressFormRendered, setAddressFormRendered] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState<IAddress | null>(null);
+
+    // Payment Section States
+    const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.STRIPE);
 
     const { _id, isLoading, totalQuantity } = useCartStore((state) => state);
     const { user } = useAuthStore((state) => state);
@@ -61,8 +70,16 @@ const CartPage: NextPageWithLayout = () => {
             } else {
                 setCheckoutStep(CheckoutStep.PAYMENT);
             }
-        } else {
-            setCheckoutStep(CheckoutStep.CART);
+        } else if (checkoutStep === CheckoutStep.PAYMENT) {
+            if (paymentMethod === PaymentMethod.STRIPE) {
+                onStripeCheckout();
+            } else if (paymentMethod === PaymentMethod.COD) {
+                toast.promise(new Promise((resolve, reject) => setTimeout(resolve, 1000)), {
+                    loading: "Creating Order...",
+                    success: "Order Placed Successfully",
+                    error: "Error in placing order",
+                });
+            }
         }
     };
 
@@ -100,7 +117,7 @@ const CartPage: NextPageWithLayout = () => {
                 {totalQuantity > 0 && (
                     <div className="max-w-screen-2xl space-y-4 mx-auto w-11/12 mt-10 mb-20">
                         <div className="grid lg:grid-cols-12 gap-4 items-start ">
-                            <div className="lg:col-span-8 max-w-full overflow-hidden">
+                            <div className="lg:col-span-8 max-w-full overflow-hidden p-1">
                                 {checkoutStep === CheckoutStep.CART && <CartSummarySection />}
 
                                 {checkoutStep === CheckoutStep.ADDRESS && (
@@ -116,17 +133,15 @@ const CartPage: NextPageWithLayout = () => {
                                 )}
 
                                 {checkoutStep === CheckoutStep.PAYMENT && (
-                                    <motion.div
-                                        initial={{ x: 100, opacity: 0 }}
-                                        animate={{ x: 0, opacity: 1 }}
-                                        transition={{ duration: 0.25 }}
-                                    >
-                                        <h1>Payment</h1>
-                                    </motion.div>
+                                    <PaymentSection
+                                        onStepBackward={onStepBackward}
+                                        onPaymentMethodSelect={setPaymentMethod}
+                                        selectedMethod={paymentMethod}
+                                    />
                                 )}
                             </div>
 
-                            <section className="lg:col-span-4">
+                            <section className="lg:col-span-4 p-1">
                                 <PriceSummarySection />
 
                                 <div className="mt-8 space-y-2">
