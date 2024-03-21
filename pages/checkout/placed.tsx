@@ -12,7 +12,7 @@ const OrderPlacedPage: NextPageWithLayout = () => {
     const orderId = router.query.orderId;
 
     return (
-        <div className="max-w-screen-xl mx-auto w-11/12 mt-[5vh] lg:mt-[10vh]">
+        <div className="max-w-screen-xl mx-auto w-11/12 flex py-[10vh]  items-center justify-center flex-col h-page-main">
             <Fireworks autorun={{ speed: 3, duration: 1000 }} />
             <PiCheckCircleDuotone className="text-green-500 text-8xl mx-auto" />
             <h1 className="text-3xl font-semibold text-center">Order Placed Successfully</h1>
