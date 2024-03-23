@@ -1,13 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-interface Props {}
+interface Props {
+    item: any;
+    orderId: string;
+}
 
-const OrderedItems: React.FC<Props> = (props) => {
+const OrderedItems: React.FC<Props> = ({ item, orderId }) => {
     return (
         <div className="flex gap-2">
             <Image
-                src="https://www.taneira.com/dw/image/v2/BKMH_PRD/on/demandware.static/-/Sites-Taneira-product-catalog/default/dwdd173c9c/images/Taneira/Catalog/SPH08A00054_1.jpg?sw=80&sh=120"
+                src={item.images[0]}
                 alt=""
                 height={120}
                 width={80}
@@ -15,11 +19,13 @@ const OrderedItems: React.FC<Props> = (props) => {
             />
 
             <div className="min-h-full flex flex-col items-start gap-1">
-                <h3 className="text-gray-700 line-clamp-1">Red Pure Cotton Ajrakh Block Print Saree</h3>
+                <h3 className="text-gray-700 line-clamp-1 capitalize">{item.name}</h3>
                 <p className="text-gray-500 text-sm">
-                    <span className="font-semibold">₹ 1,999</span> x 3
+                    <span className="font-semibold">₹{item.MRP}</span> x {item.quantity}
                 </p>
-                <button className="text-sm inline-flex underline">Details</button>
+                <Link href={`/orders/${orderId}`} className="text-sm inline-flex underline">
+                    Details
+                </Link>
             </div>
         </div>
     );

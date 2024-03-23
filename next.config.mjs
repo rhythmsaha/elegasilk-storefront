@@ -2,6 +2,7 @@
 
 const nextConfig = {
     reactStrictMode: false,
+    imageOptimization: false, // Disable image optimization
     // Include image URL
     images: {
         // domains: ["res.cloudinary.com", "www.karagiri.com"],

@@ -47,6 +47,12 @@ const API_URLs = {
         clear: "/cart/clear", // DELETE
         getCart: "/cart", // GET
     },
+
+    orders: {
+        get: "/orders/all", // GET
+        getOne: (id: string) => `/orders/single/${id}`, // GET
+        cancel: (id: string) => `/orders/cancel/${id}`, // POST
+    },
 };
 
 export default API_URLs;
