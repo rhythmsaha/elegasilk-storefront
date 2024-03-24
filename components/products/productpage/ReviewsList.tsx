@@ -1,21 +1,21 @@
 import React from "react";
 import ReviewListHeader from "./ReviewListHeader";
 import Review from "./Review";
+import { Rating } from "./ReviewsSection";
 
-interface Props {}
+interface Props {
+    list: Rating[];
+}
 
-const ReviewsList: React.FC<Props> = (props) => {
+const ReviewsList: React.FC<Props> = ({ list }) => {
     return (
         <div className="mt-20">
             <ReviewListHeader />
 
-            <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
+            <div className="mt-10 grid grid-cols-1  gap-4 lg:gap-4">
+                {list.map((rating) => (
+                    <Review key={rating._id} rating={rating} />
+                ))}
             </div>
         </div>
     );

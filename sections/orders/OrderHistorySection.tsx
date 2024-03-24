@@ -11,7 +11,7 @@ interface IOrder {}
 interface Props {}
 
 const OrderHistorySection: React.FC<Props> = (props) => {
-    const [maxPage, setMaxPage] = useState(5);
+    const [maxPage, setMaxPage] = useState(1);
     const [page, setPage] = useState(1);
 
     const onNext = () => {

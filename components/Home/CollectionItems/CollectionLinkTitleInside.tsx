@@ -8,19 +8,12 @@ export interface CollectionLinkProps {
     path: string;
 }
 
-const CollectionLinkTitleInside: React.FC<CollectionLinkProps> = ({
-    name,
-    img,
-    path,
-}) => {
+const CollectionLinkTitleInside: React.FC<CollectionLinkProps> = ({ name, img, path }) => {
     return (
-        <Link
-            href={path}
-            className="relative overflow-hidden h-full w-full rounded-lg bg-black cursor-pointer "
-        >
+        <Link href={path} className="relative overflow-hidden h-full w-full rounded-lg bg-black cursor-pointer ">
             <Image
                 src={img}
-                className="hover:scale-125 transition duration-500 ease-in-out hover:opacity-50 w-full aspect-square"
+                className="hover:scale-125 transition duration-500 ease-in-out hover:opacity-50 w-full aspect-square object-cover object-top"
                 width={300}
                 height={300}
                 alt={name}

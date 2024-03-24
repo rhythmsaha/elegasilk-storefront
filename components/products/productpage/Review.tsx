@@ -1,10 +1,13 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Rating } from "react-simple-star-rating";
+import type { Rating as IRating } from "./ReviewsSection";
 
-interface Props {}
+interface Props {
+    rating: IRating;
+}
 
-const Review: React.FC<Props> = (props) => {
+const Review: React.FC<Props> = ({ rating }) => {
     const [trunc, setTrunc] = useState(true);
 
     const onToggleTrunc = () => {
@@ -12,10 +15,12 @@ const Review: React.FC<Props> = (props) => {
     };
 
     return (
-        <div className="lg:max-w">
+        <div className="lg:max-w bg-white shadow border border-gray-50 p-4 rounded-xl">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <h3 className="text-gray-800 font-medium leading-none">Rhythm Saha</h3>
+                    <h3 className="text-gray-800 font-medium leading-none capitalize">
+                        {rating.customerId.firstName} {rating.customerId.lastName}
+                    </h3>
                     <span className="text-sm font-light leading-none text-gray-600">(Verified)</span>
                 </div>
 
@@ -27,7 +32,7 @@ const Review: React.FC<Props> = (props) => {
                     className=""
                     size={20}
                     iconsCount={5}
-                    initialValue={5}
+                    initialValue={rating.rating}
                     allowFraction
                     SVGclassName="inline"
                     readonly
@@ -35,15 +40,15 @@ const Review: React.FC<Props> = (props) => {
             </div>
 
             <div className="space-y-2 ">
-                <h4 className="font-semibold text-gray-700">Love It: My Recent Clothing Purchase</h4>
-
-                <p
-                    className={`${trunc ? "line-clamp-5 lg:line-clamp-10" : ""} text-sm sm:text-base `}
-                    onClick={onToggleTrunc}
-                >
-                    Delighted with my purchase from Elegasilk! Their saree exudes sheer elegance and charm, making every
-                    moment draped in it truly special. A must-have for anyone craving timeless grace in their wardrobe.
-                </p>
+                {rating.title && <h4 className="font-semibold text-gray-700">{rating.title}</h4>}
+                {rating.review && (
+                    <p
+                        className={`${trunc ? "line-clamp-5 lg:line-clamp-10" : ""} text-sm sm:text-base `}
+                        onClick={onToggleTrunc}
+                    >
+                        {rating.review}
+                    </p>
+                )}
             </div>
         </div>
     );

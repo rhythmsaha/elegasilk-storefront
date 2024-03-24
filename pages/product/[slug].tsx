@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { NextPageWithLayout } from "../_app";
 import MainLayout from "@/components/layouts/MainLayout";
@@ -16,11 +16,9 @@ import DetailsContainer from "@/components/products/productpage/DetailsContainer
 import Description from "@/components/products/productpage/Description";
 import ProductSpecs from "@/components/products/productpage/ProductSpecs";
 import ReviewsSection from "@/components/products/productpage/ReviewsSection";
-import { AiOutlineCheck, AiOutlineShoppingCart } from "react-icons/ai";
-import { IoFlash } from "react-icons/io5";
-import "swiper/css/bundle";
-import useCartStore from "@/store/cart/useCartStore";
 import BuyActions from "@/components/products/productpage/BuyActions";
+import "swiper/css/bundle";
+import HomeBrandStory from "@/sections/home/HomeBrandStory";
 
 interface Props {
     product: {
@@ -59,8 +57,17 @@ interface Props {
 }
 
 const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
+    const [ratingData, setRatingData] = useState({
+        averageRating: 0,
+        totalRatings: 0,
+    });
+
+    const onUpdateRating = (avg: number, total: number) => {
+        setRatingData({ averageRating: avg, totalRatings: total });
+    };
+
     return (
-        <div className="mt-0 mb-20">
+        <div className="mt-0">
             <MobileProductImage images={product.images} />
 
             <div className="max-w-screen-2xl w-11/12 mx-auto">
@@ -69,7 +76,11 @@ const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
 
                     <section className="flex flex-col w-full">
                         <div>
-                            <HeadingPart name={product.name} rating={{ average: 2.4, count: 245 }} _id={product._id} />
+                            <HeadingPart
+                                name={product.name}
+                                rating={{ average: ratingData.averageRating, count: ratingData.totalRatings }}
+                                _id={product._id}
+                            />
 
                             <Pricing MRP={product.MRP} discount={product.discount} />
 
@@ -102,10 +113,12 @@ const ProductPage: NextPageWithLayout<Props> = ({ product }) => {
                     </DetailsContainer>
 
                     <DetailsContainer heading="Ratings and Reviews">
-                        <ReviewsSection rating={2.4} totalReviews={245} />
+                        <ReviewsSection productId={product._id} updateParentRating={onUpdateRating} />
                     </DetailsContainer>
                 </section>
             </div>
+
+            <HomeBrandStory />
         </div>
     );
 };

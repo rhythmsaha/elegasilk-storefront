@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
+import RatingChip from "./RatingChip";
 
 interface Props {
     product: {
@@ -17,12 +18,16 @@ interface Props {
         published: boolean;
         createdAt: string;
         slug: string;
+        ratings: [
+            {
+                user: number;
+                rating: number;
+            }
+        ];
     };
 }
 
-const ProductItem: React.FC<Props> = ({
-    product: { _id, name, images, MRP, discount, stock, published, createdAt, slug },
-}) => {
+const ProductItem: React.FC<Props> = ({ product: { _id, name, images, MRP, discount, stock, slug, ratings } }) => {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -38,6 +43,9 @@ const ProductItem: React.FC<Props> = ({
     const removeFromCart = () => {
         removeItem(_id);
     };
+
+    const ratingAverage =
+        (ratings.length > 0 && ratings.reduce((acc, curr) => acc + curr?.rating, 0) / ratings.length) || 0;
 
     return (
         <div
@@ -64,21 +72,14 @@ const ProductItem: React.FC<Props> = ({
                             className="object-cover w-full rounded"
                         />
                     )}
-
                     {/* Rating */}
-                    <div className="absolute bottom-2 right-2 rounded-full py-1 px-3 bg-yellow-50">
-                        <span className="flex items-center gap-1">
-                            <FaStar className="text-yellow-400 text-xs sm:text-sm" />
-                            <span className="leading-none text-black font-normal sm:font-medium text-xs sm:text-sm">
-                                4.8
-                            </span>
-                        </span>
-                    </div>
+                    {ratingAverage > 0 && <RatingChip rating={ratingAverage} />}
 
-                    {/* Best Seller */}
-                    <span className="absolute top-0 left-0 bg-pink-500 text-pink-50 text-[45%] sm:text-sm  px-2 sm:px-2.5 sm:pr-4 py-0.5 rounded-r-full">
-                        Best Seller
-                    </span>
+                    {discount && discount > 0 && (
+                        <span className="absolute top-0 left-0 bg-pink-500 text-pink-50 text-[45%] sm:text-sm  px-2 sm:px-2.5 sm:pr-4 py-0.5 rounded-r-full">
+                            Discount
+                        </span>
+                    )}
                 </div>
 
                 <div className="product_info p-3">
@@ -90,7 +91,7 @@ const ProductItem: React.FC<Props> = ({
                         {discount && discount > 0 && (
                             <>
                                 <span className="text-gray-400 line-through font-light text-sm">₹{MRP}</span>
-                                <span className="text-xs sm:text-sm  text-red-500">(75% off)</span>
+                                <span className="text-xs sm:text-sm  text-red-500">({discount}% off)</span>
                             </>
                         )}
                     </div>

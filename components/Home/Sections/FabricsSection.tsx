@@ -21,7 +21,7 @@ const FabricsSection: React.FC<Props> = ({ fabricsData }) => {
                         key={index}
                         img={fabric.image}
                         name={fabric.name}
-                        path="/"
+                        path={fabric.path || ""}
                     />
                 ))}
             </div>

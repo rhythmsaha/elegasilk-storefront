@@ -6,7 +6,9 @@ import ProductItem from "@/components/products/product/ProductItem";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 
 interface Props {
-    bestSellerData: any[];
+    items: any[];
+    heading: string;
+    subHeading: string;
 }
 
 const SwiperButtonNext = () => {
@@ -35,13 +37,10 @@ const SwiperButtonPrev = () => {
     );
 };
 
-const BestSellerSection: React.FC<Props> = ({ bestSellerData }) => {
+const ExlusiveCollection: React.FC<Props> = ({ heading, items, subHeading }) => {
     return (
         <SectionContainer>
-            <SeectionHeading
-                heading="Explore Our Best Sellers"
-                subHeading="Discover the Sarees Everyone's Talking About"
-            />
+            <SeectionHeading heading={heading} subHeading={subHeading} />
 
             <div className="mt-6 md:mt-8 lg:mt-10 relative flex">
                 <Swiper
@@ -72,8 +71,8 @@ const BestSellerSection: React.FC<Props> = ({ bestSellerData }) => {
                     <SwiperButtonNext />
                     <SwiperButtonPrev />
 
-                    {bestSellerData.length > 0 &&
-                        bestSellerData.map((product, index) => (
+                    {items.length > 0 &&
+                        items.map((product, index) => (
                             <SwiperSlide key={product._id} className="">
                                 <ProductItem product={product} />
                             </SwiperSlide>
@@ -84,4 +83,4 @@ const BestSellerSection: React.FC<Props> = ({ bestSellerData }) => {
     );
 };
 
-export default BestSellerSection;
+export default ExlusiveCollection;

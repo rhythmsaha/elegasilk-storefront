@@ -22,7 +22,7 @@ const RatingBar: React.FC<{
     );
 };
 
-const RatingBars: React.FC<Props> = ({ bars, totalReivews }) => {
+const RatingBars: React.FC<Props> = ({ bars }) => {
     const total = bars.reduce((acc, bar) => acc + bar.count, 0);
 
     return (

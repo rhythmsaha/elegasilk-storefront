@@ -9,25 +9,25 @@ const BannerData = [
         name: "Wedding",
         src: "/banner/wedding.jpg",
         srcMobile: "/banner/wedding-m.jpg",
-        path: "/",
+        path: "/browse/sarees?attributes=65737b5d7c5a3cb5bae715e5",
     },
     {
         name: "Classics",
         src: "/banner/classics.jpg",
         srcMobile: "/banner/classics-m.jpg",
-        path: "/",
+        path: "/collections/65930ebf2784df2d7ed9269b",
     },
     {
         name: "Cotton",
         src: "/banner/cotton.jpg",
         srcMobile: "/banner/cotton-m.jpg",
-        path: "/",
+        path: "/browse/sarees?attributes=657348b78840612d2a0a8c6a",
     },
     {
         name: "Dbe",
         src: "/banner/dbe.jpg",
         srcMobile: "/banner/dbe-m.jpg",
-        path: "/",
+        path: "/collections/65930e7b2784df2d7ed92647",
     },
 ];
 

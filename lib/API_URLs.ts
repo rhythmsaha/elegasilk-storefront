@@ -53,6 +53,13 @@ const API_URLs = {
         getOne: (id: string) => `/orders/single/${id}`, // GET
         cancel: (id: string) => `/orders/cancel/${id}`, // POST
     },
+
+    ratings: {
+        check: (id: string) => `/ratings/check-purchase/${id}`,
+        add: "/ratings",
+        get: (id: string) => `/ratings/${id}`,
+        getForCard: (id: string) => `/ratings/${id}?card=true`,
+    },
 };
 
 export default API_URLs;
