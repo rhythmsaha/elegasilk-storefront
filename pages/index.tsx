@@ -15,12 +15,12 @@ interface Props {
 const HomePage: NextPageWithLayout<Props> = ({ collections }) => {
     return (
         <>
-            {/* <HomeCollections
+            <HomeCollections
                 exclusiveCollections={collections}
                 collectionsData={collectionsData}
                 fabricsData={fabricsData}
                 occasionData={occasionData}
-            /> */}
+            />
             <HomeBrandStory />
         </>
     );
