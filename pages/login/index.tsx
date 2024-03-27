@@ -80,7 +80,6 @@ const LoginPage: NextPageWithLayout = () => {
                             label="Email Address"
                             type="email"
                             id="login_email"
-                            value="rs.2001.saha@gmail.com"
                             isError={!!errors.email}
                             errorMessage={errors.email?.message}
                             placeholder="E.g. address@example.com"
@@ -92,8 +91,8 @@ const LoginPage: NextPageWithLayout = () => {
                         <AuthPasswordInput
                             label="Password"
                             id="login_password"
-                            defaultValue={"7001120671"}
                             placeholder="************"
+                            autoComplete="current-password"
                             isError={!!errors.password}
                             errorMessage={errors.password?.message}
                             {...register("password", {
@@ -109,14 +108,14 @@ const LoginPage: NextPageWithLayout = () => {
                     <div className="mt-2">
                         <SubmitButton text="Log In" type="submit" />
                     </div>
-
-                    <div className="mt-3 flex justify-center gap-2 text-gray-500">
-                        Forgot Password?{" "}
-                        <Link href="/login" className="font-medium underline text-black">
-                            Reset Now
-                        </Link>
-                    </div>
                 </form>
+
+                <div className="mt-3 flex justify-center gap-2 text-gray-500">
+                    Forgot Password?{" "}
+                    <Link href="/reset-password" className="font-medium underline text-black">
+                        Reset Now
+                    </Link>
+                </div>
             </div>
 
             <div className="mt-3 text-center">

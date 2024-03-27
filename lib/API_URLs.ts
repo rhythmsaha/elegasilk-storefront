@@ -5,6 +5,8 @@ const API_URLs = {
     resendverification: "/user/resendverificationlink",
     login: "/user/login",
     refreshSession: "user/refresh-session",
+    forgotPassword: "/user/forgetpassword",
+    resetPassword: "/user/resetpassword",
 
     // User
     user: {
