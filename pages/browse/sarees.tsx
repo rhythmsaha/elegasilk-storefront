@@ -28,8 +28,6 @@ const SareesPage: NextPageWithLayout = () => {
         selectedSort
     );
 
-    const router = useRouter();
-
     const handleAttributeChange = (id: string) => {
         const _selected = [...selectedAttribute];
         const index = _selected.indexOf(id);

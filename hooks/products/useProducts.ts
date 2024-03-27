@@ -38,6 +38,7 @@ const useProducts = (
     const attributesQuery = router.query.attributes;
     const colorsQuery = router.query.colors;
     const collectionsQuery = router.query.collectionId;
+    const searchQuery = router.query.search;
 
     const fetchProducts = useCallback(async () => {
         if (!router.isReady) return;
@@ -108,6 +109,10 @@ const useProducts = (
             }
         }
 
+        if (searchQuery && typeof searchQuery === "string" && searchQuery.length > 0) {
+            myQuery.search = searchQuery;
+        }
+
         if (selectedSort) {
             myQuery.sortby = selectedSort.value;
         }
@@ -142,6 +147,7 @@ const useProducts = (
         page,
         pageSize,
         selectedSort,
+        searchQuery,
     ]);
 
     useEffect(() => {

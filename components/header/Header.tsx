@@ -8,18 +8,17 @@ import SearchButton from "./SearchButton";
 import WishListButton from "./WishListButton";
 import CartButton from "./CartButton";
 import useCartStore from "@/store/cart/useCartStore";
+import { useSearchbarStore } from "@/store/search/useSearchBarStore";
+import Searchbar from "./Searchbar";
+import { AnimatePresence } from "framer-motion";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
-    const [showSearch, setShowSearch] = useState(true);
+    const { isOpen: searchOpen, open: OpenSearchHandler } = useSearchbarStore((state) => state);
 
     const isAuthenticated = useAuthStore((state) => state.authStatus) === "AUTHENTICATED";
     const { isLoading: cartLoading, totalQuantity, getCart } = useCartStore((state) => state);
-
-    const showSearchBar = () => {
-        setShowSearch(true);
-    };
 
     useEffect(() => {
         if (!isAuthenticated) return;
@@ -33,7 +32,7 @@ const Header: React.FC<Props> = () => {
                 <NavigationMenu menu={NAV_LINKS} />
 
                 <div className="flex items-center gap-4">
-                    <SearchButton className="text-2xl" onClick={showSearchBar} />
+                    <SearchButton className="text-2xl" onClick={OpenSearchHandler} />
                     <UserMenu />
                     <WishListButton
                         href={isAuthenticated ? "/wishlist" : "/login?referUrl=/wishlist"}
@@ -43,6 +42,8 @@ const Header: React.FC<Props> = () => {
                     <CartButton qty={totalQuantity} />
                 </div>
             </div>
+
+            <AnimatePresence>{searchOpen && <Searchbar />}</AnimatePresence>
         </header>
     );
 };
