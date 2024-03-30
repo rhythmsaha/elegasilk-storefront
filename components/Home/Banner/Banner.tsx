@@ -1,5 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import BannerSlide from "./BannerSlide";
 
 interface Props {}
@@ -34,7 +35,18 @@ const BannerData = [
 const Banner = (props: Props) => {
     return (
         <section className="mx-auto">
-            <Swiper spaceBetween={0} slidesPerView={1}>
+            <Swiper
+                spaceBetween={0}
+                slidesPerView={1}
+                loop={true}
+                pagination={{
+                    clickable: true,
+                }}
+                autoplay={{
+                    delay: 5000,
+                }}
+                modules={[Pagination, Autoplay]}
+            >
                 {BannerData.map((banner, index) => (
                     <SwiperSlide key={index} className="">
                         <BannerSlide
