@@ -134,12 +134,12 @@ interface StaticPath {
 }
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-    const response = await axios.get(`${API_URLs.products.paths}`);
-    const paths = (await response?.data?.paths) as StaticPath[];
+    // const response = await axios.get(`${API_URLs.products.paths}`);
+    // const paths = (await response?.data?.paths) as StaticPath[];
 
     return {
-        paths: paths,
-        fallback: false,
+        paths: [],
+        fallback: "blocking",
     };
 };
 
